@@ -1,0 +1,31 @@
+﻿<style type="text/css">
+    .title-add {
+        display: inline-block;
+    }
+
+        .title-add .title {
+            font-size: 20px;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            line-height: 2;
+        }
+
+        .title-add .add {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            float: right;
+            margin-left: 30px;
+            background-color: #D4D4D4;
+            color: #000;
+            font-size: 25px;
+        }
+
+            .title-add .add:hover {
+                cursor: pointer;
+            }
+</style>
+<div class="title-add">
+    <span class="title">@ViewData["HeaderText"]</span>
+    <div class="add"><span>@Html.ActionLink("+","NewPO","PurchaseOrder")</span></div>
+</div>

@@ -1,0 +1,466 @@
+﻿@model StratusAccounting.Models.UsersRegistrations
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(true);
+    
+}
+
+@Styles.Render("~/bundle/login")
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@using (Html.BeginForm("SignUp", "Registration", FormMethod.Post, new { id = "form", @class = "form-vertical login-form" }))
+{
+@*<style type="text/css">
+        span {
+            color: red;
+        }
+    </style>*@
+    
+    <div id="userInfo">
+        <h3 class="form-title">Sign up</h3>
+        <div class="alert alert-error hide">
+            <button class="close" data-dismiss="alert"></button>
+            <span>@Html.AntiForgeryToken()
+                @Html.ValidationSummary().</span>
+        </div>
+        <div class="control-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">First Name</label>
+
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-user"></i>
+                    @* <input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="First Name" name="username" />*@
+                    @Html.TextBoxFor(model => model.UsersInfo.UserFirstName, new { placeholder = "First Name", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.UsersInfo.UserFirstName)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Last Name</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-user"></i>
+                    @Html.TextBoxFor(model => model.UsersInfo.UserLastName, new { placeholder = "Last Name", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.UsersInfo.UserLastName)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Email</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-envelope"></i>
+                    @Html.TextBoxFor(model => model.UsersInfo.Email, new { placeholder = "Email", @class = "m-wrap placeholder-no-fix",@id ="txtEmail" })
+                    @Html.ValidationMessageFor(model => model.UsersInfo.Email)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Choose Password</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-lock"></i>
+                    @Html.PasswordFor(model => model.UsersInfo.UserPassword, new { placeholder = "Choose Password", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.UsersInfo.UserPassword)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Confirm Password</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-ok"></i>
+                    @Html.PasswordFor(model => model.UsersInfo.ConfirmPassword, new { placeholder = "Confirm Password", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.UsersInfo.ConfirmPassword)
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+
+            <button type="button" id="btnUserInfo" class="btn blue border-form-radius">
+                Next <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div id="businessInfo" style="display: none">
+        <div class="control-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Business Name</label>
+            <div class="alert alert-error hide">
+                <button class="close" data-dismiss="alert"></button>
+                @* <span>@Html.AntiForgeryToken()
+                    @Html.ValidationSummary().</span>*@
+            </div>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-font"></i>
+                    @Html.TextBoxFor(model => model.BusinessRegInfo.BusinessName, new { placeholder = "Business Name", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.BusinessName)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Business Address</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-map-marker"></i>
+                    @Html.TextBoxFor(model => model.BusinessRegInfo.AddressLine1, new { placeholder = "Business Address", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.AddressLine1)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">City</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-envelope"></i>
+
+                    @Html.HiddenFor(model => model.BusinessRegInfo.CountryId)
+                    <input type="text" title="" class="m-wrap placeholder-no-fix" pattern="^[a-zA-Z''-'\s]{1,40}$" id="country" placeholder="Select Country" required />
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.CountryId)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">State</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-location-arrow"></i>
+                    @Html.HiddenFor(model => model.BusinessRegInfo.StateId)
+                    <input type="text" id="state" class="m-wrap placeholder-no-fix" placeholder="Select State" required />
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.StateId)
+
+                    @*@Html.TextBoxFor(model => model.BusinessRegInfo.State, new { placeholder = "State", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.State)*@
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Country</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-map-marker"></i>
+                    @Html.HiddenFor(model => model.BusinessRegInfo.CityId)
+                    <input type="text" id="city" class="m-wrap placeholder-no-fix" placeholder="Select City" required />
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.CityId)
+
+                    @*@Html.TextBoxFor(model => model.BusinessRegInfo.City, new { placeholder = "City", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.City)*@
+
+                    @* @Html.DropDownListFor(model => model.BusinessRegInfo.CountryId, (SelectList)ViewBag.Countries, "--select--", new { placeholder = "Country", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.CountryId)*@
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Business Phone</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-phone"></i>
+                    @Html.TextBoxFor(model => model.BusinessRegInfo.Phone, new { placeholder = "Business Phone", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.Phone)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Business FAX</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-ok"></i>
+                    @Html.TextBoxFor(model => model.BusinessRegInfo.Fax, new { placeholder = "Business FAX", @class = "m-wrap placeholder-no-fix" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.Fax)
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">User Licensees Required</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-repeat"></i>
+                    @Html.TextBoxFor(model => model.BusinessRegInfo.Licences, new { placeholder = "User Licensees Required", @class = "m-wrap placeholder-no-fix", @readonly="readonly" })
+                    @Html.ValidationMessageFor(model => model.BusinessRegInfo.Licences)
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="btnBusInfoBack" class="btn blue border-form-radius">
+                back <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+            <button type="button" id="btnBusinessInfo" class="btn blue border-form-radius">
+                Next <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="process" style="display: none">
+        <h3 class="form-title">Sign up</h3>
+        <div class="alert alert-error hide">
+            <button class="close" data-dismiss="alert"></button>
+            @*  <span>@Html.AntiForgeryToken()
+                    @Html.ValidationSummary().</span>*@
+        </div>
+        <div class="signup-logo">
+            <img src="~/Content/img/visa.png" alt="" />
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" value="option1" />
+                Visa
+            </label>
+        </div>
+        <div class="signup-logo">
+            <img src="~/Content/img/mastercard.png" alt="" />
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" value="option1" />
+                Master
+            </label>
+        </div>
+        <div class="signup-logo">
+            <img src="~/Content/img/discover.png" alt="" />
+            <label class="radio">
+                <input type="radio" name="optionsRadios1" value="option1" />
+                Discovery
+            </label>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="control-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Credit card #</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-credit-card"></i>
+                    <input class="m-wrap placeholder-no-fix" id="txtCCard" maxlength="16" type="text" autocomplete="off" placeholder="Credit Card #" name="username" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">CVV #</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-ok"></i>
+                    <input class="m-wrap placeholder-no-fix" id="txtNumeric" type="password" maxlength="3" autocomplete="off" placeholder="CVV #" name="password" />
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="btnPrcBack" class="btn blue border-form-radius">
+                back <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+            <button type="submit" class="btn blue border-form-radius">
+                Save <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    //function getEmail(id) {}
+    $('#txtEmail').blur(function () {
+        debugger;
+        $.ajax({
+            url: '/Registration/CheckForEmail',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { userName: $('#txtEmail').val() },
+            success: function (data) {
+                debugger;
+                // put result of action into element with class "result"
+                $('.result').html(data);
+            },
+            error: function () {
+                debugger;
+                alert('Error');
+            }
+        });
+    });
+   
+</script>
+
+<script type="text/javascript">
+    var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    $('#country').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CountryName,
+                            value: item.CountryId
+                        };
+                    }));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#country').val(ui.item.label);
+            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#state').autocomplete({
+        source: function (request, response) {
+
+            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            if (countryId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { country: countryId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.StateName,
+                                value: item.StateId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#state').val(ui.item.label);
+            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#city').autocomplete({
+        source: function (request, response) {
+
+            var stateId = $('#BusinessRegInfo_StateId').val();
+            //debugger;
+            if (stateId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { state: stateId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CityName,
+                                value: item.CityId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#city').val(ui.item.label);
+            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    $(document).ready(
+        function () {
+            $("#btnUserInfo").click(
+
+                function () {
+                    //debugger;
+                    $("#form").validate();
+                    if ($("#form").valid()) {
+                        $("#userInfo")[0].style.display = 'none';
+                        $("#businessInfo")[0].style.display = 'block';
+                    }
+                }
+                );
+            $("#btnBusinessInfo").click(
+                function () {
+                    //debugger;
+                    $("#form").validate();
+                    if ($("#form").valid()) {
+                        $("#businessInfo")[0].style.display = 'none';
+                        $("#process")[0].style.display = "block";
+                    }
+                }
+                );
+
+            $("#btnPrcBack").click(
+                function () {
+                    $("#businessInfo")[0].style.display = 'block';
+                    $("#process")[0].style.display = "none";
+                }
+                );
+
+            $("#btnBusInfoBack").click(
+                function () {
+                    $("#userInfo")[0].style.display = 'block';
+                    $("#businessInfo")[0].style.display = 'none';
+                }
+                );
+        }
+        );
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#txtNumeric, #txtCCard').keydown(function (e) {
+            if (e.shiftKey || e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (!((key == 8) || (key == 46) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+                    e.preventDefault();
+                }
+            }
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundle/Script/login")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

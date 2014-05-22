@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Payments";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Payments</h2>
+
+<div class="page-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="chart_of_accounts.html">Transactions</a></li>
+                    <li><a href="chart_of_accounts.html">Invoices</a></li>
+                    <li><i class="icon-angle-right"></i><a href="Payments.cshtml">Payment</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <h3 class="page-title matop border-btoom">Payments <a href="~/Transactions/AddPayment"><i class="icon-plus-sign"></i></a>
+                        </h3>
+                        <div class="form-horizontal form-view">
+                            <div class="row-fluid">
+                                <div class="span12 no-left-margin">
+                                    <table class="table table-striped" id="sample_2">
+                                        <thead>
+                                            <tr class="b1">
+                                                <th>S.No</th>
+                                                <th>Date</th>
+                                                <th>Account</th>
+                                                <th>Paid To</th>
+                                                <th>Instrument</th>
+                                                <th>Instrument #</th>
+                                                <th>Status</th>
+                                                <th>Received For</th>
+                                                @*<th class="hidden-360">Vendor</th>*@
+                                                <th>Tags</th>
+                                                <th>Options</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rowsBody">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td></td>
+                                                    @*<td><a href="new_po.html">@item.PONumber</a></td>*@
+                                                    <td>@item.Date</td>
+                                                    <td>@item.Account</td>
+                                                    <td>@item.PaidTo</td>
+                                                    <td>@item.Instrument</td>
+                                                    <td>@item.InstrumentNum</td>
+                                                    <td>@item.Status</td>
+                                                    <td>@item.ReceivedFor</td>                                                    
+                                                    @*<td class="hidden-360">@item.UserVendor</td>
+                                                    <td>@item.Amount</td>*@
+                                                    @*<td>@item.Status
+                                                    <div class="btn-group pull-right">
+                                                        <button class="btn dropdown-toggle padding-booton" data-toggle="dropdown"><span class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Copy</a></li>
+                                                            <li><a href="#">View</a></li>
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Print</a></li>
+                                                            <li><a href="#">Generate Invoice</a></li>
+                                                            <li><a href="#">Mark as Draft</a></li>
+                                                            <li><a href="#">Mark as Sent</a></li>
+                                                            <li><a href="#">Mark as Paid</a></li>
+                                                            <li><a href="#">Mark as Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    </td>*@
+                                                </tr>    
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
+                                    </div>
+                                    <div class="span6" id="pager">
+                                        <form>
+                                            <div class="dataTables_paginate paging_bootstrap pagination">
+                                                <ul>
+                                                    <li class="prev disabled">
+                                                        <a href="#">←<span class="hidden-480">Previous</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick=""><label id="strtPage">1</label></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="NextPage();">
+                                                            <label id="endPage">2</label></a>
+                                                    </li>
+                                                    <li class="next disabled">
+                                                        <a href="#">
+                                                            <span class="hidden-480">Next</span>→
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>

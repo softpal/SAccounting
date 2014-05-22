@@ -1,0 +1,56 @@
+﻿@model StratusAccounting.Models.UserBankAccount
+@{
+    <div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Bank name</label>
+                        @Html.TextBoxFor(model => model.BankName)
+                    @Html.ValidationMessageFor(model => model.BankName)
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Account #</label>
+                        @Html.TextBoxFor(model => model.AccountNum)
+                    @Html.ValidationMessageFor(model => model.AccountNum)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Account type</label>
+                       @Html.DropDownListFor(model => model.BankAccountTypeId, (SelectList)ViewBag.BankAccounts, "--select--", new { @id = "accountType", @class = "m-wrap span12 border-form-radius" })
+                        @*@Html.EditorFor(model => model.BankAccountTypeId)*@
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Routing #</label>
+                        @Html.TextBoxFor(model => model.RountingNum)
+                    @Html.ValidationMessageFor(model => model.RountingNum)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Bank Address</label>
+                        @Html.TextBoxFor(model => model.Address)
+                    @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

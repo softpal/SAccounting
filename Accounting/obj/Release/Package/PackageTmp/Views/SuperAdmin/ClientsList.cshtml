@@ -1,0 +1,57 @@
+﻿@model List<StratusAccounting.BAL.BusinessUsersBasicView>
+@using System.Collections.Generic
+@{
+    ViewBag.Title = "Business Users";
+    Layout = "~/Views/Shared/_SuperAdminView.cshtml";
+    //Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["HeaderText"] = "Purchase Order";
+    var modelData = Model;
+    if (modelData != null)
+    {
+        var num = modelData.Count;
+    }
+}
+@{
+    ViewData["databind"] = "bu";
+    ViewData["modelData"] = modelData;
+}
+
+@Html.BeginForm()
+{
+<div class="page-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="#">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="sa_clients.html">Clients</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body">
+
+                        @Html.Partial("~/Views/Shared/Accounting/_BUDataGrid.cshtml", modelData, ViewData)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+
+@Scripts.Render("~/bundle/Script/Dashboard")
+
+}

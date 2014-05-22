@@ -1,0 +1,161 @@
+﻿@model IList<StratusAccounting.Models.Ledger_DTO>
+
+@{
+    ViewBag.Title = "Trial Balance as on";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="Ledger.html">Reports</a></li>
+                    <li><a href="trial_balance.html"><i class="icon-angle-right"></i>Trial Balance</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+
+                    <div class="portlet-body">
+                        <div class="row-fluid">
+                            <div class="span12 margin-bottom-10">
+                                <div class="span7">
+                                    <h4 class="matop">@ViewBag.Title&nbsp;&nbsp;<span>@ViewBag.ToDate</span></h4>
+                                </div>
+                                <div class="span2">
+                                    <div class="control-group">
+                                        <div class="controls no-left-margin">
+                                            <select class="m-wrap span12">
+                                                <option value="select">Select Preset</option>
+                                                <option value="Today">Today</option>
+                                                <option value="This Week">This Week</option>
+                                                <option value="This Month">This Month</option>
+                                                <option value="This Quarter">This Quarter</option>
+                                                <option value="This Year">This Year</option>
+                                                <option value="Last Week">Last Week</option>
+                                                <option value="Last Month">Last Month</option>
+                                                <option value="last Quarter">last Quarter</option>
+                                                <option value="Last Year">Last Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="span2">
+                                    <div class="control-group">
+                                        <div class="controls no-left-margin">
+                                            <input type="text" placeholder="To Date" value="" size="16" class="m-wrap span12 date-picker">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span1"><a class="btn blue margin-bottom-10" href="#">View</a> </div>
+                            </div>
+
+                            <div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div id="sample_2_length" class="dataTables_length">
+                                            <label>
+                                                <div class="select2-container m-wrap small" id="s2id_autogen1">
+                                                    <a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1"><span class="select2-chosen">5</span><abbr class="select2-search-choice-close"></abbr>
+                                                        <span class="select2-arrow"><b></b></span></a>
+                                                    <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2"><div class="select2-drop select2-display-none select2-with-searchbox">
+                                                        <div class="select2-search">
+                                                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
+                                                        </div>
+                                                        <ul class="select2-results"></ul>
+                                                    </div>
+                                                </div>
+                                                <select size="1" name="sample_2_length" aria-controls="sample_2" class="m-wrap small select2-offscreen" tabindex="-1">
+                                                    <option value="5">5</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20">20</option>
+                                                    <option value="-1">All</option>
+                                                </select>
+                                                Records Per Page</label>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="dataTables_filter" id="sample_2_filter">
+                                            <label>
+                                                Search:
+                                            <input type="text" aria-controls="sample_2" class="m-wrap small"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
+
+                                    <thead>
+                                        <tr class="b1" role="row">
+                                            <th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" style="width: 118px;" aria-label="S.No: activate to sort column ascending">S.No</th>
+                                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" style="width: 430px;" aria-sort="ascending" aria-label="Account: activate to sort column descending">Account</th>
+                                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" style="width: 179px;" aria-label="Credit: activate to sort column ascending">Credit</th>
+                                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" style="width: 180px;" aria-label="Debit $: activate to sort column ascending">Debit $</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="hidden-480" rowspan="1" colspan="1"></td>
+                                            <th rowspan="1" colspan="1">Total</th>
+                                            <th rowspan="1" colspan="1">@Model.Sum(item => item.Credit)</th>
+                                            <th rowspan="1" colspan="1">@Model.Sum(item => item.Debit)</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                        @foreach (StratusAccounting.Models.Ledger_DTO item in Model)
+                                        {
+                                            <tr class="odd">
+                                                <td class="hidden-480 ">@item.Sno</td>
+                                                <td class="  sorting_1">@item.Description</td>
+                                                <td class=" ">@item.Credit</td>
+                                                <td class=" ">@item.Debit</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="sample_2_info">Showing 1 to 7 of 7 entries</div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="dataTables_paginate paging_bootstrap pagination">
+                                            <ul>
+                                                <li class="prev disabled"><a href="#">← <span class="hidden-480">Previous</span></a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li class="next disabled"><a href="#"><span class="hidden-480">Next</span> → </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span12 no-left-margin margin-top-10">
+                                <span class="font-size20">Download report in</span>
+                                <span class="pull-right">
+                                    <a class="btn red" href="#">Excel</a>
+                                    <a class="btn blue" href="#">CSV</a>
+                                    <a class="btn green" href="#">PDF</a>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+@Scripts.Render("~/bundle/Script/Dashboard")

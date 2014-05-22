@@ -1,0 +1,115 @@
+﻿@model StratusAccounting.Models.UMst_UserAccounts
+
+<form action="#">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3>Add chart of account</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="scroller" style="height: 200px" data-always-visible="1" data-rail-visible1="1">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">Account Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.AccountName, new { @id = "accountName", @class = "m-wrap span12 border-form-radius" })
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Number</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.AccountNum, new { @id = "accountNumber", @class = "m-wrap span12 border-form-radius" })
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Category Type</label>
+                        <div class="controls">
+                            <div class="span9">
+                                @Html.DropDownListFor(model => model.UserParentAccountsId, (SelectList)ViewBag.ParentAccounts, "--select--", new { @id = "accountType", @class = "m-wrap span12 border-form-radius" })
+                            </div>
+                            <div class="span3">
+                                <button class="btn blue" type="button">View/Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn blue" onclick="SaveCharofAccounts()" value="Add" />
+        <a class="btn" onclick="CloseAddPopup();">Cancel</a>
+    </div>
+
+    <script type="text/javascript">
+        function SaveCharofAccounts() {
+            var pageURL = window.location;
+            var acntName = $("#accountName").val();
+            var acntNum = $("#accountNumber").val();
+            var pAccount = $("#accountType").val();
+            //var id = $("#hdnID").val();
+
+            if (pageURL.toString().indexOf("Organization") >= 0) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/ChartofAccount/SaveChartofAccounts",
+                    data: JSON.stringify({ "accountName": acntName, "accountNumber": acntNum, "accountType": pAccount }),
+                    success: function (data) {
+                        if (data) {
+                            CloseAddPopup();
+                            window.location(pageURL);
+                        }
+                    },
+                    error: function (data) {
+                        //debugger;
+                    }
+                });
+            }
+            else if (pageURL.toString().indexOf("Transactions") >= 0) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/Transactions/InsertAccount",
+                    data: JSON.stringify({ "accountName": acntName, "accountNumber": acntNum, "accountType": pAccount }),
+                    success: function (data) {
+                        if (data) {
+                            CloseAddPopup();
+                            window.location(pageURL);
+                        }
+                    },
+                    error: function (data) {
+                        // debugger;
+                    }
+                });
+            }
+        }
+
+        //function loadPage() {
+        //    window.location("/Organization/Services");
+        //    //$.ajax({
+        //    //    type: "POST",
+        //    //    contentType: "application/json",
+        //    //    url: "/Organization/Services",
+        //    //    data: JSON.stringify({}),
+        //    //    success: function (data) {
+        //    //        debugger;
+        //    //        if (data) {
+        //    //        }
+        //    //    },
+        //    //    error: function (data) {
+        //    //        debugger;
+        //    //    }
+        //    //});
+        //}
+
+        function CloseAddPopup() {
+            $(".close").click();
+        }
+
+    </script>
+</form>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<StratusAccounting.Models.Mst_AssetType>
+<div class="modal-scrollable" style="z-index: 10050;">
+    <div id="responsive" class="modal hide fade in" tabindex="-1" data-width="760" aria-hidden="false" style="display: block; width: 760px; margin-left: -380px; margin-top: -166px;">
+        <form class="form-horizontal" action="#">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h3>Manage Asset Types</h3>
+            </div>
+            <div class="modal-body">
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 170px;">
+                    <div class="scroller" style="height: 170px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                        <div class="row-fluid">
+                            <div class="span8">
+                                <div class="control-group">
+                                    <div class="controls no-left-margin">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="input-append">
+                                                <div class="uneditable-input"> <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span> </div>
+                                                <span class="btn btn-file">
+                                                    <span class="fileupload-new">Asset Type</span> <span class="fileupload-exists">Change</span>
+                                                    <input type="file" class="default" placeholder="Add a Category Name">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                           @* @foreach(var type in Model)
+                                            { 
+                                            <tr id="@type.AssetTypeId">
+                                                <td width="85%" valign="middle"><a href="#">@type.AssetName</a></td>
+                                                <td width="15%" align="center"><i class="icon-remove-circle f24" onclick="removeAssetType(@type.AssetTypeId)"></i></td>
+                                            </tr>
+                                            }*@
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="slimScrollBar ui-draggable" style="background-color: rgb(161, 178, 189); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; height: 170px; background-position: initial initial; background-repeat: initial initial;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px; background-position: initial initial; background-repeat: initial initial;"></div>
+                </div>
+            </div>
+        </form>
+        <div class="modal-footer">
+
+            <button type="button" data-dismiss="modal" class="btn blue">Close</button>
+        </div>
+    </div>
+</div>

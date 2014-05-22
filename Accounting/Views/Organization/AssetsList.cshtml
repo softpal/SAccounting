@@ -1,0 +1,143 @@
+﻿@model IEnumerable<StratusAccounting.Models.Asset>
+
+@{
+    ViewBag.Title = "AssetsList";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>AssetsList</h2>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Organization/Preferences">Organization</a></li>
+                        <li><a href="/Organization/AssetsList"><i class="icon-angle-right"></i>Assets</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body">
+                            <h3 class="page-title matop border-btoom">Assets&nbsp;<a href="~/Organization/Assets"><i class="icon-plus-sign"></i> </a></h3>
+
+                            <table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+                                <thead>
+                                    <tr class="b1">
+                                        <th class="hidden-480">Date</th>
+                                        <th>@Html.ActionLink("Description","SortAssets",new{column="Description", direction=ViewBag.sortDirection})</th>
+                                        <th>@Html.ActionLink("Vendor", "SortAssets", new { column = "Vendor", direction = ViewBag.sortDirection })</th>
+                                        <th class="hidden-480">@Html.ActionLink("Purchased Date", "SortAssets", new { column = "PurchasedDate", direction = ViewBag.sortDirection })</th>
+                                        <th class="hidden-480">@Html.ActionLink("Intial value $", "SortAssets", new { column = "IntialValue", direction = ViewBag.sortDirection }) </th>
+                                        <th>@Html.ActionLink("current value $", "SortAssets", new { column = "CurrentValue", direction = ViewBag.sortDirection })</th>
+                                    </tr>   
+                                </thead>
+                                <tbody id="rowsBody">
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="hidden-480">@item.CreatedDate</td>
+                                            <td>@item.AssetDescription</td>
+                                            <td>@item.UserVendorId</td>
+                                            <td class="hidden-480">@item.PurchasedDate</td>
+                                            <td class="hidden-480">@item.InitialValue</td>
+                                            <td>@item.CurrentValue&nbsp;&nbsp;&nbsp;<div class="btn-group float-right">
+                                                <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton">
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>@Html.ActionLink("View", "Assets", new { assetId = item.AssetsId })</li>
+                                                    <li>@Html.ActionLink("Edit", "EditAsset", "Organization", new { assetId = @item.AssetsId }, null)
+                                                    <li>@Html.ActionLink("Delete", "DeleteAsset", new { assetId = item.AssetsId })</li>
+                                                </ul>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                @*<tfoot> <tr><td colspan="4"><a>1</a><a>2</a></td><td></td><td></td><td></td></tr></tfoot>*@
+                            </table>
+                            <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
+                                    </div>
+                                    <div class="span6" id="pager">
+                                        <form>
+                                            <div class="dataTables_paginate paging_bootstrap pagination">
+                                                <ul>
+                                                    <li class="prev disabled">
+                                                        <a href="#">←<span class="hidden-480">Previous</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick=""><label id="strtPage">1</label></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="NextPage();">
+                                                            <label id="endPage">2</label></a>
+                                                    </li>
+                                                    <li class="next disabled">
+                                                        <a href="#">
+                                                            <span class="hidden-480">Next</span>→
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}
+
+<script type="text/javascript">
+
+    function NextPage() {
+        debugger;
+        var pageNum = parseInt(document.getElementById("endPage").innerText);
+        $.ajax({
+            type: "POST",
+            url: "/Organization/GetAssets",
+            cache: false,
+            data: { pageNum: pageNum },
+            success: function (data) {
+                if (data.length > 0) {
+                    debugger;
+                    document.getElementById("rowsBody").innerHTML = '';
+                    var childRows = '';
+                    for (var i = 0; i < data.length; i++) {
+                        childRows += '<tr><td class="hidden-480">' + data[i].CreatedDate + '</td><td>' + data[i].AssetDescription + '</td><td>' + data[i].UserVendorId + '</td><td class="hidden-480">' + data[i].PurchasedDate + '</td><td class="hidden-480">' + data[i].InitialValue + '</td><td>' + data[i].CurrentValue + '&nbsp;&nbsp;&nbsp;<div class="btn-group float-right"><button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button></div></td></tr>';
+                    }
+                    document.getElementById("rowsBody").innerHTML = childRows;
+                    $("#strtPage").val(pageNum);
+                    $("#endPage").val(pageNum + 1);
+                }
+            },
+            error: function (data) {
+                debugger;
+                alert(data);
+            }
+        });
+    }
+
+</script>

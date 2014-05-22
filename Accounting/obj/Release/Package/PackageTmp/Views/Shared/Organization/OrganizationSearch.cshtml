@@ -1,0 +1,15 @@
+﻿<div class="span3">
+    <div class="account-details">
+        <ul class="no-left-margin">
+            <div class="input-append">
+                <input type="text" placeholder="Search" class="m-wrap input-large">
+                <button type="button" class="btn blue"><i class="icon-search"></i></button>
+            </div>
+            @foreach (StratusAccounting.Models.UserBankAccount item in @Model)
+            {
+                <li>@Html.ActionLink(item.BankName, "EditBankAccounts", new { bankAccountId = item.BankAccountsId })<a onclick="DeleteServices(@item.BankAccountsId,this)"; ><img src="~/Content/img/icon-close.png" alt="" class="account-detailsbg" /></a></li>
+            }
+
+        </ul>
+    </div>
+</div>

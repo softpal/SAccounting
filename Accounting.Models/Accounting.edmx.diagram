@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d892ab618ab34203b50f96516428847c" Name="Diagram1">
+        <EntityTypeShape EntityType="Accounting.Models.CustomersAddress" Width="1.5" PointX="7.5" PointY="117.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.CustomerTaxDetail" Width="1.5" PointX="27" PointY="111.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Document" Width="1.5" PointX="15.75" PointY="111.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeeBankDetail" Width="1.5" PointX="10.5" PointY="120.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeeFamilyDetail" Width="1.5" PointX="15.75" PointY="124.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeeLeaveBillingDetail" Width="1.5" PointX="18.75" PointY="122.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeeLeaf" Width="1.5" PointX="21.75" PointY="121.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeePaymentType" Width="1.5" PointX="15.75" PointY="129" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeePayroll" Width="1.5" PointX="24.75" PointY="116.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeesTimesheet" Width="1.5" PointX="24.75" PointY="121.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserCustomer" Width="1.5" PointX="18.75" PointY="110.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserEmployee" Width="1.5" PointX="13.5" PointY="120.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserVendor" Width="1.5" PointX="15.75" PointY="104.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.VendorsAddress" Width="1.5" PointX="10.5" PointY="113.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.VendorTaxDetail" Width="1.5" PointX="18" PointY="100.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.ApplicationParameter" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AccountSubTypes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AccountTypes" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AccountUserTypes" Width="1.5" PointX="15.75" PointY="147.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AddressType" Width="1.5" PointX="8.25" PointY="114.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AssetDisposition" Width="1.5" PointX="15.75" PointY="155.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_AssetType" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_BankAccountTypes" Width="1.5" PointX="22" PointY="134.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_BusinessStatus" Width="1.5" PointX="13.5" PointY="131" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_BusinessType" Width="1.5" PointX="11.25" PointY="109.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_Cities" Width="1.5" PointX="5.25" PointY="130.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_Counties" Width="1.5" PointX="5.25" PointY="134.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_Countries" Width="1.5" PointX="0.75" PointY="103.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_CreditPeriodTypes" Width="1.5" PointX="16.5" PointY="97.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_CustomersRename" Width="1.5" PointX="22.5" PointY="94.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_GreetingsList" Width="1.5" PointX="22.5" PointY="97.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_InvoiceDueTerm" Width="1.5" PointX="27" PointY="97.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_Invoicestatus" Width="1.5" PointX="21.75" PointY="101" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_ItemTypes" Width="1.5" PointX="19.5" PointY="97.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_PaymentStatus" Width="1.5" PointX="32.25" PointY="121.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_PaymentTypes" Width="1.5" PointX="13.5" PointY="101.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_PreferenceFields" Width="1.5" PointX="14.25" PointY="141.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_PreferenceValues" Width="1.5" PointX="16.5" PointY="141.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_Screens" Width="1.5" PointX="13.5" PointY="95.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_SignupPricing" Width="1.5" PointX="13.5" PointY="134.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_SignupRenewal" Width="1.5" PointX="13.5" PointY="137.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_States" Width="1.5" PointX="3" PointY="132.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_TaxTypes" Width="1.5" PointX="15.75" PointY="101.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_UserRoles" Width="1.5" PointX="19.5" PointY="93.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_UserType" Width="1.5" PointX="32.25" PointY="131.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Mst_VendorType" Width="1.5" PointX="13.5" PointY="99" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Serial" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.BusinessBranch" Width="1.5" PointX="15.75" PointY="121.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.BusinessRegistration" Width="1.5" PointX="13.5" PointY="106.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.BusinessStatu" Width="1.5" PointX="15.75" PointY="116.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.BusinessUser" Width="1.5" PointX="21.75" PointY="111.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.IPBlocker" Width="1.5" PointX="15.75" PointY="133.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserBankAccount" Width="1.5" PointX="24.25" PointY="126.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserLoginDetail" Width="1.5" PointX="13.5" PointY="92.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UserPaymentDetail" Width="1.5" PointX="15.75" PointY="136.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.User" Width="1.5" PointX="11.25" PointY="105" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Asset" Width="1.5" PointX="18" PointY="127.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EmployeeAsset" Width="1.5" PointX="27.25" PointY="120.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Estimate" Width="1.5" PointX="27" PointY="105.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.EstimatesDetail" Width="1.5" PointX="32.25" PointY="106.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Expens" Width="1.5" PointX="31.5" PointY="124.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Payment" Width="1.5" PointX="21.25" PointY="126.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.PurchaseInvoice" Width="1.5" PointX="29.25" PointY="103.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.PurchaseInvoiceDetail" Width="1.5" PointX="34.5" PointY="105" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.PurchaseInvoicePayment" Width="1.5" PointX="34.5" PointY="125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.PurchaseOrder" Width="1.5" PointX="24" PointY="101.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.PurchaseOrderDetail" Width="1.5" PointX="26.25" PointY="100.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Receipt" Width="1.5" PointX="37.5" PointY="126.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Rpt_Transactions" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.SalesInvoice" Width="1.5" PointX="30" PointY="110.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.SalesInvoiceDetail" Width="1.5" PointX="32.25" PointY="111.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.SalesReceipt" Width="1.5" PointX="35.25" PointY="111.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Transaction" Width="1.5" PointX="20.25" PointY="153.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.TransactionType" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.Journal" Width="1.5" PointX="18.75" PointY="105.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_AssetType" Width="1.5" PointX="15.75" PointY="151.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_BusinessItems" Width="1.5" PointX="21.75" PointY="104.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_BusinessPreferences" Width="1.5" PointX="18.75" PointY="118" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_TaxDetails" Width="1.5" PointX="21.75" PointY="116.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_UserAccounts" Width="1.5" PointX="18" PointY="145.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_UserCustomFields" Width="1.5" PointX="15.75" PointY="175" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_UserCustomizeFields" Width="1.5" PointX="24.75" PointY="111.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_UserGreetingEmails" Width="1.5" PointX="24.75" PointY="107.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Accounting.Models.UMst_UserParentAccounts" Width="1.5" PointX="15.75" PointY="186.625" IsExpanded="true" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_Mst_AddressType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_Mst_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_Mst_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomersAddress_UserCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomerTaxDetails_Mst_TaxTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_CustomerTaxDetails_UserCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Documents_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Documents_Mst_Screens" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_Mst_BankAccountTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_Mst_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_Mst_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeBankDetails_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeFamilyDetails_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeLeaveBillingDetails_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeLeaveBillingDetails_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeLeaves_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeesLeaves_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeePaymentTypes_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeePaymentTypes_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeePayroll_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeePayroll_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeesTimesheet_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeesTimesheet_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Estimates_UserCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesInvoice_UserCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomers_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomers_Mst_BusinessType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomers_Mst_CreditPeriodTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomers_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomers_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeAssets_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_UserEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserEmployees_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserEmployees_Mst_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserEmployees_Mst_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserEmployees_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserEmployees_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseOrder_UserVendors" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserVendors_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserVendors_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserVendors_Mst_VendorType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserVendors_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_UserVendors" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorTaxDetails_UserVendors" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_Mst_AddressType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_Mst_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_Mst_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorsAddress_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_VendorTaxDetails_Mst_TaxTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Mst_AccountSubTypes_Mst_AccountTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Assets_AssetDisposition" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserBankAccounts_Mst_BankAccountTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessStatus_Mst_BusinessStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Mst_BusinessType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Mst_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Mst_Cities_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Mst_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Mst_Counties_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Mst_States_Mst_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomizeFields_Mst_CustomersRename" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserGreetingEmails_Mst_GreetingsList" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoice_Mst_InvoiceDueTerm" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Estimates_Mst_Invoicestatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoice_Mst_Invoicestatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseOrder_Mst_Invoicestatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesInvoice_Mst_Invoicestatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EstimatesDetails_Mst_ItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Expenses_Mst_ItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesInvoiceDetails_Mst_ItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_BusinessItems_Mst_ItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoicePayments_Mst_PaymentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Expenses_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoicePayments_Mst_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserVendors_Mst_PaymentTypes1" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Mst_PreferenceValues_Mst_PreferenceFields" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessPreferences_Mst_PreferenceValues" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessStatus_Mst_SignupPricing" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessStatus_Mst_SignupRenewal" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Mst_States" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_TaxDetails_Mst_TaxTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessUsers_Mst_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoicePayments_Mst_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserBankAccounts_Mst_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessBranches_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Assets_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Assets_UserVendors" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessPreferences_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Created" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessRegistration_Modified" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessStatus_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessUsers_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeAssets_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Estimates_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Expenses_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_IPBlockers_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Journals_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoice_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseOrder_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Receipt_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesInvoice_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_TaxDetails_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_AssetType_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_BusinessItems_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_UserAccounts_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_UserCustomFields_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_UserParentAccounts_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserBankAccounts_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserCustomizeFields_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserGreetingEmails_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserPaymentDetails_BusinessRegistration" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_BusinessUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_UserBankAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Receipt_UserBankAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserBankAccounts_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UserLoginDetails_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Assets_UMst_AssetType" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EmployeeAssets_Assets" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_EstimatesDetails_Estimates" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Expenses_PurchaseInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Expenses_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_PurchaseInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Payments_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoice_PurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoiceDetails_PurchaseInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoicePayments_PurchaseInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoiceDetails_ItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseInvoicePayments_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseOrderDetails_PurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_PurchaseOrderDetails_ItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Receipt_SalesReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Receipt_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesInvoiceDetails_SalesInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_SalesReceipt_SalesInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Transactions_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_Journals_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_BusinessItems_UMst_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="Accounting.Models.FK_UMst_UserAccounts_UMst_UserParentAccounts" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

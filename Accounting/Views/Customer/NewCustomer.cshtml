@@ -1,0 +1,1012 @@
+﻿@model StratusAccounting.Models.Customers_DTO
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="list_customers.html">Customers</a></li>
+                        <li><i class="icon-angle-right"></i><a href="add_new_customer.html">Create Customer</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <!-- <h3 class="page-title matop border-btoom">create Customer <a href="#"><i class="icon-plus-sign"></i></a></h3>-->
+                            <form class="horizontal-form" action="#">
+                                <h3 class="form-section matop">Customer Details</h3>
+                                <div class="row-fluid">
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <label for="firstName" class="control-label">Unique #</label>
+                                            <div class="controls">
+                                                @*<input type="text" class="m-wrap span12 border-form-radius" disabled="" placeholder="Auto Generated">*@
+                                                @Html.TextBoxFor(model => model.UserCustomer.UserCustomerId, new { @class = "m-wrap span12 border-form-radius", placeholder = "Auto Generated" })
+                                                @Html.ValidationMessageFor(model => model.UserCustomer.UserCustomerId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Company Name</label>
+                                                @Html.TextBoxFor(model => model.UserCustomer.CompanyName, new { @class = "m-wrap span12 border-form-radius" })
+                                                @Html.ValidationMessageFor(model => model.UserCustomer.CompanyName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">First Name</label>
+                                                @Html.TextBoxFor(model => model.UserCustomer.CustomerFirstName, new { @class = "m-wrap span12 border-form-radius" })
+                                                @Html.ValidationMessageFor(model => model.UserCustomer.CustomerFirstName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Last Name</label>
+                                                @Html.TextBoxFor(model => model.UserCustomer.CustomerLastName, new { @class = "m-wrap span12 border-form-radius" })
+                                                @Html.ValidationMessageFor(model => model.UserCustomer.CustomerLastName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Title</label>
+                                                @Html.TextBoxFor(model => model.UserCustomer.Title, new { @class = "m-wrap span12 border-form-radius" })
+                                                @Html.ValidationMessageFor(model => model.UserCustomer.Title)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">&nbsp;</label>
+                                                <select class="m-wrap span12 border-form-radius">
+                                                    <option value="con">Select</option>
+                                                    <option value="Con 1">Profit</option>
+                                                    <option value="Con 2">Non-Profit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @Html.EditorFor(model => model.CustomerCommunication, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
+                                @* <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Office Email</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Business Phone</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Business FAX</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Street</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Country</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">City</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">ZIP</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">State</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Website</label>
+                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>*@
+                                <h3 class="form-section matop">Bank Details</h3>
+                                @Html.EditorFor(model => model.UserBankAccount, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
+
+                                @*<div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Bank name</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Account #</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Account type</label>
+                                                <select class="m-wrap span12 border-form-radius">
+                                                    <option value="con">Select</option>
+                                                    <option value="Con 1">Saving</option>
+                                                    <option value="Con 2">Checking</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Routing #</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row-fluid">
+
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Bank Address</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>*@
+                                <h3 class="form-section matop">Payment Details</h3>
+                                @Html.EditorFor(model => model.UserCustomer, "~/Views/Shared/EditorTemplates/UserCustomer.cshtml")
+
+                                @*<div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Credit Period</label>
+                                                <select class="m-wrap span12 border-form-radius">
+                                                    <option value="con">Select</option>
+                                                    <option value="con 1">15 Days</option>
+                                                    <option value="Con 2">30 Days</option>
+                                                    <option value="Con 3">45 Days	</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Credit Limit</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Preferred Payment Method</label>
+                                                <select class="m-wrap span12 border-form-radius">
+                                                    <option value="con">Select</option>
+                                                    <option value="con 1">Cash</option>
+                                                    <option value="Con 2">Check</option>
+                                                    <option value="Con 3">Credit Card</option>
+                                                    <option value="Con 3">Debit Card</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Credit Card Token ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                @Html.EditorFor(model => model.CustomerCommunication, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
+                                @*<h3 class="form-section matop">Billing Address</h3>*@
+
+                                @*<div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Street</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">City</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">ZIP</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">County</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">State</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Country</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <h3 class="form-section matop">Shipping Address&nbsp;
+										
+                                    <label class="checkbox pull-right">
+                                        <input type="checkbox" value="" />
+                                        Same as Billing Address
+                                    </label>
+
+                                </h3>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Street</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">City</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">ZIP</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">County</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">State</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Country</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="form-section matop">Tax Info</h3>
+                                @*@Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")*@
+                                <div id="taxParentDiv">
+                                    @Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")
+                                </div>
+                                <div>
+                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveTaxInformation();" />
+                                </div>
+
+                                @*<h3 class="form-section matop">Tax Details</h3>
+                                <div class="row-fluid">
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Federal Tax ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Federal Tax %</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">City Tax ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">City Tax %</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">State Tax ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">State Tax %</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">County Tax ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">County Tax %</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span12 no-left-margin">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="radio">
+                                                    <input type="radio" name="optionsRadios1" value="option1" />
+                                                    Taxable 
+                                                </label>
+                                                <label class="radio">
+                                                    <input type="radio" name="optionsRadios1" value="option2" checked />
+                                                    Non Taxable 
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>*@
+                                <h3 class="form-section matop">Documents</h3>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                                                        <span class="btn btn-file"><span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
+                                                            <input type="file" class="default">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="85%" valign="middle"><a href="#">one.pdf</a></td>
+                                                        <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="85%" valign="middle"><a href="#">excel.xls</a></td>
+                                                        <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions ">
+                                    <button class="btn blue" type="submit"><i class="icon-plus-sign"></i>Add</button>
+                                    <button class="btn" type="button">Cancel</button>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}
+
+<script type="text/javascript">
+    function SaveTaxInformation() {
+        var countChild = $('#taxParentDiv').find('input').length / 3;//$("#taxParentDiv")[0].childNodes.length;
+        var TaxDetails = new Array(countChild);
+        var i = 0;
+        var taxNum;
+        var taxValue;
+        $('#taxParentDiv').find('input').each(function (index, element) {
+            if (element.id.indexOf("hdn") >= 0) {
+                TaxDetails[i] = new Array(3);
+                TaxDetails[i][0] = element.value;
+            }
+            else if (element.id.indexOf("TaxNum") >= 0) {
+                TaxDetails[i][1] = element.value;
+            }
+            else if (element.id.indexOf("TaxValue") >= 0) {
+                TaxDetails[i][2] = element.value;
+                i++;
+            }
+        });
+
+        $.ajax({
+            url: '/Customer/SaveTaxInformation/',
+            type: "Post",
+            contentType: "application/json",
+            data: JSON.stringify({ "TaxDetails": TaxDetails }),
+            success: function (data) {
+                //debugger;  //var result = msg.data;
+                if (data) {
+                    alert("Saved successfully");
+                }
+            },
+            error: function (error) {
+                //debugger;
+                alert(error);
+            }
+        });
+
+    }
+</script>
+
+
+<script type="text/javascript">
+    var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    $('#country').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CountryName,
+                            value: item.CountryId
+                        };
+                    }));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#country').val(ui.item.label);
+            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+
+    var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    $('#billingcountry').autocomplete({
+        source: function (request, response) {
+
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CountryName,
+                            value: item.CountryId
+                        };
+                    }));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#billingcountry').val(ui.item.label);
+            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+    var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    $('#shippingcountry').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CountryName,
+                            value: item.CountryId
+                        };
+                    }));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#shippingcountry').val(ui.item.label);
+            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+
+    $('#state').autocomplete({
+        source: function (request, response) {
+            //debugger;
+            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            if (countryId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { country: countryId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.StateName,
+                                value: item.StateId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#state').val(ui.item.label);
+            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#billingstate').autocomplete({
+        source: function (request, response) {
+
+            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            if (countryId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { country: countryId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.StateName,
+                                value: item.StateId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#billingstate').val(ui.item.label);
+            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#shippingstate').autocomplete({
+        source: function (request, response) {
+
+            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            if (countryId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { country: countryId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.StateName,
+                                value: item.StateId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#shippingstate').val(ui.item.label);
+            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#city').autocomplete({
+        source: function (request, response) {
+
+            var stateId = $('#BusinessRegInfo_StateId').val();
+            //debugger;
+            if (stateId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { state: stateId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CityName,
+                                value: item.CityId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#city').val(ui.item.label);
+            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#billingcity').autocomplete({
+        source: function (request, response) {
+
+            var stateId = $('#BusinessRegInfo_StateId').val();
+            //debugger;
+            if (stateId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { state: stateId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CityName,
+                                value: item.CityId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#billingcity').val(ui.item.label);
+            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi" })';
+    //debugger;
+    $('#shippingcity').autocomplete({
+        source: function (request, response) {
+
+            var stateId = $('#BusinessRegInfo_StateId').val();
+            //debugger;
+            if (stateId > 0) {
+                $.ajax({
+                    url: stateapi,
+                    data: { state: stateId, query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CityName,
+                                value: item.CityId
+                            };
+                        }));
+                    }
+                });
+            }
+        },
+        focus: function (event, ui) {
+            this.value = ui.item.label;
+            $(".ui-helper-hidden-accessible").css("display", "none");
+            event.preventDefault(); // Prevent the default focus behavior.
+        },
+        select: function (event, ui) {
+            $('#shippingcity').val(ui.item.label);
+            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            return false;
+        },
+        minLength: 1,
+        messages: {
+            noResults: '',
+            results: function () { }
+        }
+    });
+
+    $(document).ready(
+        function () {
+            $("#btnUserInfo").click(
+
+                function () {
+                    //debugger;
+                    $("#form").validate();
+                    if ($("#form").valid()) {
+                        $("#userInfo")[0].style.display = 'none';
+                        $("#businessInfo")[0].style.display = 'block';
+                    }
+                }
+                );
+            $("#btnBusinessInfo").click(
+                function () {
+                    //debugger;
+                    $("#form").validate();
+                    if ($("#form").valid()) {
+                        $("#businessInfo")[0].style.display = 'none';
+                        $("#process")[0].style.display = "block";
+                    }
+                }
+                );
+
+            $("#btnPrcBack").click(
+                function () {
+                    $("#businessInfo")[0].style.display = 'block';
+                    $("#process")[0].style.display = "none";
+                }
+                );
+
+            $("#btnBusInfoBack").click(
+                function () {
+                    $("#userInfo")[0].style.display = 'block';
+                    $("#businessInfo")[0].style.display = 'none';
+                }
+                );
+        }
+        );
+</script>
+@Scripts.Render("~/bundle/Script/Dashboard")

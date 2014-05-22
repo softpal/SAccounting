@@ -1,0 +1,357 @@
+﻿@model StratusAccounting.Models.Asset
+
+@{
+    ViewBag.Title = "Assets";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Assets</h2>
+
+@Styles.Render("~/bundle/Datepicker")
+
+<link rel="stylesheet" type="text/css" href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="~/Scripts/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
+<link href="~/Scripts/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="~/Scripts/plugins/jquery-tags-input/jquery.tagsinput.css" />
+@*@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{*@
+<div class="page-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="/Organization/Preferences">Organization</a></li>
+                    <li><i class="icon-angle-right"></i><a href="/Organization/Assets">Assets</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body form">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <!-- BEGIN FORM-->
+                                @using (Html.BeginForm("Assets", "Organization", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                { 
+                                    <h3 class="form-section matop">Asset details</h3>
+                                    <div class="row-fluid">
+                                        <div class="span6 ">
+                                            <div class="control-group">
+                                                <label for="firstName" class="control-label">Asset #</label>
+                                                <div class="controls">
+                                                    @if (@Model != null && @Model.AssetsId > 0)
+                                                    {
+                                                        @Html.HiddenFor(model => model.BusinessID)
+                                                        @Html.HiddenFor(model => model.CreatedByUserId)
+                                                        @Html.HiddenFor(model => model.CreatedDate)
+                                                    }
+                                                    @Html.TextBoxFor(model => model.AssetsId, new { @class = "m-wrap span12 border-form-radius", @id = "txtAssetID", @readonly="readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span6 ">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Purchase Date</label>
+                                                    @Html.TextBoxFor(model => model.PurchasedDate, new { id = "txtPurchaseDt", @class = "m-wrap span12 border-form-radius" })
+                                                    @Html.ValidationMessageFor(model => model.PurchasedDate)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Description</label>
+                                                    @Html.TextBoxFor(model => model.AssetDescription, new { @class = "m-wrap span12 border-form-radius", @id = "txtDescription" })
+                                                    @Html.ValidationMessageFor(model => model.AssetDescription)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Vendor</label>
+                                                    @*@Html.TextBoxFor(model => model.UserVendorId, new { @class = "m-wrap span12 border-form-radius" })*@
+                                                    @Html.DropDownListFor(model => model.UserVendorId, (SelectList)ViewBag.Vendors, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlVendors" })
+                                                    @Html.ValidationMessageFor(model => model.UserVendorId)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Intial Amount</label>
+                                                    @Html.TextBoxFor(model => model.InitialValue, new { @class = "m-wrap span12 border-form-radius", @id = "txtInitialValue" })
+                                                    @Html.ValidationMessageFor(model => model.InitialValue)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Type of Asset <a data-toggle="modal" href="#responsive" class="color2">Manage Types</a> </label>
+                                                    @Html.DropDownListFor(model => model.AssetTypeId, (SelectList)ViewBag.AssestsTypeList, "--select--", new { @class = "m-wrap span12 border-form-radius", id = "ddlAssetTypeList" })
+                                                </div>
+
+                                                @*<div class="controls">
+
+                                                    <a data-toggle="modal" href="#responsive">Manage Types</a>
+
+                                                    <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760" aria-hidden="true" style="display: none; width: 760px; margin-left: -380px; margin-top: -166px;">
+                                                        @Html.Partial("Organization/_ManageAssetTypes", (IEnumerable<StratusAccounting.Models.Mst_AssetType>)ViewBag.AssetTypes)
+                                                    </div>
+                                                    @Html.DropDownListFor(model => model.AssetTypeId, (SelectList)ViewBag.AssestsTypeList, "--select--", new { @class = "m-wrap span12 border-form-radius", id = "ddlAssetTypeList" })
+                                                </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Located at</label>
+                                                    @Html.TextBoxFor(model => model.LocatedAt, new { @class = "m-wrap span12 border-form-radius", @id = "txtLocatedAt" })
+                                                    @Html.ValidationMessageFor(model => model.LocatedAt)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">PO#</label>
+                                                    @Html.TextBoxFor(model => model.PONumber, new { @class = "m-wrap span12 border-form-radius", @id = "txtPONumber" })
+                                                    @Html.ValidationMessageFor(model => model.PONumber)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Final disposition </label>
+                                                    @Html.DropDownListFor(model => model.AssetDispositionId, (SelectList)ViewBag.FDisposition, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlAssetDispositionId" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">G/L Account code</label>
+                                                    @Html.TextBoxFor(model => model.GLAccountCode, new { @class = "m-wrap span12 border-form-radius", @id = "txtGLAccountCode" })
+                                                    @Html.ValidationMessageFor(model => model.GLAccountCode)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Depreciation G/L Account code</label>
+                                                    @Html.TextBoxFor(model => model.DepreciationGLAccountCode, new { @class = "m-wrap span12 border-form-radius", @id = "txtDepreciationGLAccountCode" })
+                                                    @Html.ValidationMessageFor(model => model.DepreciationGLAccountCode)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <div class="control-group">
+                                                <label class="control-label">Tag to Employee</label>
+                                                <div class="controls">
+                                                    <div id="tags_1_tagsinput" class="tagsinput" style="width: auto; height: 100px;">
+                                                    </div>
+
+                                                    <input type="text" value="foo,bar,baz,roffle" class="m-wra tags" id="tags_1" style="display: none;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="form-section matop">Documents</h3>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <div data-provides="fileupload" class="fileupload fileupload-new">
+                                                        <div class="input-append">
+                                                            <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                                                            <span class="btn btn-file"><span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
+                                                                <input type="file" name="assetFIle" class="default">
+                                                            </span>
+                                                        </div>
+                                                        <style>
+                                                            .f24 {
+                                                                font-size: 24px;
+                                                                color: #666;
+                                                            }
+                                                        </style>
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            @foreach (var file in ViewBag.Files)
+                                                            { 
+                                                                <tr>
+                                                                    <td width="85%" valign="middle"><a href="#">@file</a></td>
+                                                                    <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
+                                                                </tr>
+                                                            }
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions ">
+                                        <input class="btn blue" type="submit" value="Add" onclick="AddAsset();" /><i class="icon-plus-sign"></i>Add
+                                        <a class="btn" href="AssetsList">Cancel</a>
+                                        <!--<button class="btn" type="button">Cancel</button>-->
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                </div>
+                <!-- END SAMPLE FORM PORTLET-->
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+
+<div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+    @Html.Partial("Organization/_ManageAssetTypes", (IEnumerable<StratusAccounting.Models.Mst_AssetType>)ViewBag.AssetTypes)
+</div>
+@*}  *@
+
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $("#txtPurchaseDt").datepicker();
+        }
+        );
+
+    function AddAsset() {
+        debugger;
+        var assetId = $("#txtAssetID").val();
+        var purchaseDt = $("#txtPurchaseDt").val();
+        var description = $("#txtDescription").val();
+        var vendorId = $("#ddlVendors").val();
+        var initialValue = $("#txtInitialValue").val();
+        var assetTypeId = $("#ddlAssetTypeList").val();
+        var locatedAt = $("#txtLocatedAt").val();
+        var poNumber = $("#txtPONumber").val();
+        var assetDispositionId = $("#ddlAssetDispositionId").val();
+        var glAccountCode = $("#txtGLAccountCode").val();
+        var depreciationGLAccountCode = $("#txtDepreciationGLAccountCode").val();
+        var currentValue = 0;
+
+        $.ajax({
+            url: '/Organization/SaveAssets/',
+            type: "Post",
+            dataType: "Json",
+            //contentType: 'application/json, charset=utf-8',
+            data: { "assetId": assetId, "purchaseDt": purchaseDt, "description": description, "vendorId": vendorId, "initialValue": initialValue, "assetTypeId": assetTypeId, "locatedAt": locatedAt, "poNumber": poNumber, "assetDispositionId": assetDispositionId, "glAccountCode": glAccountCode, "depreciationGLAccountCode": depreciationGLAccountCode, "currentValue": currentValue },
+            success: function () {
+                debugger;  //var result = msg.data;
+                alert("Saved successfully");
+            },
+            error: function (error) {
+                debugger;
+                alert(error.responseText);
+            }
+        });
+
+    }
+
+    function removeAssetType(assetTypeId) {
+        $.ajax({
+            url: '/Organization/DeleteAssetType/',
+            type: "Post",
+            dataType: "Json",
+            //contentType: 'application/json, charset=utf-8',
+            data: { "assetTypeId": assetTypeId },
+            success: function () {
+                //debugger;  //var result = msg.data;
+
+                $('#' + assetTypeId).remove();
+
+                $("#ddlAssetTypeList option[value='" + assetTypeId + "']").remove();
+
+            },
+            error: function (error) {
+                //debugger;
+                alert(error.responseText);
+            }
+        });
+    }
+    function onManageAssetTypeClose() {
+
+    }
+    function DeleteAssetsToEmployee(employeeId, assetId) {
+        $.ajax({
+            url: '/Organization/DeleteAssetsToEmployee/',
+            type: "Post",
+            dataType: "Json",
+            //contentType: 'application/json, charset=utf-8',
+            data: { "employeeId": employeeId, "assetId": assetId },
+            success: function () {
+                //debugger;  //var result = msg.data;
+
+                $('#' + employeeId).remove();
+
+            },
+            error: function (error) {
+                //debugger;
+                alert(error.responseText);
+            }
+        });
+    }
+
+    function AddNewAsset() {
+        debugger;
+        var asset = $("#txtAsset").val();
+        $.ajax({
+            url: '/Organization/InsertAssetType/',
+            type: "Post",
+            dataType: "Json",
+            //contentType: 'application/json, charset=utf-8',
+            data: { "asset": asset},
+            success: function (data) {
+                debugger;  //var result = msg.data;
+                $("#ddlAssetTypeList").html('');  
+                for(var i=0;i<data.length;i++)
+                {
+                    childOptions += '<option value="' + data[i].AssetTypeId + '">' + data[i].AssetName + '</option>';
+                }
+                $("#ddlAssetTypeList").html(childOptions);
+            },
+            error: function (error) {
+                //debugger;
+                alert(error.responseText);
+            }
+        });
+        
+    }
+
+</script>
+
+
+@Scripts.Render("~/bundle/Script/Dashboard")

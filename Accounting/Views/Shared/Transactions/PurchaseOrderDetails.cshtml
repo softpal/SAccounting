@@ -1,0 +1,45 @@
+﻿@model StratusAccounting.Models.PurchaseOrderDetail
+
+<tr>
+    @using (Html.BeginCollectionItem("PurchaseOrderDetail"))
+    {
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    @Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.BusinessItems, "--Select--", new { @class = "m-wrap span12 border-form-radius" })
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    @Html.TextBoxFor(model => model.Description, new { @class = "span12 m-wrap mabottom1" })
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "span12 m-wrap mabottom1", @onblur = "javascript:return addSubTotal(this);" })
+
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Amount, new { @class = "span12 m-wrap mabottom1", @onblur = "javascript:return addSubTotal(this);" })
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Tax, new { @class = "span12 m-wrap mabottom1", @onblur = "javascript:return addSubTotal(this);" })
+                </div>
+            </div>
+        </td>
+    }
+</tr>

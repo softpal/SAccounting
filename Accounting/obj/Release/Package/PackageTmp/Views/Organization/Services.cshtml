@@ -1,0 +1,266 @@
+﻿@model StratusAccounting.Models.UMst_BusinessItems
+@using StratusAccounting.Models;
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Services</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Organization/Preferences">Organization</a></li>
+                        <li><i class="icon-angle-right"></i><a href="/Organization/Services">Services</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body form">
+                            <h3 class="page-title matop border-btoom">Services&nbsp;<a href="~/Organization/Services"><i class="icon-plus-sign"></i></a></h3>
+                            @*<h3 class="page-title matop border-btoom">Services&nbsp;<a href="~/Organization/Services"><i class="icon-plus-sign" id="service-popup"></i></a></h3>*@
+                            <div class="row-fluid">
+                                <div class="span3">
+                                    <div class="account-details">
+                                        <ul class="no-left-margin">
+                                            <div class="input-append">
+                                                <input type="text" placeholder="Search" id="txtKeyword" class="m-wrap input-large" onkeyup="SearchServices();" />
+                                                <button type="button" class="btn blue" ><i class="icon-search"></i></button>
+                                            </div>
+                                            <div id="lstServices">
+                                            @foreach (UMst_BusinessItems item in ViewBag.BusinessItems)
+                                            { 
+                                                <li class="active"><a href="/Organization/EditService/?serviceId=@item.ItemId">@item.Title</a><a onclick="DeleteServices(@item.ItemId,this);" ><img src="~/Content/img/icon-close.png" alt="" class="account-detailsbg" /></a></li>
+                                            }
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="span9 account-right">
+                                    <div class="span12">
+                                        <form class="horizontal-form" action="#">
+                                            <div class="row-fluid margin-bottom-20">
+                                                <span class="color1">Print button will not show while user adding or editing</span> <a class="btn blue border-form-radius float-right" href="#"><i class="icon-print"></i>Print</a>
+                                                <div class="control-group margin-top-20">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span>Title</label>
+                                                    <div class="controls">
+                                                        @if (Model != null && Model.ItemId > 0)
+                                                        {
+                                                            @Html.HiddenFor(model => model.ItemId)
+                                                            @Html.HiddenFor(model => model.CreatedDate)
+                                                        }
+                                                        @Html.TextBoxFor(model => model.Title, new { @class = "m-wrap span12 border-form-radius" })
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span> Unique # <span class="color2">(manual entry)</span></label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.UniqueId, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.UniqueId)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Description </label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.Description, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.Description)
+                                                    </div>
+                                                </div>field-validation-error
+                                                <div class="control-group">
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Cost Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.CostPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                            @Html.ValidationMessageFor(model => model.CostPrice)
+                                                        </div>
+                                                    </div>
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Discount Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.DiscountPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                            @Html.ValidationMessageFor(model => model.DiscountPrice)
+                                                        </div>
+                                                    </div>
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Preferred Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.PreferredPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                            @Html.ValidationMessageFor(model => model.PreferredPrice)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Category</label>
+                                                    <div class="controls">
+                                                        <a data-toggle="modal" href="#responsive"><i class="icon-plus-sign"></i></a>
+                                                        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+                                                            @Html.Partial("ChartofAccounts/ChartofAccounts", new UMst_UserAccounts())
+                                                            @*@Html.Partial("ChartofAccounts/ChartofAccounts", new { catid = ViewBag.ParentAccounts});*@
+                                                        </div>
+                                                        @Html.DropDownListFor(model => model.UserAccountsId, (SelectList)ViewBag.AccountTypeList, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "drpValue" })
+                                                        @Html.ValidationMessageFor(model => model.UserAccountsId)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div class="radio">
+                                                            <span>
+                                                                @Html.CheckBoxFor(model => model.Taxable, new { @class = "radio" })
+                                                                @Html.ValidationMessageFor(model => model.Taxable)
+                                                                <label for="firstName" class="control-label">Is&nbsp;Taxable?</label>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button id="btnSave" type="submit" class="btn blue"><i class="icon-ok"></i>Save</button>
+                                                <a class="btn" href="~/Organization/Services">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>   
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}
+
+<script type="text/javascript">
+
+    function DeleteServices(objId, objectElement) {
+        $.ajax({
+            url: '/Organization/Delete/',
+            type: "Post",
+            dataType: "Json",
+            //contentType: 'application/json, charset=utf-8',
+            data: { "serviceId": objId },
+            success: function () {
+                //debugger;  //var result = msg.data;
+                alert("Deleted Successfully .");
+                $(objectElement).parent().css("display", "none");
+            },
+            error: function (error) {
+                //debugger;
+                alert(error.responseText);
+            }
+        });
+    }
+
+    $(function () {
+        $('#tags').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("AutoComplete")',
+                    dataType: "json",
+                    contentType: 'application/json, charset=utf-8',
+                    data: {
+                        search: $("#tags").val()
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item
+                            };
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+            },
+            minLength: 1
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(
+         function () {
+             $.ajaxSetup({
+                 cache: false
+             });
+             // GetData();
+         }
+        );
+
+    function SearchServices() {
+        var keyword = $("#txtKeyword").val();
+        document.getElementById("lstServices").innerHTML = '';
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/Organization/BindSearchServices",
+            data: JSON.stringify( { "keyword": keyword }),
+            success: function (data) {
+                if (data.length > 0) {
+                    var childString = '';
+                    document.getElementById("lstServices").innerHTML = '';
+                    for(var i=0;i<data.length;i++)
+                    {
+                        childString += '<li class="active"><a href="/Organization/EditService/?serviceId=' + data[i].ServicesId + '">' + data[i].ServicesTitle + '</a><a onclick="DeleteServices(' + data[i].ServicesId + ',this)"; ><img src="\\Content\\img\\icon-close.png" alt="" class="account-detailsbg" /></a></li>';
+                    }
+                    $("#lstServices").append(childString);
+                }
+            },
+            error: function (data) {
+                //debugger;
+            }
+        });
+    }
+
+    function GetData() {
+        //debugger;
+        try {
+            $.post("/Organization/ServicesPopUp", null, function (data, status, jqXHR) {
+
+                try {
+                    var chartAccounts = eval(data);
+                    displayData(chartAccounts);
+                } catch (ex) {
+                    alert(ex);
+                }
+
+            });
+        } catch (exe) {
+            alert(exe);
+        }
+    }
+
+    function displayData(chartAccounts) {
+        //debugger;
+        $.each(chartAccounts, function (key, value) {
+            //debugger;
+            $("drpValue").append('<Option value="' + value.Id + '">' + value.AccountName + '</Option>');
+        });
+    }
+
+    function displayData(data) {
+        //debugger;
+        //$.each(data, function (key, value) {
+        //    debugger;
+        //    $("drpValue").append('<Option value="' + value.Id + '">' + value.AccountName + '</Option>');
+        //});
+    }
+</script>
+ 

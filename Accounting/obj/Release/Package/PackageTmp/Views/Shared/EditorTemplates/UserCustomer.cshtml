@@ -1,0 +1,47 @@
+﻿@model StratusAccounting.Models.UserCustomer
+@{
+    <div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Credit Period</label>
+                        @*@Html.EditorFor(model => model.CreditPeriodTypeId)*@
+                        @Html.DropDownListFor(model => model.CreditPeriodTypeId, (SelectList)ViewBag.CreditPeriods, "--select--", new { @id = "creditPeriodType", @class = "m-wrap span12 border-form-radius" })
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Credit Limit</label>
+                        @Html.TextBoxFor(model => model.CreditLimit)
+                    @Html.ValidationMessageFor(model => model.CreditLimit)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Preferred Payment Method</label>
+                        @*@Html.EditorFor(model => model.PaymentTypesId)*@
+                        @Html.DropDownListFor(model => model.PaymentTypesId, (SelectList)ViewBag.PaymentMethods, "--select--", new { @id = "paymentType", @class = "m-wrap span12 border-form-radius" })
+                    @Html.ValidationMessageFor(model => model.PaymentTypesId)
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Credit Card Token ID</label>
+                        @Html.TextBoxFor(model=>model.CreditCardToken)
+                    @Html.ValidationMessageFor(model => model.CreditCardToken)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

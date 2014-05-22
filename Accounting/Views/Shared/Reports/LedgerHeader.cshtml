@@ -1,0 +1,84 @@
+﻿@{
+    
+}
+
+<script src="~/Scripts/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="~/Scripts/plugins/data-tables/DT_bootstrap.js"></script>
+<script src="~/Scripts/plugins/data-tables/jquery.dataTables.min.js"></script>
+<link href="~/Scripts/plugins/select2/select2_stratus.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/jquery.blockui.min.js"></script>
+
+<div class="span12">
+    <h4>@ViewBag.Title&nbsp;&nbsp;<span>@ViewBag.FromDate - @ViewBag.ToDate</span></h4>
+</div>
+
+<div class="span12 margin-top-10 margin-bottom-10  no-left-margin">
+    <div class="span3 ma">
+        <div class="control-group">
+            <div class="controls no-left-margin">
+                @Html.DropDownList("UserAccounts", null, "--select--", new { @id = "accountId", @class = "m-wrap span12" })
+            </div>
+        </div>
+    </div>
+    <div class="span3 ma">
+        <div class="control-group">
+            <div class="controls no-left-margin">
+                <select id="dropPreset" class="m-wrap span12">
+                    <option value="select">Select Preset</option>
+                    <option value="Today">Today</option>
+                    <option value="This Week">This Week</option>
+                    <option value="This Month">This Month</option>
+                    <option value="This Quarter">This Quarter</option>
+                    <option value="This Year">This Year</option>
+                    <option value="Last Week">Last Week</option>
+                    <option value="Last Month">Last Month</option>
+                    <option value="last Quarter">last Quarter</option>
+                    <option value="Last Year">Last Year</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="span3 ma">
+        <div class="control-group">
+            <div class="controls no-left-margin">
+                @Html.TextBox("fromDate", string.Empty, new { id = "fromDate", @class = "m-wrap span12 date-picker" })
+            </div>
+        </div>
+    </div>
+    <div class="span3 ma">
+        <div class="control-group">
+            <div class="controls no-left-margin">
+                @Html.TextBox("toDate", string.Empty, new { id = "toDate", @class = "m-wrap span12 date-picker" })
+            </div>
+        </div>
+    </div>
+    <div class="span1">
+        <input type="submit" class="btn blue margin-bottom-10" value="View" />
+        
+    </div>
+</div>
+<script src="~/Scripts/DatesRangeSelect.js"></script>
+<script type="text/javascript">
+
+    $("#fromDate").datepicker();
+    $("#toDate").datepicker();
+
+    $("#dropPreset").live("change", function () {
+        //debugger;
+        var selectedVal = $(this).val();
+        var fromDate; //= $("#fromDate");
+        var toDate; //= $("#toDate");
+
+
+        var dates = DateRange(selectedVal);
+
+        fromDate = dates[0];
+        toDate = dates[1];
+        
+        $("#fromDate").val(fromDate);
+        //toDate = $.datepicker.formatDate('mm/dd/yy', new Date());
+        $("#toDate").val(toDate);
+
+    });
+</script>

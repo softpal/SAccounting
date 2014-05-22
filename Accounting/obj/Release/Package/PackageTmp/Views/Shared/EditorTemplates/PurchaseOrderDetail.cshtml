@@ -1,0 +1,54 @@
+﻿@model StratusAccounting.Models.PurchaseOrderDetail
+
+<tr>
+    @using (Html.BeginCollectionItem("PurchaseOrderDetail"))
+    {
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    @Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.BusinessItems, "--select--", new { @class = "m-wrap span12 border-form-radius" })
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    @Html.TextBoxFor(model => model.Description, new { @class = "span12 m-wrap mabottom1" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                    @*<input type="text" class="span12 m-wrap mabottom1" />*@
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+
+                <div class="controls">
+                    @*<input type="text" class="span12 m-wrap mabottom1" />*@
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "span12 m-wrap mabottom1", @onblur = "addSubTotal(this);" })
+                    @Html.ValidationMessageFor(model => model.Quantity)
+
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+
+                <div class="controls">
+                    @*<input type="text" class="span12 m-wrap mabottom1"  onblur="addSubTotal(this);"/>*@
+                    @Html.TextBoxFor(model => model.Amount, new { @class = "span12 m-wrap mabottom1", @onblur = "addSubTotal(this);" })
+                    @Html.ValidationMessageFor(model => model.Amount)
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+
+                <div class="controls">
+                    @*<input type="text" class="span12 m-wrap mabottom1" />*@
+                    @Html.TextBoxFor(model => model.Tax, new { @class = "span12 m-wrap mabottom1", @onblur = "addTax(this);" })
+                    @Html.ValidationMessageFor(model => model.Tax)
+                </div>
+            </div>
+        </td>
+    }
+</tr>

@@ -1,0 +1,88 @@
+﻿@model StratusAccounting.Models.CustomersAddress
+@{
+    <div class="span12 no-left-margin">
+        <h3 class="form-section matop">Billing Address<a data-toggle="modal" href="#popup-7">
+            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i>Edit</button>
+        </a></h3>
+        <div id="popup-7" class="modal hide fade" tabindex="-1" data-width="760">
+            @*<form class="form-horizontal form-row-seperated" action="#">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h3>Billing Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
+                        <div class="scroller" style="height: 250px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label">Street</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">City</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">ZIP</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">County</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">State</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div>
+                        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+            </div>*@
+        </div>
+        <div class="span6 no-left-margin">
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Street&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                @Html.DisplayFor(model => model.AddressLine1)
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">City&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                @Html.DisplayFor(model => model.CityId)
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">ZIP&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                @Html.DisplayFor(model => model.Zip)
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">County&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                @Html.DisplayFor(model => model.CountyId)
+            </div>
+
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">State&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                @Html.DisplayFor(model => model.StateId)
+            </div>
+        </div>
+        <div class="span6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d243647.2517687158!2d78.38212164747699!3d17.450496957502324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1395048601965" height="150" frameborder="0" style="border: 0; width: 100%"></iframe>
+        </div>
+    </div>
+}

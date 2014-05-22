@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Stratus Connection | Login Page</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
+    <script>intuit.ipp.anywhere.setup({
+    menuProxy: 'http://example.com/myapp/BlueDotMenu',
+    grantUrl: 'http://example.com/myapp/RequestOAuthToken'
+    });
+    </script>
+
+    @Styles.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/stratus-home/css/css/style.css" rel="stylesheet" />
+
+    <!-- END PAGE LEVEL STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+
+    <div class="menu white-back ble-back">
+        <div class="container clearfix">
+            <div id="logo" class="fleft">
+                <a href="stratus-home/index1.html">
+                    <img src="~/Content/img/logo1.png"></a>
+            </div>
+            <div id="nav" class="fright">
+                <ul class="navigation">
+                    <li class="libg"><a href="~/Stratus/Index" class="color-black">Home</a></li>
+                    <li class="libg"><a href="#" class="color-black">Take A Tour</a></li>
+                    <li class="libg"><a href="#" class="color-black">FAQ</a></li>
+                    <li class="libg"><a href="~/Home/Index" class="color-black">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content inn-ma">
+        <!-- BEGIN LOGIN FORM -->
+
+        @RenderBody()
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+        2014 © Powered By Stratus Business Connection. 
+
+    </div>
+
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            Login.init();
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

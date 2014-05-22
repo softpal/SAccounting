@@ -1,0 +1,524 @@
+﻿@model StratusAccounting.Models.PurchaseInvoice
+@{
+    ViewBag.Title = "AddPurchaseInvoice";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundle/Script/Dashboard")
+
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+@Scripts.Render("~/bundle/Script/Dashboard")
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.HiddenFor(model => model.BusinessID)
+    @Html.HiddenFor(model => model.UserVendorId)
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="chart_of_accounts.html">Transactions</a></li>
+                        <li><i class="icon-angle-right"></i><a href="invoice.html">Invoice</a> </li>
+                        <li><i class="icon-angle-right"></i><a href="new_invoice.html">New Invoice / Edit Invoice</a> </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body flip-scroll">
+                            <!-- BEGIN FORM-->
+                            <form class="horizontal-form" action="#">
+                                <h3 class="form-section matop">Invoices</h3>
+                                <div class="row-fluid">
+                                    <div class="span9  account-right1">
+                                        <div class="row-fluid margin-bottom-20">
+                                            <div class="span8">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="radio">
+                                                            <div class="radio">
+                                                                <span class="checked">
+                                                                    <input type="radio" name="optionsRadios1" value="option1"></span>
+                                                            </div>
+                                                            Purchase Invoice
+                                                        </label>
+                                                        <label class="radio">
+                                                            <div class="radio">
+                                                                <span class="">
+                                                                    <input type="radio" name="optionsRadios1" value="option2" checked=""></span>
+                                                            </div>
+                                                            Sales Invoice
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span4 ">
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Invoice Title</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.InvoiceTitle)
+                                                        @Html.ValidationMessageFor(model => model.InvoiceTitle)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4 ">
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Customer</label>
+                                                    <div class="controls">
+                                                        @Html.HiddenFor(model => model.UserVendorId)
+                                                        <input type="text" class="m-wrap span12 border-form-radius" id="txtVendor" name="txtVendor" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Invoice #</label>
+                                                        @Html.TextBoxFor(model => model.InvoiceNumber, new { @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.InvoiceNumber)
+                                                        @*<input type="text" class="m-wrap span12 border-form-radius" readonly="" placeholder="Autopopulate Unquie#">*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Purchase Order / Service order #</label>
+                                                        @Html.DropDownListFor(model => model.PurchaseOrderId, (SelectList)ViewBag.POServiceNum, "--Select--", new { @id = "purchaseProduct", @class = "m-wrap span12 border-form-radius" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Term</label>
+                                                        @Html.DropDownListFor(model => model.DueTermId, (SelectList)ViewBag.InvoiceDueTerms, "--Select--", new { @id = "invoiceTerm", @class = "m-wrap span12 border-form-radius" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Due Date</label>
+                                                        @* @Html.TextBoxFor(model => model.DueDate)*@
+                                                        @Html.ValidationMessageFor(model => model.DueDate)
+                                                        <input type="text" class="m-wrap span12 border-form-radius" id="DueDate" name="DueDate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <table id="purchaseInvoicetbl" class="table-bordered table-striped table-condensed cf margin-top-10 margin-bottom-10">
+                                            <thead class="cf">
+                                                <tr class="b1">
+                                                    <th class="journal-padding-bootom">Product/Service/Project</th>
+                                                    <th class="journal-padding-bootom">Description</th>
+                                                    <th class="numeric journal-padding-bootom">Quantity</th>
+                                                    <th class="numeric journal-padding-bootom">Amount</th>
+                                                    <th class="numeric journal-padding-bootom">Tax</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="editorRows">
+                                                @*  @Html.EditorFor(model => model.PurchaseInvoiceDetails, "~/Views/Shared/EditorTemplates/PurchaseInvoiceDetails.cshtml")
+                                                @Html.Partial("~/Views/Shared/EditorTemplates/PurchaseInvoiceDetails.cshtml")*@
+                                                @if (Model != null)
+                                                {
+                                                    foreach (StratusAccounting.Models.PurchaseInvoiceDetail purchaseInnoiceDetail in Model.PurchaseInvoiceDetails)
+                                                    {
+                                                        Html.RenderPartial("EditorTemplates/PurchaseInvoiceDetails", purchaseInnoiceDetail);
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="details-color pull-right" id="addItem">Add More</a>
+                                        <div class="clearfix"></div>
+                                        <div class="span2 pull-right">
+                                            <p>Sub total<span class="pull-right" id="txtsubTotal">0</span></p>
+                                            <p>Tax1<span class="pull-right" id="txtTax1">0</span></p>
+                                            <p>Tax2<span class="pull-right" id="txtTax2">0</span></p>
+                                            <p>Tax3<span class="pull-right" id="txtTax3">0</span></p>
+                                            <p>Total<span class="pull-right" id="txtTotal">0</span></p>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Terms &amp; Conditions</label>
+                                                        <textarea rows="3" class="m-wrap span12 border-form-radius"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <div class="control-group">
+                                                    <label class="control-label">Tag to</label>
+                                                    <div class="controls">
+                                                        <input id="tags_1" type="text" class="m-wra tags" value="Service, Project, Project1" style="display: none;"><div id="tags_1_tagsinput" class="tagsinput" style="width: auto; height: 100px;">
+                                                            <span class="tag"><span>Service&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>Project&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>Project1&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><div id="tags_1_addTag">
+                                                                <input id="tags_1_tag" value="" data-default="add a tag" style="color: rgb(102, 102, 102); width: 80px;">
+                                                            </div>
+                                                            <div class="tags_clear"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")
+
+                                        <div class="clearfix"></div>
+                                        <div class="form-actions ">
+                                            <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button>
+                                            <button class="btn blue" type="button"><i class="icon-print"></i>Print</button>
+                                            <button class="btn red" type="submit"><i class="icon-ok"></i>Save</button>
+                                            <button class="btn green" type="button"><i class="icon-envelope"></i>Send Email</button>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <h4 class="border-btoom">Add to Invoice&nbsp;</h4>
+                                        <button class="btn blue border-form-radius" type="button">Add All</button>
+                                        <div class="span10 margin-top-10 invoice-border border-form-radius no-left-margin">
+
+                                            <span class="font-size16">Estimate # 1006<br>
+                                                <small>03/10/2014</small></span>
+                                            <p class="font-size16">$10,000.00</p>
+                                            <a class="btn mini green border-form-radius" href="#" style="margin-right: 5px;">Add</a>
+
+                                            <a class="btn mini black border-form-radius" href="#">Open</a>
+                                        </div>
+                                        <div class="span10 margin-top-10 invoice-border border-form-radius no-left-margin">
+
+                                            <span class="font-size16">Estimate # 1006<br>
+                                                <small>03/10/2014</small></span>
+                                            <p class="font-size16">$10,000.00</p>
+                                            <a class="btn mini green border-form-radius" href="#" style="margin-right: 5px;">Add</a>
+                                            <a class="btn mini black border-form-radius" href="#">Open</a>
+                                        </div>
+                                        <div class="span10 margin-top-10 invoice-border border-form-radius no-left-margin">
+                                            <span class="font-size16">Estimate # 1006<br>
+                                                <small>03/10/2014</small></span>
+                                            <p class="font-size16">$10,000.00</p>
+                                            <a class="btn mini green border-form-radius" href="#" style="margin-right: 5px;">Add</a>
+                                            <a class="btn mini black border-form-radius" href="#">Open</a>
+                                        </div>
+                                        <div class="span10 margin-top-10 invoice-border border-form-radius no-left-margin">
+                                            <span class="font-size16">Estimate # 1006<br>
+                                                <small>03/10/2014</small></span>
+                                            <p class="font-size16">$10,000.00</p>
+                                            <a class="btn mini green border-form-radius" href="#" style="margin-right: 5px;">Add</a>
+                                            <a class="btn mini black border-form-radius" href="#">Open</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END FORM-->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+}
+
+<script type="text/javascript">
+
+
+
+    var aryFilePath = new Array();
+    function AddFile() {
+        var fullPath = document.getElementById('upLoad').value;
+        var filename;
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var children = document.getElementById("tblFileName").innerHTML;
+            children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);"></i></td></tr>';
+            document.getElementById("tblFileName").innerHTML = children;
+            document.getElementById('upLoad').value = "";
+            aryFilePath.push([fullPath]);
+        }
+    }
+
+    function Removefile(element) {
+        var fileName = element.parentNode.parentNode.parentNode.innerHTML.split('#\">')[1].split("</")[0];
+        aryFilePath.splice($.inArray(fileName, aryFilePath), 1);
+        document.getElementById("tblFileName").innerHTML = '';
+        var children = '';
+        for (var i = 0; i < aryFilePath.length; i++) {
+            var fullPath = aryFilePath[i].toString();
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);" style="cursor:pointer;"></i></td></tr>';
+        }
+        document.getElementById("tblFileName").innerHTML = children;
+    }
+
+    var subtotal = 0;
+    var totalTax = 0;
+    var total = 0;
+    function addSubTotal(field) {
+        var i;
+        var subtotal = 0;
+        var totalTax = 0;
+        var tax1 = 0;
+        var tax2 = 0;
+        var tax3 = 0;
+        var total = 0;
+        var len = $('input:hidden[name=PurchaseInvoiceDetail.index]').length;
+        if (!isNaN(len)) {
+            for (var j = 0; j < len; j++) {
+                i = $('input:hidden[name=PurchaseInvoiceDetail.index]')[j].value;
+                if (j != '0') {
+                    var amount = parseInt($("#PurchaseInvoiceDetail_" + i + "__Amount").val());
+                    var quantity = parseInt($("#PurchaseInvoiceDetail_" + i + "__Quantity").val());
+                    if (!isNaN(amount) && !isNaN(quantity)) {
+                        subtotal += amount * quantity;
+                    }
+
+                    var tax = parseInt($("#PurchaseInvoiceDetail_" + i + "__Tax").val());
+                    if (!isNaN(tax)) {
+                        if ($("#PurchaseInvoiceDetail_" + i + "__ItemId").val() == "27") {// for Product based
+                            tax1 += tax;
+                        }
+                        if ($("#PurchaseInvoiceDetail_" + i + "__ItemId").val() == "28") {// for service based
+                            tax2 += tax;
+                        }
+                        if ($("#PurchaseInvoiceDetail_" + i + "__ItemId").val() == "29") {// for Project based
+                            tax3 += tax;
+                        }
+                    }
+                }
+
+            }
+        }
+        $("#txtsubTotal").text(subtotal.toString());
+        $("#txtTax1").text(tax1.toString());
+        $("#txtTax2").text(tax2.toString());
+        $("#txtTax3").text(tax3.toString());
+        total = tax1 + tax2 + tax3 + subtotal;
+        $("#txtTotal").text(total.toString());
+    }
+
+
+    function bindEditSubTotal(itemId, qty, amt, tax) {
+        var subtotal = 0;
+        var totalTax = 0;
+        var tax1 = 0;
+        var tax2 = 0;
+        var tax3 = 0;
+        var total = 0;
+
+        if (!isNaN(amt) && !isNaN(qty)) {
+            subtotal += amt * qty;
+        }
+        if (!isNaN(tax)) {
+            if (itemId == "27") {// for Product based
+                tax1 += tax;
+            }
+            if (itemId == "28") {// for service based
+                tax2 += tax;
+            }
+            if (itemId == "29") {// for Project based
+                tax3 += tax;
+            }
+        }
+
+    }
+    var i = 0;
+    $(document).ready(function () {
+
+        $("#DueDate").datepicker();
+
+        $("#addItem").click(function () {
+            //debugger;
+            $.ajax({
+                url: "/Invoices/BlankEditorRow",
+                cache: false,
+                success: function (html) {
+                    //debugger;
+                    $("#editorRows").append(html);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            return false;
+        });
+
+        $("#invoiceTerm").change(function () {
+        });
+
+
+        // for get the po details by poid
+        $("#purchaseProduct").change(function () {
+
+            var editsubtotal = 0;
+            var edittotalTax = 0;
+            var edittax1 = 0;
+            var edittax2 = 0;
+            var edittax3 = 0;
+            var edittotal = 0;
+
+            $.ajax({
+                url: '@Url.Action("GetPurchaseOrderDetailsByPOID")',
+                dataType: "json",
+                contentType: 'application/json, charset=utf-8',
+                data: {
+                    vendorId: $("#UserVendorId").val(),
+                    PoId: $("#purchaseProduct").val()
+                },
+                success: function (data) {
+                    $("#editorRows").empty();
+                    if (data != null && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            $.ajax({
+                                url: "/Invoices/BindEditorRow",
+                                data: { itemId: data[i].ItemId, desc: data[i].Description, qty: data[i].Quantity, amt: data[i].Amount, tax: data[i].Tax },
+                                cache: false,
+                                success: function (html) {
+                                    $("#editorRows").append(html);
+                                },
+                                error: function (error) {
+                                    alert(error.message);
+                                }
+                            });
+                        }
+
+                    }
+
+                    if (data != null && data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            if (!isNaN(data[i].Amount) && !isNaN(data[i].Quantity)) {
+                                editsubtotal += data[i].Amount * data[i].Quantity;
+                            }
+                            if (!isNaN(data[i].Tax)) {
+                                if (data[i].ItemId == "27") {// for Product based
+                                    edittax1 += data[i].Tax;
+                                }
+                                if (data[i].ItemId == "28") {// for service based
+                                    edittax2 += data[i].Tax;
+                                }
+                                if (data[i].ItemId == "29") {// for Project based
+                                    edittax3 += data[i].Tax;
+                                }
+                            }
+                        }
+                        $("#txtsubTotal").text(editsubtotal.toString());
+                        $("#txtTax1").text(edittax1.toString());
+                        $("#txtTax2").text(edittax2.toString());
+                        $("#txtTax3").text(edittax3.toString());
+                        edittotal = edittax1 + edittax2 + edittax3 + editsubtotal;
+                        $("#txtTotal").text(edittotal.toString());
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        });
+
+        $('.ddlItems').change(function () {
+            alert($(this).id);
+        });
+
+
+        $(":radio[name='optionsRadios1']").change(function () {
+            $('#txtVendor').val("");
+            $('#UserVendorId').val("0");
+
+
+            $('#txtVendor').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("GetVendorsList")',
+                        dataType: "json",
+                        contentType: 'application/json, charset=utf-8',
+                        data: {
+                            keyword: $("#txtVendor").val(),
+                            val: $(":radio[name='optionsRadios1']").val()
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.VendorFirstName,
+                                    value: item.UserVendorId
+                                };
+                            }));
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#txtVendor').val(ui.item.label);
+                    $('#UserVendorId').val(ui.item.value);
+
+                    $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("GetPODetails")',
+                        data: {
+                            vendorId: $("#UserVendorId").val(),
+                            type: $(":radio[name='optionsRadios1']").val()
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null) {
+                                $("#purchaseProduct").empty();
+                                $("#purchaseProduct").append($("<option></option>").val("").html("--Select--"));
+                                if (data.length > 0 && data != "") {
+                                    //$.each(data.d, function (key, value) {
+                                    //    $("#purchaseProduct").append($("<option></option>").val(value.PONumber).html(value.POTitle));
+                                    //});
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#purchaseProduct").append($("<option></option>").val(data[i].PurchaseOrderId).html(data[i].POTitle));
+                                    }
+                                }
+                                else {
+
+                                }
+                            }
+                            else {
+                            }
+                        },
+                        error: function (result) {
+                            alert("Error");
+                        }
+                    });
+
+                    return false;
+                },
+                minLength: 1
+            });
+
+        });
+
+    });
+</script>

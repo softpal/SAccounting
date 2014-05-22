@@ -1,0 +1,94 @@
+﻿@model StratusAccounting.Models.UMst_TaxDetails
+@{
+    <div class="span12 no-left-margin">
+        <h3 class="form-section matop">Tax Details<a data-toggle="modal" href="#popup-9">
+            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i>Edit</button>
+        </a></h3>
+        <div id="popup-9" class="modal hide fade" tabindex="-1" data-width="760">
+            @*<form class="form-horizontal form-row-seperated" action="#">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h3>Tax Details</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;">
+                        <div class="scroller" style="height: 300px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label">Federal Tax ID</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">City Tax ID</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">City Tax %</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">State Tax ID</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">State Tax %</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">County Tax ID</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">County Tax %</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div>
+                        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+            </div>*@
+        </div>
+        <div class="span6 no-left-margin">
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Federal Tax ID &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model => model.TaxNumber) </span></label>
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">City Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model => model.TaxNumber)</span></label>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">State Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model => model.TaxNumber)</span></label>
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">County Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model => model.TaxNumber)</span></label>
+            </div>
+        </div>
+    </div>
+}

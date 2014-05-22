@@ -1,0 +1,195 @@
+﻿@model StratusAccounting.Models.UMst_BusinessItems
+@using StratusAccounting.Models;
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Projects</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Organization/Preferences">Organisation</a></li>
+                        <li><i class="icon-angle-right"></i><a href="/Organization/Projects">Projects</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+
+                        <div class="portlet-body form">
+                            <h3 class="page-title matop border-btoom">Projects&nbsp;<a href="~/Organization/Projects"><i class="icon-plus-sign"></i></a></h3>
+                            <div class="row-fluid">
+                                <div class="span3">
+
+                                    <div class="account-details">
+
+                                        <ul class="no-left-margin">
+                                            <div class="input-append">
+                                                <input type="text" placeholder="Search" id="txtKeyword" class="m-wrap input-large" onkeyup="SearchProjects();" />
+                                                <button type="button" class="btn blue"><i class="icon-search"></i></button>
+                                            </div>
+                                            <div id="lstProjects">
+                                            @foreach (UMst_BusinessItems item in ViewBag.BusinessItems)
+                                            {
+                                                <li><a href="/Organization/EditProject/?projectId=@item.ItemId" >@item.Title</a><a onclick="DeleteProjects(@item.ItemId,this)"; ><img src="~/Content/img/icon-close.png" alt="" class="account-detailsbg" /></a></li>
+                                            }
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="span9 account-right">
+                                    <div class="span12">
+                                        <form class="horizontal-form" action="#">
+                                            <div class="row-fluid margin-bottom-20">
+                                                <span class="color1">Print button will not show while user adding or editing</span> <a class="btn blue border-form-radius float-right" href="#"><i class="icon-print"></i>Print</a>
+                                                <div class="control-group margin-top-20">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span>Title</label>
+                                                    <div class="controls">
+                                                        @if (@Model != null && @Model.ItemId > 0)
+                                                        {
+                                                            @Html.HiddenFor(model => model.ItemId)
+                                                            @Html.HiddenFor(model => model.CreatedDate)
+                                                        }
+                                                        @Html.TextBoxFor(model => model.Title, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.Title) 
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span> Unique # <span class="color2">(manual entry)</span></label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.UniqueId, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.UniqueId) 
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Description </label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.Description, new { rows = 3, @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.Description) 
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Cost Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.CostPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.CostPrice) 
+                                                        </div>
+                                                    </div>
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Discount Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.DiscountPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.DiscountPrice) 
+                                                        </div>
+                                                    </div>
+                                                    <div class="span4">
+                                                        <label for="firstName" class="control-label">Preferred Price</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.PreferredPrice, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.PreferredPrice) 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Category</label>
+                                                    <div class="controls">
+                                                        <a data-toggle="modal" href="#responsive"><i class="icon-plus-sign"></i></a>
+                                                        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+                                                            @Html.Partial("ChartofAccounts/ChartofAccounts", new UMst_UserAccounts())
+                                                            @*@Html.Partial("ChartofAccounts/ChartofAccounts", new { catid = ViewBag.ParentAccounts});*@
+                                                        </div>
+                                                        @Html.DropDownListFor(model => model.UserAccountsId, (SelectList)ViewBag.AccountTypeList, "--select--", new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model=>model.UserAccountsId) 
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+
+                                                        <div class="radio">
+                                                            <span>
+                                                                @Html.CheckBoxFor(model => model.Taxable, new { @class = "radio" })
+                                                                <label for="firstName" class="control-label">Is&nbsp;Taxable?</label>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button id="btnSave" type="submit" class="btn blue"><i class="icon-ok"></i>Save</button>
+                                                <a class="btn" href="~/Organization/Projects">Cancel</a>
+                                                <!--  <button class="btn" type="button">Cancel</button>-->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}
+<script type="text/javascript">
+    function DeleteProjects(objId, objectElement) {
+        $.ajax({
+            url: '/Organization/DeleteProject/',
+            type: "Post",
+            dataType: "Json",
+            data: { "projectId": objId },
+            success: function () {
+                alert("Deleted Successfully .");
+                $(objectElement).parent().css("display", "none");
+            },
+            error: function (error) {
+                alert(error.responseText);
+            }
+        });
+    }
+
+    function SearchProjects() {
+        var keyword = $("#txtKeyword").val();
+        document.getElementById("lstProjects").innerHTML = '';
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/Organization/BindSearchProjects",
+            data: JSON.stringify({ "keyword": keyword }),
+            success: function (data) {
+                if (data.length > 0) {
+                    var childString = '';
+                    document.getElementById("lstProjects").innerHTML = '';
+                    for (var i = 0; i < data.length; i++) {
+                        childString += '<li><a href="EditProject/?projectId=' + data[i].ProjectsId + '" >' + data[i].ProjectsTitle + '</a><a onclick="DeleteProjects(' + data[i].ProjectsId + ',this)"; ><img src="\\Content\\img\\icon-close.png" alt="" class="account-detailsbg" /></a></li>';
+                    }
+                    $("#lstProjects").append(childString);
+                }
+            },
+            error: function (data) {
+                ///debugger;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,202 @@
+﻿@model StratusAccounting.Models.UserBankAccount
+@{
+    ViewBag.Title = "BankAccounts";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>BankAccounts</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Organization/Preferences">Organization</a></li>
+                        <li><i class="icon-angle-right"></i><a href="/Organization/BankAccounts">Bank Accounts </a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+
+                        <div class="portlet-body form">
+                            <h3 class="page-title matop border-btoom">Bank Accounts <a href="~/Organization/BankAccounts"><i class="icon-plus-sign"></i></a></h3>
+                            <div id="validationSummery">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                            </div>
+                            <div class="row-fluid">
+
+                                <div class="span3">
+                                    <div class="account-details">
+                                        <ul class="no-left-margin">
+                                            <div class="input-append">
+                                                <input type="text" placeholder="Search" class="m-wrap input-large">
+                                                <button type="button" class="btn blue"><i class="icon-search"></i></button>
+                                            </div>
+                                            @foreach (StratusAccounting.Models.UserBankAccount item in ViewBag.BanksList)
+                                            {
+                                                <li>@Html.ActionLink(item.BankName, "EditBankAccounts", new { bankAccountId = item.BankAccountsId })<a onclick="DeleteServices(@item.BankAccountsId,this)" ><img src="~/Content/img/icon-close.png" alt="" class="account-detailsbg" /></a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="span9 account-right">
+                                    <div class="span12">
+                                        <form class="horizontal-form" action="#">
+                                            <div class="row-fluid">
+                                                <span class="color1" style="color: red;">@Html.ValidationSummary(true)</span>
+                                                <a class="btn blue border-form-radius float-right" href="#"><i class="icon-print"></i>Print</a>
+                                                <div class="control-group margin-top-20">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span> Bank Name</label>
+                                                    <div class="controls">
+                                                        @if (@Model != null && @Model.BankAccountsId > 0)
+                                                        {
+                                                            @Html.HiddenFor(model => model.BusinessID)
+                                                            @Html.HiddenFor(model => model.BankAccountsId)
+                                                            @Html.HiddenFor(model => model.CreatedByUserId)
+                                                            @Html.HiddenFor(model => model.CreatedDate)
+                                                        }
+                                                        @Html.TextBoxFor(model => model.BankName, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.BankName)
+                                                        @*<input type="text" class="m-wrap span12 border-form-radius">*@
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label"><span class="required">*</span> Account type</label>
+
+                                                        @Html.DropDownListFor(model => model.BankAccountTypeId, (SelectList)ViewBag.AccountType, "--select--", new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.BankAccountTypeId)
+
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Account #</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.AccountNum, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.AccountNum)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label"><span class="required">*</span> Opening balance </label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.OpeningBalance, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.OpeningBalance)
+                                                    </div>
+                                                </div>
+                                                @*<div class="control-group">
+                                                    <label for="firstName" class="control-label">Account Holder Name</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.AccountHolderName, new { @class = "m-wrap span12 border-form-radius" })
+                                                    </div>
+                                                </div>*@
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Account Holder1 Name</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.AccountHolder1Name, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.AccountHolder1Name)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Account Holder2 Name</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.AccountHolder2Name, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.AccountHolder2Name)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Account Holder3 Name</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.AccountHolder3Name, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.AccountHolder3Name)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Swift code</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.SwiftCode, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.SwiftCode)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Routing #</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.RountingNum, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.RountingNum)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Bank address</label>
+                                                    <div class="controls">
+                                                        @Html.TextBoxFor(model => model.Address, new { @class = "m-wrap span12 border-form-radius" })
+                                                        @Html.ValidationMessageFor(model => model.Address)
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="span6">
+                                                        <label for="firstName" class="control-label">Phone #</label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.Phone, new { @class = "m-wrap span12 border-form-radius" })
+                                                            @Html.ValidationMessageFor(model => model.Phone)
+                                                        </div>
+                                                    </div>
+                                                    <div class="span6">
+                                                        <label for="firstName" class="control-label">Fax </label>
+                                                        <div class="controls">
+                                                            @Html.TextBoxFor(model => model.Fax, new { @class = "m-wrap span12 border-form-radius" })
+                                                            @Html.ValidationMessageFor(model => model.Fax)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button id="btnSave" type="submit" class="btn blue"><i class="icon-ok"></i>Save</button>
+                                                <a class="btn" href="~/Organization/BankAccounts">Cancel</a>
+                                                <!-- <button class="btn" type="button">Cancel</button>-->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}
+<script type="text/javascript">
+    function DeleteServices(objId, objectElement) {
+        $.ajax({
+            url: '/Organization/DeleteBankAccount/',
+            type: "Post",
+            dataType: "Json",
+            data: { "bankAccountId": objId },
+            success: function () {
+                alert("Deleted Successfully .");
+                $(objectElement).parent().css("display", "none");
+            },
+            error: function (error) {
+                alert(error.responseText);
+            }
+        });
+    }
+</script>

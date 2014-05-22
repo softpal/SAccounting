@@ -1,0 +1,74 @@
+﻿@model  StratusAccounting.Models.UMst_TaxDetails
+@{
+    if (Model != null)
+    {
+    <div id="parentTaxDiv">
+        <div>
+            <div class="row-fluid">
+                <div class="span6">
+                        @Html.HiddenFor(model => model.TaxTypesId, new { @id = "hdnValue" + @Model.TaxTypesId })
+                    <div class="control-group">
+                        <div class="controls">
+                            @*<label class="control-label">@Model.Mst_TaxTypes.TaxName Tax No</label>*@
+                            <div class="control-label"> @Html.LabelFor(model => model.Mst_TaxTypes.TaxName ) </div>
+                            @Html.TextBoxFor(model => model.TaxNumber, new { @class = "m-wrap span12 border-form-radius", id = "TaxNum" + @Model.TaxTypesId })
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <div class="controls">
+                            @*<label class="control-label">@Model.Mst_TaxTypes.TaxName Tax %</label>*@
+                            <div class="control-label"> @Html.LabelFor(model => model.Mst_TaxTypes.TaxName ) </div>
+                            @Html.TextBoxFor(model => model.TaxValue, new { @class = "m-wrap span12 border-form-radius", id = "TaxValue" + @Model.TaxTypesId })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    }
+    
+    @*else
+    {
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="control-group">
+                <div class="controls">
+                    <label class="control-label">Federal Tax ID</label>
+                    @Html.TextBoxFor(model => model.TaxNumber)
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="control-group">
+                <div class="controls">
+                    <label class="control-label">Federal Tax %</label>
+                    @Html.TextBoxFor(model => model.TaxValue)
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="control-group">
+                <div class="controls">
+                    <label class="control-label">City Tax ID</label>
+                    @Html.TextBoxFor(model => model.TaxTypesId)
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="control-group">
+                <div class="controls">
+                    <label class="control-label">City Tax %</label>
+                    @Html.TextBoxFor(model => model.TaxValue)
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    }*@
+}
+
+
+

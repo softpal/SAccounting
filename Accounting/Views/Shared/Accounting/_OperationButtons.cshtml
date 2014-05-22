@@ -1,0 +1,52 @@
+﻿<style type="text/css">
+    .operation-buttons {
+        width:100%;
+    display:inline-block;
+    }
+
+        .operation-buttons .buttons {
+            width:55%;
+            float:right;
+        }
+
+            .operation-buttons .buttons .btn {
+                display: inline-block;
+                margin-top: 5px;
+                text-align: center;
+                background-color: #D4D4D4;
+                width: 130px;
+                height: 30px;
+            }
+
+                .operation-buttons .buttons .btn:hover {
+                    cursor: pointer;
+                }
+
+                .operation-buttons .buttons .btn span {
+                    line-height: 2;
+                }
+
+            .operation-buttons .buttons .btn-cancel {
+                margin-right: 60px;
+            }
+</style>
+
+
+<div class="operation-buttons">
+    <div class="buttons">
+        <div class="btn-cancel btn">
+            <span>Cancel</span>
+        </div>
+        <div class="btn-print btn">
+            <span>Print</span>
+        </div>
+        <div class="btn-save btn">
+            <span>
+                <input type="submit" value="Save" />
+                </span>
+        </div>
+        <div class="btn-sendemail btn">
+            <span>Send Email</span>
+        </div>
+    </div>
+</div>

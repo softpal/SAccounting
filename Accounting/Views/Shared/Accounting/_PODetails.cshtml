@@ -1,0 +1,65 @@
+﻿@model AC.PurchaseOrder
+<style type="text/css">
+    input {
+        width: 300px;
+    }
+
+    .po-details {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .po-details .po-heading {
+        font-size: 26px;
+        font-family: 'Segoe UI';
+        line-height: 2;
+        margin-bottom:10px;
+    }
+
+    .col2 .fields {
+        width: 45%;
+        padding: 5px;
+        float: left;
+    }
+    .col3 {
+        clear: both;
+    }
+
+        .col3 .fields {
+            width: 30%;
+            padding: 5px;
+            float: left;
+            margin-right: 20px;
+        }
+</style>
+
+
+<div class="po-details">
+    <div class="po-heading">Purchase Order</div>
+    <hr />
+
+    <section class="col2">
+        <div class="fields">
+            <div class="lable-field">PO Title</div>
+            <div class="input-field">@Html.TextBoxFor(model=>model.POTitle)</div>
+        </div>
+        <div class="fields">
+            <div class="lable-field">Vendor</div>
+            <div class="input-field">@Html.TextBoxFor(model=>model.UserVendor.CompanyName)</div>
+        </div>
+    </section>
+    <section class="col3">
+        <div class="fields">
+            <div class="lable-field">PO #</div>
+            <div class="input-field">@Html.TextBoxFor(model=>model.PONumber)</div>
+        </div>
+        <div class="fields">
+            <div class="lable-field">Expiry Date</div>
+            <div class="input-field">@Html.TextBoxFor(model=>model.ExpiryDate)</div>
+        </div>
+        <div class="fields">
+            <div class="lable-field">Custom lable from preferences</div>
+            <div class="input-field">@Html.TextBoxFor(model=>model.CustomField1)</div>
+        </div>
+    </section>
+</div>

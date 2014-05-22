@@ -1,0 +1,215 @@
+﻿@model StratusAccounting.Models.PurchaseInvoicePayment
+@{
+    ViewBag.Title = "Payments";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+@Scripts.Render("~/bundle/Script/Dashboard")
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="chart_of_accounts.html">Transactions</a></li>
+                        <li><a href="invoice.html"><i class="icon-angle-right"></i>Invoices</a></li>
+                        <li><a href="invoice_payments.html"><i class="icon-angle-right"></i>Payment</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <!-- <h3 class="page-title matop border-btoom">create Customer <a href="#"><i class="icon-plus-sign"></i></a></h3>-->
+                            <form class="horizontal-form" action="#">
+                                <h3 class="form-section matop">New Payment</h3>
+
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Date</label>
+                                                @Html.HiddenFor(model => model.Date)
+                                                <input class="m-wrap span12 date-picker border-form-radius" size="16" type="text" name="txtPaymentDate" id="txtPaymentDate" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Amount</label>
+                                                @Html.TextBoxFor(model => model.Amount, new { @id = "txtAmount", @class = "m-wrap span12 date-picker border-form-radius", @size = 16 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Paid To</label>
+                                                <select class="m-wrap span12 border-form-radius" id="ddlPaidto">
+                                                    <option value="0">Select</option>
+                                                    <option value="1">Customer</option>
+                                                    <option value="2">Employee</option>
+                                                    <option value="3">Vendor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Instrument</label>
+                                                @Html.DropDownListFor(model => model.PaymentTypesId, (SelectList)ViewBag.GetInstrumentTypes, "--Select--", new { @id = "ddlInstruments", @class = "m-wrap span12 border-form-radius" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Instrument #</label>
+                                                @Html.TextBoxFor(model => model.InstrumentNum, new { @id = "txtInstrumentNo", @class = "m-wrap span12 date-picker border-form-radius", @size = 16 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Status</label>
+                                                @Html.DropDownListFor(model => model.PaymentStatusId, (SelectList)ViewBag.GetPaymentStatusTypes, "--Select--", new { @id = "ddlStatus", @class = "m-wrap span12 border-form-radius" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <label for="firstName" class="control-label">Received for</label>
+                                            <div class="controls">
+                                                @Html.TextBoxFor(model => model.ReceivedFor, new { @id = "txtRcvdFor", @class = "m-wrap span12 date-picker border-form-radius", @size = 16 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Tags</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius" id="txtTags">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-actions ">
+                                    <button class="btn blue" type="submit"><i class="icon-plus-sign"></i>Add</button>
+                                    <button class="btn" type="button">Cancel</button>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+    </div>
+
+}
+<script src="~/Scripts/scripts/app.js"></script>
+<script src="~/Scripts/scripts/table-advanced.js"></script>
+
+<script src="~/Scripts/scripts/form-components.js"></script>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $("#txtPaymentDate").datepicker();
+        })
+    $("#btnSubmit").click(function () {
+
+        var txtPaymentDate = $('#txtPaymentDate').val();
+        var txtAmount = $('#txtAmount').val();
+        var txtInstrument = $('#txtInstrumentNo').val();
+        var txtreceivedfor = $('#txtRcvdFor').val();
+        try {
+
+            if (txtPaymentDate.toString().trim() != '') {
+              //  $('#Date').val(txtPaymentDate);
+            }
+            else {
+                $('#txtPaymentDate').focus();
+                return false;
+            }
+
+
+            if (txtAmount.toString().trim() != '') {
+            }
+            else {
+                $('#txtAmount').focus();
+                return false;
+            }
+
+            if ($("#ddlPaidto").val().toString() != "" && $("#ddlPaidto").val().toString() != "0") {
+            }
+            else {
+                $('#ddlPaidto').focus();
+                return false;
+            }
+
+            if ($("#ddlInstruments").val().toString() != "" && $("#ddlInstruments").val().toString() != "0") {
+            }
+            else {
+                $('#ddlInstruments').focus();
+                return false;
+            }
+
+            if (txtInstrument.toString().trim() != '') {
+            }
+            else {
+                $('#txtInstrumentNo').focus();
+                return false;
+            }
+
+            if ($("#ddlStatus").val().toString() != "" && $("#ddlStatus").val().toString() != "0") {
+            }
+            else {
+                $('#ddlStatus').focus();
+                return false;
+            }
+            if (txtreceivedfor.toString().trim() != '') {
+            }
+            else {
+                $('#txtRcvdFor').focus();
+                return false;
+            }
+
+
+        }
+        catch (e) {
+            return false;
+        }
+
+
+    })
+</script>

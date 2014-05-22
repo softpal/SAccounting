@@ -1,0 +1,50 @@
+﻿@model StratusAccounting.Models.PurchaseInvoiceDetail
+
+@{
+    <tr>
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    <select class="span12 m-wrap mabottom1" tabindex="1">
+                        @Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.PurchaseProduct, "--select--", new { @id = "purchaseProduct", @class = "m-wrap span12 border-form-radius" })
+                    </select>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="control-group">
+                <div class="controls no-left-margin">
+                    @Html.TextBoxFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+                <div class="controls">
+                     @Html.TextBoxFor(model => model.Quantity)
+                    @Html.ValidationMessageFor(model => model.Quantity)
+
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Amount)
+                    @Html.ValidationMessageFor(model => model.Amount)
+                </div>
+            </div>
+        </td>
+        <td class="numeric">
+            <div class="control-group">
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Tax)
+                    @Html.ValidationMessageFor(model => model.Tax)
+                </div>
+            </div>
+        </td>
+    </tr>
+}
+
+

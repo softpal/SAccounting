@@ -1,0 +1,74 @@
+﻿@model IList<StratusAccounting.Models.Ledger_DTO>
+@{
+    StratusAccounting.Models.Ledger_DTO first = null, last = null;
+    var ledgerType = (StratusAccounting.Models.LedgerTypes)Session["LedgerType"];
+    decimal totalDebits = 0;
+    decimal totalCredits = 0;
+    if (Model.Count > 0)
+    {
+        first = Model.First();
+        last = Model.Last();
+        totalCredits = @Model.Where(ledgerDebit => ledgerDebit.IsSummery == false).Sum(ledgerDebit => ledgerDebit.Credit) - first.Credit - last.Credit;
+        totalDebits = Model.Where(ledgerDebit => ledgerDebit.IsSummery == false).Sum(ledgerDebit => ledgerDebit.Debit) - first.Debit - last.Debit;
+    }
+}
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+        <thead>
+            <tr style="font-weight: bold; font-size: 14px;">
+                <td colspan="3">Opening Balance: @first.Balance</td>
+                <td colspan="3" style="text-align:right;" >Closing Balance: @last.Balance</td>
+            </tr>
+            <tr class="b1">
+                <th class="hidden-480">S.No</th>
+                <th>Date</th>
+                <th class="hidden-480">Description</th>
+                <th>Debit</th>
+                <th>Credit</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var index = 1; index < Model.Count - 1; index++)
+            {
+                <tr>
+                    <td class="hidden-480">@index</td>
+                    <td>@Model[index].Date.ToString("MM/dd/yyy")</td>
+                    @if (ledgerType == StratusAccounting.Models.LedgerTypes.Ledger)
+                    {
+                        <td class="hidden-480">@Model[index].Account</td>
+                    }
+                    else
+                    {
+                        <td class="hidden-480">@Model[index].Description</td>
+                    }
+                    <td>@Model[index].Debit</td>
+                    <td>@Model[index].Credit</td>
+                    <td>@Model[index].Balance</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="hidden-480">&nbsp;</td>
+                <td class="bold hidden-480">&nbsp;</td>
+                <td class="bold">Total</td>
+                @if (Model.Count > 0)
+                {
+                    <td class="bold">@totalDebits</td>
+                    <td class="bold">@totalCredits</td>
+                    <td class="bold">@Model.Last().Balance</td>
+                }
+                else
+                {
+                    <td class="bold">0.00</td>
+                    <td class="bold">0.00</td>
+                    <td class="bold">0.00</td>
+                }
+            </tr>
+        </tfoot>
+    </table>
+}

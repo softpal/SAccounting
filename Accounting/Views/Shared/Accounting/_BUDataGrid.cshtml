@@ -1,0 +1,122 @@
+﻿<style type="text/css">
+    .grid-container {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+        .grid-container .grid-table .table-header {
+            border-bottom: 1px solid #D4D4D4;
+        }
+
+        .grid-container .grid-table .table-data {
+            border-bottom: 1px solid #000;
+        }
+
+        .grid-container .grid-table {
+            width: 100%;
+        }
+
+            .grid-container .grid-table .table-data td a {
+                text-decoration: none;
+                color: blue;
+            }
+</style>
+@{
+    var modelData = Model;
+    var columns = (List<string>)ViewData["ColumnNames"];
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var Self;
+        var PO_Number;
+        var Updatable_Status;
+        $(".more-options").css("display", "none");
+        $(".more-options").mouseleave(function () {
+            $(this).hide();
+        });
+        $('.more-options-button').click(function (e) {
+            $(".more-options").hide();
+            Self = $(this);
+            PO_Number = $(this).parent().parent().attr("id");
+            $('.more-options').css({ 'top': e.pageY + 18, 'left': e.pageX, 'position': 'absolute', 'border': '1px solid black', 'padding': '5px', 'background-color': '#FFF' });
+            $('.more-options').toggle();
+        });
+
+        //Mark the Record status to Draft/Sent/Paid/Delete //
+
+        $(".more-options").find("#draft").click(function () {
+            Updatable_Status = "Draft";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#sent").click(function () {
+            Updatable_Status = "Sent";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#paid").click(function () {
+            Updatable_Status = "Paid";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#delete").click(function () {
+            Updatable_Status = "Delete";
+            UpdateStatus(Updatable_Status);
+        });
+
+        function UpdateStatus(Updatable_Status) {
+            $.ajax({
+                url: "/PurchaseOrder/UpdateStatus",
+                type: "GET",
+                dataType: 'json',
+                contentType: "application/json",
+                cache: false,
+                data: { PONumber: PO_Number, UpdatableStatus: Updatable_Status },
+                success: function (data) {
+                    Self.parent().parent().find("#status").html(Updatable_Status);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+            $(".more-options").hide();
+        }
+    });
+</script>
+
+<table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+    <thead>
+        <tr class="b1">
+
+            <th class="hidden-480">Business</th>
+            <th>Admin Email</th>
+            <th>Registered on</th>
+            <th class="hidden-480">Expires on</th>
+            <th class="hidden-480">Licenses</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in modelData)
+        {
+            <tr>
+                <td class="hidden-480">@item.Business</td>
+                <td>@item.AdminEmail</td>
+                <td>@item.RegisterdOn</td>
+                <td class="hidden-480">@item.ExpiresOn</td>
+                <td class="hidden-480">@item.Licenses</td>
+                <td>Active&nbsp;&nbsp;&nbsp;<div class="btn-group float-right">
+                    <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton">
+
+                        <span class="caret"></span>
+
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Export Data</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Deactivate Account</a></li>
+
+                    </ul>
+                </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

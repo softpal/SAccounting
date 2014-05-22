@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=" js touch svg inlinesvg svgclippaths no-ie8compat" lang="en">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Stratus Accounting</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300,600,300italic' rel='stylesheet' type='text/css'>
+    <link href="../../stratus-home/css/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../stratus-home/css/css/normalize.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="../../stratus-home/css/css/grid.css" type="text/css" media="screen">
+    <script src="~/stratus-home/js/jquery.js"></script>
+    <script src="~/stratus-home/js/jquery-ui.js"></script>
+    <!--<script src="~/stratus-home/js/css3-mediaqueries.js"></script> -->
+    <script src="~/stratus-home/js/fwslider.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="menu back-none">
+            @{
+                Html.RenderPartial("~/Views/Shared/Home/Navigation.cshtml");
+            }
+        </div>
+        <div class="clear"></div>
+        <div id="fwslider">
+            <div class="slider_container">
+                <div style="display: block; z-index: 1; opacity: 1;" class="slide">
+                    <img src="~/stratus-home/images/home1.png">
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <h4 style="opacity: 1;" class="title">SAVE 80% TIME WITH ACCOUNTING</h4>
+
+                            <a style="opacity: 1;" class="readmore slider-text1" href="~/Home/Index"><em style="margin: 0 0 0 10px;"></em>Sign In Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="opacity: 1; z-index: 0; display: none;" class="slide">
+                    <img src="~/stratus-home/images/upandrun.jpg">
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <h4 class="title">UP AND RUNNING IN LESS THAN 10 MINUTES</h4>
+
+                            <a style="opacity: 1;" class="readmore slider-text2" href="~/Home/Index"><em style="margin: 0 0 0 10px;"></em>Sign In Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="z-index: 0; opacity: 1; display: none;" class="slide">
+                    <img src="~/stratus-home/images/relevant.jpg">
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <h4 class="title">MORE RELEVANT TO YOUR BUSINESS THROUGH TAGGING</h4>
+
+                            <a style="opacity: 1;" class="readmore slider-text3" href="~/Home/Index"><em style="margin: 0 0 0 10px;"></em>Sign In Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="z-index: 0; opacity: 1; display: none;" class="slide">
+                    <img src="~/stratus-home/images/backup.jpg">
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <h4 class="title">FORGET BACKUPS, ENJOY PEACE OF MIND ON CLOUD</h4>
+
+                            <a style="opacity: 1;" class="readmore slider-text4" href="~/Home/Index"><em style="margin: 0 0 0 10px;"></em>Sign In Now!</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div style="width: 180px;" class="timers"></div>
+            <div style="left: 0px; top: 267px;" class="slidePrev"><span></span></div>
+            <div style="right: 0px; top: 267px;" class="slideNext"><span></span></div>
+        </div>
+        <div id="footer">
+            <div class="footer">
+                <div class="ftinr ft">
+                    <h1>USEFUL LINKS</h1>
+                    <img src="~/stratus-home/images/logo.png" alt="" />
+                    <div class="ftr-a"><a href="#">Home</a>   <a href="#">Take a Tour</a>   <a href="#">FAQ</a>   <a href="#">Pricing</a></div>
+                    <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip </p>
+                </div>
+                <div class="ftinr">
+                    <h1>TWEETS</h1>
+                    <img src="~/stratus-home/images/tweets.png" alt="" />
+                </div>
+                <div class="ftinr1 fnone">
+                    <h1>CONTACT</h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="top">
+                                <img src="~/stratus-home/images/home.png" alt="" /></td>
+                            <td>&nbsp;&nbsp;&nbsp;<strong>STRATUS</strong><br>
+                                &nbsp;&nbsp;&nbsp;132/A, 2nd Floor,<br>
+                                &nbsp;&nbsp;&nbsp;6th Road, Western Hills,<br>
+                                &nbsp;&nbsp;&nbsp;Addagutta, Kukatpally</td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <img src="~/stratus-home/images/phone.png" alt="" /></td>
+                            <td>&nbsp;&nbsp;&nbsp;+91 9440 123456</td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <img src="~/stratus-home/images/message.png" alt="" /></td>
+                            <td>&nbsp;&nbsp;&nbsp;<a href="#">Info@domain.com</a></td>
+                        </tr>
+                    </table>
+                    <div class="social">
+                        <ul class="social-networks">
+                            <li class="icon-facebook"><a href="#" title="Facebook">Facebook</a></li>
+                            <li class="icon-twitter"><a href="#" title="Twitter">Twitter</a></li>
+                            <li class="icon-dribbble"><a href="#" title="Pinterest">Pinterest</a></li>
+                            <li class="icon-linkedin"><a href="#" title="Linkedin">Linkedin</a></li>
+                            <li class="icon-skype"><a href="#" title="Google+">Google+</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="lineseparator"></div>
+            <div class="cop">Copyright © 2014 Stratus</div>
+        </div>
+    </div>
+</body>
+</html>

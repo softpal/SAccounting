@@ -1,0 +1,107 @@
+﻿<style type="text/css">
+    .grid-container {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+        .grid-container .grid-table .table-header {
+            border-bottom: 1px solid #D4D4D4;
+        }
+
+        .grid-container .grid-table .table-data {
+            border-bottom: 1px solid #000;
+        }
+
+        .grid-container .grid-table {
+            width: 100%;
+        }
+
+            .grid-container .grid-table .table-data td a {
+                text-decoration: none;
+                color: blue;
+            }
+</style>
+@{
+    var modelData = Model;
+    var columns = (List<string>)ViewData["ColumnNames"];
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var Self;
+        var PO_Number;
+        var Updatable_Status;
+        $(".more-options").css("display", "none");
+        $(".more-options").mouseleave(function () {
+            $(this).hide();
+        });
+        $('.more-options-button').click(function (e) {
+            $(".more-options").hide();
+            Self = $(this);
+            PO_Number = $(this).parent().parent().attr("id");
+            $('.more-options').css({ 'top': e.pageY + 18, 'left': e.pageX, 'position': 'absolute', 'border': '1px solid black', 'padding': '5px', 'background-color': '#FFF' });
+            $('.more-options').toggle();
+        });
+
+        //Mark the Record status to Draft/Sent/Paid/Delete //
+
+        $(".more-options").find("#draft").click(function () {
+            Updatable_Status = "Draft";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#sent").click(function () {
+            Updatable_Status = "Sent";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#paid").click(function () {
+            Updatable_Status = "Paid";
+            UpdateStatus(Updatable_Status);
+        });
+        $(".more-options").find("#delete").click(function () {
+            Updatable_Status = "Delete";
+            UpdateStatus(Updatable_Status);
+        });
+
+        function UpdateStatus(Updatable_Status) {
+            $.ajax({
+                url: "/PurchaseOrder/UpdateStatus",
+                type: "GET",
+                dataType: 'json',
+                contentType: "application/json",
+                cache: false,
+                data: { PONumber: PO_Number, UpdatableStatus: Updatable_Status },
+                success: function (data) {
+                    Self.parent().parent().find("#status").html(Updatable_Status);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+            $(".more-options").hide();
+        }
+    });
+</script>
+<div class="grid-container">
+    <table class="grid-table">
+        <tr class="table-header">
+            @*loop this based on the number of fields getting from the model data*@
+            @foreach (var column in columns)
+            {
+                <th>@column</th>
+            }
+            <th></th>
+        </tr>
+
+        @for (int i = 0; i < modelData.Count; i++)
+        {
+            var statusId = modelData[i].PONumber;
+            <tr class="table-data" id="@modelData[i].PONumber">
+                <td><a href="#">@modelData[i].PONumber</a></td>
+                <td>@modelData[i].ExpiryDate</td>
+                <td>@modelData[i].VendorCompany</td>
+                <td>@modelData[i].Amount</td>
+                <td id="status">@modelData[i].Status</td>
+                <td>@Html.Partial("~/Views/Shared/Accounting/_MoreOptionsButton.cshtml")</td>
+            </tr>
+        }
+    </table>
+</div>

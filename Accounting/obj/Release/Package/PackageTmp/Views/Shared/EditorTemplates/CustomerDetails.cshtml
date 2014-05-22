@@ -1,0 +1,63 @@
+﻿@model StratusAccounting.Models.CustomersAddress
+@{
+    <div>
+        <div class="row-fluid">
+            <div class="span6 ">
+                <div class="control-group">
+                    <label for="firstName" class="control-label">Unique #</label>
+                    <div class="controls">
+                        @Html.EditorFor(model => model.UserCustomerId)
+                    </div>
+                </div>
+            </div>
+            <div class="span6 ">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Company Name</label>
+                        @Html.EditorFor(model => model.UserCustomer.CompanyName)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">First Name</label>
+                        @Html.EditorFor(model => model.UserCustomer.CustomerFirstName)
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Last Name</label>
+                        @Html.EditorFor(model => model.UserCustomer.CustomerLastName)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">Title</label>
+                        @Html.EditorFor(model => model.UserCustomer.Title)
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label">&nbsp;</label>
+                        <select class="m-wrap span12 border-form-radius">
+                            <option value="con">Select</option>
+                            <option value="Con 1">Profit</option>
+                            <option value="Con 2">Non-Profit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

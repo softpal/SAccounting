@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8224A6D-0D95-4536-A868-BBC6FB566457}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Accounting.Models</RootNamespace>
+    <AssemblyName>Accounting.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounting.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounting.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounting.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationParameter.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Asset.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessBranch.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessRegistration.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessStatu.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessUser.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersAddress.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerTaxDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Document.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeAsset.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeBankDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeFamilyDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeLeaf.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeLeaveBillingDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePaymentType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePayroll.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeesTimesheet.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estimate.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstimatesDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Expens.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_GetChildAccounts_Tmp_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_Accounts_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_ApplicationParameters_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_AssetDispositionTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BankAccounts_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BankAccountTypes1_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BankAccountTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessAssetsToEmployees_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessAssets_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessAssetTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessDetails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessItems_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessPreferences_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessTaxDetails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_BusinessTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CreditPeriods_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomersAddress_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomersBank_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomersDetails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomersList_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomerTaxDetails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomFields_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_CustomizeFields_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_GreetingEmails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_InstrumentTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_InvoiceDueTerms_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_InvoicesStatus_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_Invoices_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_MasterAddress_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_MasterCustomersRename_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_MasterGreetingList_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_MasterPreferences_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_PaymentStatusTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_PaymentTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_PurchaseInvoicePayments_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_PurchaseOrders_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_Purchase_Service_Order_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_StratusClients_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_UserAccountTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_UserParentAccountTypes_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_VendorsAddress_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_VendorsBank_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_VendorsDetails_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Get_VendorsList_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Insert_Estimates_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPBlocker.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Journal.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerAccounts_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AccountSubTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AccountTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AccountUserTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AddressType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AssetDisposition.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_AssetType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_BankAccountTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_BusinessStatus.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_BusinessType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_Cities.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_Counties.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_Countries.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_CreditPeriodTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_CustomersRename.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_GreetingsList.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_InvoiceDueTerm.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_Invoicestatus.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_ItemTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_PaymentStatus.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_PaymentTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_PreferenceFields.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_PreferenceValues.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_Screens.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_SignupPricing.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_SignupRenewal.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_States.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_TaxTypes.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_UserRoles.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_UserType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mst_VendorType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseInvoice.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseInvoiceDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseInvoicePayment.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrderDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_Transactions.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInvoice.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInvoiceDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesReceipt.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Serial.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_AssetType.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_BusinessItems.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_BusinessPreferences.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_TaxDetails.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_UserAccounts.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_UserCustomFields.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_UserCustomizeFields.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_UserGreetingEmails.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UMst_UserParentAccounts.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserBankAccount.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserCustomer.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserEmployee.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLoginDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserPaymentDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserVendor.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserVerification_Result.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VendorsAddress.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VendorTaxDetail.cs">
+      <DependentUpon>Accounting.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Accounting.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Accounting.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Accounting.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Accounting.edmx</DependentUpon>
+      <LastGenOutput>Accounting.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Accounting.edmx.diagram">
+      <DependentUpon>Accounting.edmx</DependentUpon>
+    </None>
+    <None Include="Accounting.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Accounting.edmx</DependentUpon>
+      <LastGenOutput>Accounting.cs</LastGenOutput>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

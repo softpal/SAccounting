@@ -1,0 +1,124 @@
+﻿@model StratusAccounting.Models.Estimate_DTO
+@using StratusAccounting.Models
+@{
+    ViewBag.Title = "Estimate";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Estimate</h2>
+
+<div class="page-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="#">Customer</a></li>
+                    <li><i class="icon-angle-right"></i><a href="Estimate.cshtml">Estimate</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <h3 class="page-title matop border-btoom">Estimate</h3>
+
+                        <a data-toggle="modal" href="#responsive"><i class="icon-plus-sign"></i></a>
+                        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+                            @Html.Partial("NewEstimate")
+                        </div>
+
+                        <div class="form-horizontal form-view">
+                            <div class="row-fluid">
+                                <div class="span12 no-left-margin">
+                                    <table class="table table-striped" id="sample_2">
+                                        <thead>
+                                            <tr class="b1">
+                                                <th>Estimate #</th>
+                                                <th>Expiry date</th>
+                                                <th class="hidden-360"></th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rowsBody">
+                                            @*@foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td><a href="new_po.html">@item.EstimatesId</a></td>
+                                                    <td>@item.ExpiryDate</td>
+                                                    <td class="hidden-360"></td>
+                                                    <td>@item.Amount</td>*@
+                                            @*<td>@item.Status
+                                                    <div class="btn-group pull-right">
+                                                        <button class="btn dropdown-toggle padding-booton" data-toggle="dropdown"><span class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Copy</a></li>
+                                                            <li><a href="#">View</a></li>
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Print</a></li>
+                                                            <li><a href="#">Generate Invoice</a></li>
+                                                            <li><a href="#">Mark as Draft</a></li>
+                                                            <li><a href="#">Mark as Sent</a></li>
+                                                            <li><a href="#">Mark as Paid</a></li>
+                                                            <li><a href="#">Mark as Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    </td>*@
+                                            @* </tr>    
+                                            }*@
+                                        </tbody>
+                                    </table>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
+                                        </div>
+                                        <div class="span6" id="pager">
+                                            <form>
+                                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                                    <ul>
+                                                        <li class="prev disabled">
+                                                            <a href="#">←<span class="hidden-480">Previous</span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" onclick="">
+                                                                <label id="strtPage">1</label></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" onclick="NextPage();">
+                                                                <label id="endPage">2</label></a>
+                                                        </li>
+                                                        <li class="next disabled">
+                                                            <a href="#">
+                                                                <span class="hidden-480">Next</span>→
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>

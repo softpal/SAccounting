@@ -1,0 +1,672 @@
+﻿@model StratusAccounting.Models.BusinessPreferences_DTO
+@{
+    ViewBag.Title = "Preferences";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@*<link href="~/Scripts/plugins/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Scripts/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />*@
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Organization/Preferences">Organization</a></li>
+                        <li><i class="icon-angle-right"></i><a href="/Organization/Preferences">Preferences</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+
+                            @using (Html.BeginForm("Preferences", "Organization", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(model => model.BusiReg.CreatedDate);
+                                @Html.HiddenFor(model => model.BusiReg.CreatedByUserId);
+                                <h3 class="form-section matop">Business Information </h3>
+                                <!--<i class="icon-ok"></i>-->
+                                <div class="row-fluid">
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <label for="firstName" class="control-label">Comapny Name</label>
+                                            <div class="controls">
+                                                @Html.TextBoxFor(model => model.BusiReg.BusinessName, new { @class = "m-wrap span12 border-form-radius", @id = "companyName" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6 ">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Business type</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.BusinessTypeId, (SelectList)ViewBag.BusinessType, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "businessType" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Business Email</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.Email, new { @class = "m-wrap span12 border-form-radius", @id = "businessEmail" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Business Phone</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.Phone, new { @class = "m-wrap span12 border-form-radius", @id = "businessPhone" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">User Licensees Required</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.Licences, new { @class = "m-wrap span12 border-form-radius", @id = "txtLicense" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">City</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.CityId, (SelectList)ViewBag.Cities, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCity" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Password</label>
+                                                @*@Html.TextBoxFor(model => model.BusiReg.Password, new { @class = "m-wrap span12 border-form-radius", @id = "txtPassword" })*@
+                                                <input type="text" class="m-wrap span12 border-form-radius" id="txtPassword" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">State</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.StateId, (SelectList)ViewBag.States,"--select--",new { @class = "m-wrap span12 border-form-radius", @id = "ddlState" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Company Address</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.AddressLine1, new { @class = "m-wrap span12 border-form-radius", @id = "companyAddress" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">County</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.City, new { @class = "m-wrap span12 border-form-radius", @id = "txtCounty" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">DUNS #</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.DUNS_, new { @class = "m-wrap span12 border-form-radius", @id = "txtDUNS" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Country</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.CountryId, (SelectList)ViewBag.Countrys, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCountry" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">DBA</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.DBA, new { @class = "m-wrap span12 border-form-radius", @id = "txtDBA" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Zip</label>
+                                                @Html.TextBoxFor(model => model.BusiReg.Zip, new { @class = "m-wrap span12 border-form-radius", @id = "txtZip" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveBusinessInformation();" />
+                                </div>
+                                <h3 class="form-section matop">Prefrences</h3>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Date format</label>
+                                                @Html.DropDownListFor(model => model.DateFormatPreference.PreferenceValuesId, (SelectList)ViewBag.DateFormatPreference, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlDate" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Number format</label>
+                                                @Html.DropDownListFor(model => model.NumberFormatPreference.PreferenceValuesId, (SelectList)ViewBag.NumberFormat, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlnumberFormat" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Fiscal Year End</label>
+                                                @Html.DropDownListFor(model => model.FiscalYearFormat.PreferenceValuesId, (SelectList)ViewBag.FiscalFormat, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlFiscalyear" })
+                                                <span class="help-inline  color2">Year starts from next day above</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Primary currency</label>
+                                                @Html.DropDownListFor(model => model.PrimaryCurrency.PreferenceValuesId, (SelectList)ViewBag.Currency, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "txtCurrency" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SavePreferenceInformation();" />
+                                </div>
+                                <h3 class="form-section matop">Tax Info</h3>
+                                <div id="taxParentDiv">
+                                    @Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")
+                                </div>
+                                <div>
+                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveTaxInformation();" />
+                                </div>
+                                <h3 class="form-section matop">Customize</h3>
+                                <div class="span12 no-left-margin">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <label class="control-label">Upload Your Logo</label>
+                                            <div class="controls">
+                                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                                    <div class="input-append mabottom">
+                                                        <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview" id="txtfileUpload"></span></div>
+                                                        <span class="btn btn-file"><span class="fileupload-new">Upload</span>
+                                                            <span class="fileupload-exists">Change</span>
+                                                            <input type="file" class="default">
+                                                        </span>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <span class="help-inline color2">width 29, height 29 pixles</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="span9">
+                                                    <label class="control-label">Custom field label</label>
+                                                    @Html.TextBoxFor(model => model.UserCustFields.CustomField1Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField1" })
+                                                    @Html.TextBoxFor(model => model.UserCustFields.CustomField2Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField2" })
+                                                    @Html.TextBoxFor(model => model.UserCustFields.CustomField3Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField3" })
+
+                                                </div>
+                                                <div class="span3">
+                                                    <label class="control-label">Order #</label>
+                                                    <input type="text" class="m-wrap span12 border-form-radius" id="txtOrder1">
+                                                    <input type="text" class="m-wrap span12 border-form-radius" id="txtOrder2">
+                                                    <input type="text" class="m-wrap span12 border-form-radius" id="txtOrder3">
+                                                </div>
+                                                <span class="help-inline color2 matop">Shown in customers, vendors, and sales & transactions</span>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Greeting emails</label>
+                                                @Html.DropDownListFor(model => model.UserGreetingEmails.GreetingsListId, (SelectList)ViewBag.GreetingEmails, "--select--", new { id = "ddlGreetingEmails", @class = "m-wrap span12 border-form-radius", onchange = "displayGreetingText();" })@*onchange = "addGreeting();"*@
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Subject</label>
+                                                @Html.HiddenFor(model => model.HidInvoice, new { id = "hidInvoice" })
+                                                <textarea rows="3" id="txtSubject" class="m-wrap span12 border-form-radius" onblur="addGreeting();"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Online Payment Sure gateway merchant ID</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius" id="txtMerchantID">
+                                                @*@Html.TextBoxFor(model => model.CustomFields, new { @class = "m-wrap span12 border-form-radius" })*@
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Online Payment Sure gateway Password</label>
+                                                <input type="text" class="m-wrap span12 border-form-radius" id="txtgatewayPwd">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Rename customers to</label>
+
+                                                @Html.DropDownListFor(model => model.CustomFields.CustomersRenameId, (SelectList)ViewBag.CustomersRename, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlRenameCustomer" })
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">Invoice terms (can be changed individually)</label>
+                                                @*  <textarea rows="3" class="m-wrap span12 height123"></textarea>*@
+                                                @Html.TextAreaFor(model => model.CustomFields.InvoiceTerms, new { @class = "m-wrap span12 height123", rows = 3, @id = "txtInvoiceTerms" })
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="control-label">PO terms (can be changed individually)</label>
+                                                @Html.TextAreaFor(model => model.CustomFields.POTerms, new { rows = 3, @class = "m-wrap span12 height123", @id = "txtPOTerms" })
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Upload company documents</label>
+                                            @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")
+                                            @*<div class="controls">
+                                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                                                        <span class="btn btn-file"><span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
+                                                            <input type="file" class="default">
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveCustomize();" />
+                                </div>
+                                <h3 class="form-section matop">Import quick books data</h3>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                                                        <span class="btn btn-file"><span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
+                                                            <input type="file" class="default">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group margin-bottom-25">
+                                                <div class="controls">
+                                                    <label class="checkbox line">
+                                                        <input type="checkbox" value="">
+                                                        Ignore data not compatible with "accounting (our product name)" 
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions ">
+                                    @*<input type="file" name="photo" />*@
+                                    <button class="btn blue" type="submit"><i class="icon-ok"></i>Save</button>
+                                    <a class="btn" href="~/Home/Dashboard">Cancel</a>
+                                    <!--<button class="btn" type="button">Cancel</button>-->
+                                </div>
+                            }
+
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    
+    <script type="text/javascript">
+        greetings = new Array();
+
+        var greetingIdMsg = new Array();
+        $(document).ready(function () {
+            //debugger;
+            $.ajax({
+                url: '/Organization/GetGreetingMessages/',
+                type: "Get",
+                dataType: "Json",
+                //contentType: 'application/json, charset=utf-8',
+                //data: { "id": objId },
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    //alert("Deleted Successfully .");
+                    //$(objectElement).parent().css("display", "none");
+                    for (var i = 0; i < data.length; i++) {
+                        greetingIdMsg[i] = new Array(3);
+                        greetingIdMsg[i][0] = data[i].GreetingsListId;
+                        greetingIdMsg[i][1] = '';
+                        greetingIdMsg[i][2] = data[i].Message;
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+
+            var previousGreeting = '';
+            $('#ddlGreetingEmails').change(function () {
+                greetings[previousGreeting] = $('#txtSubject').val();
+                // alert(previousGreeting);
+                if (previousGreeting === 'Invoice') {
+                    $('#hidInvoice').value = $('#txtSubject').val();
+                }
+                previousGreeting = $('#ddlGreetingEmails option:selected').text();
+            });
+        });
+
+        function SaveBusinessInformation() {
+            var companyName = $("#companyName").val();
+            var businessTypeID = $("#businessType").val();
+            var businessEmail = $("#businessEmail").val();
+            var businessPhone = $("#businessPhone").val();
+            var companyAddress = $("#companyAddress").val();
+            var cityID = $("#ddlCity").val();
+            var stateID = $("#ddlState").val();
+            var txtZip = $("#txtZip").val();
+            var countryID = $("#ddlCountry").val();
+            var county = $("#txtCounty").val();
+            var txtDUNS = $("#txtDUNS").val();
+            var txtDBA = $("#txtDBA").val();
+            var license = $("#txtLicense").val();
+
+            $.ajax({
+                url: '/Organization/SaveBusinessInformation/',
+                type: "Post",
+                contentType: "application/json",
+                data: JSON.stringify({ "companyName": companyName, "businessTypeID": businessTypeID, "businessEmail": businessEmail, "businessPhone": businessPhone, "companyAddress": companyAddress, "cityID": cityID, "stateID": stateID, "txtZip": txtZip, "countryID": countryID, "county": county, "txtDUNS": txtDUNS, "txtDBA": txtDBA, "license": license }),
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    if (data) {
+                        alert("Saved successfully");
+                    }
+                },
+                error: function (error) {
+                    debugger;
+                    alert(error);
+                }
+            });
+        }
+
+        function SavePreferenceInformation() {
+            var dateFormat = $("#ddlDate").val();
+            var numberFormat = $("#ddlnumberFormat").val();
+            var fiscalYear = $("#ddlFiscalyear").val();
+            var currency = $("#txtCurrency").val();
+
+            $.ajax({
+                url: '/Organization/SavePreferenceInformation/',
+                type: "Post",
+                contentType: "application/json",
+                data: JSON.stringify({ "dateFormat": dateFormat, "numberFormat": numberFormat, "fiscalYear": fiscalYear, "currency": currency }),
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    if (data) {
+                        alert("Saved successfully");
+                    }
+
+                },
+                error: function (error) {
+                    //debugger;
+                    alert(error);
+                }
+            });
+        }        
+
+        function addGreeting() {
+            //debugger;
+            var greetingID = $("#ddlGreetingEmails").val();
+            var subject = $("#ddlGreetingEmails option:selected").text();
+            var message = $("#txtSubject").val();
+            if (greetingIdMsg.length > 0) {
+
+                var valueExists = false;
+                var j = 0;
+                for (; j < greetingIdMsg.length; j++) {
+                    if (greetingIdMsg[j][0] == greetingID) {
+                        valueExists = true;
+                        break;
+                    }
+                }
+
+                if (!valueExists) {
+                    var i = greetingIdMsg.length;
+                    greetingIdMsg[i] = new Array(3);
+                    greetingIdMsg[i][0] = greetingID;
+                    greetingIdMsg[i][1] = subject;
+                    greetingIdMsg[i][2] = message;
+                }
+                else {
+                    greetingIdMsg[j][1] = subject;
+                    greetingIdMsg[j][2] = message;
+                }
+                //greetingIdMsg.push([greetingID, subject]);
+            }
+            else {
+
+                if (greetingIdMsg.length == 0) {
+
+                    //for (var i = 0; i < $("#ddlGreetingEmails")[0].length; i++) {
+                    //    greetingIdMsg[i] = new Array(2);
+                    //}
+                    greetingIdMsg[0] = new Array(3);
+                    greetingIdMsg[0][0] = greetingID;
+                    greetingIdMsg[0][1] = subject;
+                    greetingIdMsg[0][2] = message;
+                }
+
+            }
+        }
+
+        function displayGreetingText() {
+            var greetingID = $("#ddlGreetingEmails").val();
+            for (var j = 0; j < greetingIdMsg.length; j++) {
+                if (greetingIdMsg[j][0] == greetingID) {
+                    $("#txtSubject").val(greetingIdMsg[j][2]);
+                    //greetingIdMsg[i]['subject'] = subject;                    
+                    break;
+                }
+                else
+                    $("#txtSubject").val('');
+            }
+        }
+
+        function SaveTaxInformation() {
+            var countChild = $('#taxParentDiv').find('input').length / 3;//$("#taxParentDiv")[0].childNodes.length;
+
+            var TaxDetails = new Array(countChild);
+
+            var i = 0;
+            var taxNum;
+            var taxValue;
+            $('#taxParentDiv').find('input').each(function (index, element) {
+                if (element.id.indexOf("hdn") >= 0) {
+                    TaxDetails[i] = new Array(3);
+                    TaxDetails[i][0] = element.value;
+                }
+                else if (element.id.indexOf("TaxNum") >= 0) {
+                    TaxDetails[i][1] = element.value;
+                }
+                else if (element.id.indexOf("TaxValue") >= 0) {
+                    TaxDetails[i][2] = element.value;
+                    i++;
+                }
+            });
+
+            $.ajax({
+                url: '/Organization/SaveTaxInformation/',
+                type: "Post",
+                contentType: "application/json",
+                data: JSON.stringify({ "TaxDetails": TaxDetails }),
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    if (data) {
+                        alert("Saved successfully");
+                    }
+
+                },
+                error: function (error) {
+                    //debugger;
+                    alert(error);
+                }
+            });
+
+        }
+
+        function SaveCustomize() {
+
+            SaveGreeting();
+
+            var renameCustomer = $("#ddlRenameCustomer").val();
+            var txtInvoiceTerms = $("#txtInvoiceTerms").val();
+            var txtPOTerms = $("#txtPOTerms").val();
+            var customField1 = $("#customField1").val();
+            var customField2 = $("#customField2").val();
+            var customField3 = $("#customField3").val();
+            var txtOrder1 = $("#txtOrder1").val();
+            var txtOrder2 = $("#txtOrder2").val();
+            var txtOrder3 = $("#txtOrder3").val();
+            var logo = $("#txtfileUpload").val();
+            var txtMerchantID = $("#txtMerchantID").val();
+            var txtgatewayPwd = $("#txtgatewayPwd").val();
+
+            $.ajax({
+                url: '/Organization/SaveCustomize/',
+                type: "Post",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "renameCustomer": renameCustomer, "txtInvoiceTerms": txtInvoiceTerms, "txtPOTerms": txtPOTerms, "customField1": customField1,
+                    "customField2": customField2, "customField3": customField3, "txtOrder1": txtOrder1, "txtOrder2": txtOrder2, "txtOrder3": txtOrder3, "logo": logo, "txtMerchantID": txtMerchantID, "txtgatewayPwd": txtgatewayPwd, "aryFilePath": aryFilePath
+                }),
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    if (data) {
+                        alert("Saved successfully");
+                    }
+
+                },
+                error: function (error) {
+                    //debugger;
+                    alert(error);
+                }
+            });
+
+        }
+
+        function SaveGreeting() {
+            //debugger;
+            $.ajax({
+                url: '/Organization/SaveGreeting/',
+                type: "Post",
+                contentType: "application/json",
+                data: JSON.stringify({ "userGreetings": greetingIdMsg }),
+                success: function (data) {
+                    //debugger;  //var result = msg.data;
+                    if (data) {
+                        alert("Saved successfully");
+                    }
+
+                },
+                error: function (error) {
+                    //debugger;
+                    alert(error);
+                }
+            });
+        }
+
+        var aryFilePath = new Array();
+        function AddFile() {
+            var fullPath = document.getElementById('upLoad').value;
+            var filename;
+            if (fullPath) {
+                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                filename = fullPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                var children = document.getElementById("tblFileName").innerHTML;
+                children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);"></i></td></tr>';
+                document.getElementById("tblFileName").innerHTML = children;
+                document.getElementById('upLoad').value = "";
+                aryFilePath.push([fullPath]);
+            }
+        }
+
+        function Removefile(element) {
+            var fileName = element.parentNode.parentNode.parentNode.innerHTML.split('#\">')[1].split("</")[0];
+            aryFilePath.splice($.inArray(fileName, aryFilePath), 1);
+            document.getElementById("tblFileName").innerHTML = '';
+            var children='';
+            for (var i = 0; i < aryFilePath.length; i++) {
+                var fullPath = aryFilePath[i].toString();
+                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                var filename = fullPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);" style="cursor:pointer;"></i></td></tr>';
+            }
+            document.getElementById("tblFileName").innerHTML = children;
+        }
+
+    </script>
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}

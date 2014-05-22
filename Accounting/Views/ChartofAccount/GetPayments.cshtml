@@ -1,0 +1,105 @@
+﻿@model IEnumerable<StratusAccounting.Models.PurchaseInvoicePayment>
+@{
+    ViewBag.Title = "GetPayments";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>GetPayments</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseInvoiceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentTypesId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstrumentNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentStatusId)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedByUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PaidToTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseInvoiceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentTypesId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstrumentNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentStatusId)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedByUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedByUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidToTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseInvoicePaymentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PurchaseInvoicePaymentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseInvoicePaymentId })
+        </td>
+    </tr>
+}
+
+</table>

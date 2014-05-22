@@ -1,0 +1,90 @@
+﻿@model StratusAccounting.Models.UserBankAccount
+
+@{
+    <div class="span6">
+        <h3 class="form-section matop margin-top-10">Bank Details <a data-toggle="modal" href="#popup-5">
+            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i>Edit</button>
+        </a></h3>
+        <div id="popup-5" class="modal hide fade" tabindex="-1" data-width="760">
+           @* <form class="form-horizontal form-row-seperated" action="#">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h3>Bank Details </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 260px;">
+                        <div class="scroller" style="height: 260px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label">Bank Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Account #</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Account Type</label>
+                                        <div class="controls">
+                                            <div class="span12">
+                                                <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                                    <option value="">Select type</option>
+                                                    <option value="Category 1">Savings</option>
+                                                    <option value="Category 2">Checking</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Routing #</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Bank Address</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div>
+                        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+            </div>*@
+        </div>
+        <div class="control-group mabottom">
+            <label class="control-label details-text span12 mabottom" for="firstName">Bank Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+            @Html.DisplayFor(model => model.BankName)
+        </div>
+        <div class="control-group mabottom">
+            <label class="control-label details-text span12 mabottom" for="firstName">Account #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+            @Html.DisplayFor(model => model.AccountNum)
+        </div>
+        <div class="control-group mabottom">
+            <label class="control-label details-text span12 mabottom" for="firstName">Account type&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+            @Html.DisplayFor(model => model.BankAccountTypeId)
+        </div>
+        <div class="control-group mabottom">
+            <label class="control-label details-text span12 mabottom" for="firstName">Routing #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+            @Html.DisplayFor(model => model.RountingNum)
+        </div>
+        <div class="control-group mabottom">
+            <label class="control-label details-text span12 mabottom" for="firstName">Bank address</label>
+            @Html.DisplayFor(model => model.Address)
+            <div class="controls"></div>
+        </div>
+    </div>
+}

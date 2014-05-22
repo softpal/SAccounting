@@ -1,0 +1,97 @@
+﻿@model StratusAccounting.Models.CustomersAddress
+@{
+    <div class="span12 no-left-margin">
+        <h3 class="form-section matop">Payment Details<a data-toggle="modal" href="#popup-6">
+            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i>Edit</button>
+        </a></h3>
+        <div id="popup-6" class="modal hide fade" tabindex="-1" data-width="760">
+            @*<form class="form-horizontal form-row-seperated" action="#">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h3>Payment Details</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 280px;">
+                        <div class="scroller" style="height: 280px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label">Credit period</label>
+                                        <div class="controls">
+                                            <div class="span12">
+                                                <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                                    <option value="">Select type</option>
+                                                    <option value="Category 1">15 Days</option>
+                                                    <option value="Category 2">20 Days</option>
+                                                    <option value="Category 2">25 Days</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Credit limit</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Preferred&nbsp; payment method</label>
+                                        <div class="controls">
+                                            <div class="span12">
+                                                <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                                    <option value="">Select type</option>
+                                                    <option value="Category 1">Cash</option>
+                                                    <option value="Category 2">Cheque</option>
+                                                    <option value="Category 3">Credit Card</option>
+                                                    <option value="Category 4">Debit Card</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Routing #</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Bank Address</label>
+                                        <div class="controls">
+                                            <input type="text" class="span12 m-wrap">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div>
+                        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+            </div>*@
+        </div>
+        <div class="span6 no-left-margin">
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Credit period&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model =>model.UserCustomer.CreditPeriodTypeId) </span></label>
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Preferred payment method&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model =>model.UserCustomer.PaymentTypesId) </span></label>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Credit limit&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model =>model.UserCustomer.CreditLimit) </span></label>
+            </div>
+            <div class="control-group mabottom">
+                <label class="control-label details-text span12 mabottom" for="firstName">Credit card token ID&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                    <span class="text">@Html.DisplayFor(model =>model.UserCustomer.CreditCardToken) </span></label>
+            </div>
+        </div>
+    </div>
+}

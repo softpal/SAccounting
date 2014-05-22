@@ -1,0 +1,16 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul class="nav pull-right">
+        <li class="dropdown user"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img alt="" src="~/Content/img/avatar1_small.jpg" />
+            <span class="username">@User.Identity.Name</span> <i class="icon-angle-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="~/SuperAdmin/ChangePassword"><i class="icon-user"></i>My Profile</a></li>
+                <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
+                <li><a href="~/Home/Logout"><i class="icon-key"></i>Log Out</a></li>
+            </ul>
+        </li>
+        <!-- END USER LOGIN DROPDOWN -->
+        <!-- END USER LOGIN DROPDOWN -->
+    </ul>
+}

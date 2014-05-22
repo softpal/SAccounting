@@ -1,0 +1,67 @@
+﻿<style type="text/css">
+    .upload-docs {
+        width: 100%;
+    }
+
+        .upload-docs .upload {
+            display: inline-block;
+            width: 100%;
+        }
+
+            .upload-docs .upload #txtUploadFile {
+                max-width: 600px !important;
+                width: 500px !important;
+                margin-right: 30px;
+                float: left;
+            }
+
+            .upload-docs .upload .btn-upload {
+                display: inline-block;
+                margin-top: 5px;
+                text-align: center;
+                background-color: #D4D4D4;
+                width: 130px;
+                height: 30px;
+            }
+
+                .upload-docs .upload .btn-upload:hover {
+                    cursor: pointer;
+                }
+
+                .upload-docs .upload .btn-upload span {
+                    line-height: 2;
+                }
+
+    .upload-docs .docs-table .docs-data {
+        border-bottom: 1px solid #D4D4D4;
+    }
+
+    .upload-docs .docs-table {
+        width: 100%;
+    }
+
+        .upload-docs .docs-table .docs-data td a {
+            text-decoration: none;
+            color: blue;
+        }
+</style>
+
+<div class="upload-docs">
+    <div class="upload">
+        @Html.TextBox("txtUploadFile")
+        <div class="btn-upload">
+            <span>Upload</span>
+        </div>
+    </div>
+
+    <table class="docs-table">
+        <tr class="docs-data">
+            <td><a href="#">Sample.pdf</a></td>
+            <td>@Html.Partial("~/Views/Shared/Accounting/_MoreOptionsButton.cshtml")</td>
+        </tr>
+        <tr class="docs-data">
+            <td><a href="#">Excel.xls</a></td>
+            <td>@Html.Partial("~/Views/Shared/Accounting/_MoreOptionsButton.cshtml")</td>
+        </tr>
+    </table>
+</div>

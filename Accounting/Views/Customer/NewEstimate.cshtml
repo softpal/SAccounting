@@ -1,0 +1,301 @@
+﻿@model StratusAccounting.Models.Estimate_DTO
+@using StratusAccounting.Models
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h3>Estimate To (Customer Name)</h3>
+</div>
+
+<div class="modal-body">
+    <div class="scroller" data-always-visible="1" data-rail-visible1="1">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label">Estimate #</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.Estimate.EstimatesId, new { @class = "m-wrap span12 border-form-radius", @id = "txtEstimateId" })
+                        @Html.ValidationMessageFor(model => model.Estimate.EstimatesId)
+                    </div>
+
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Customer Name</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.Estimate.UserCustomer, new { @class = "m-wrap span12 border-form-radius", @id = "txtCustName" })
+                        @Html.ValidationMessageFor(model => model.Estimate.UserCustomer)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Estimate Valid Till</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.Estimate.EstimateDate, new { @class = "m-wrap span12 border-form-radius", @id = "txtDate" })
+                        @Html.ValidationMessageFor(model => model.Estimate.EstimateDate)
+                    </div>
+                </div>
+                <table class="table-bordered table-striped table-condensed cf margin-top-10 margin-bottom-10" id="tblEstimate">
+                    <thead class="cf">
+                        <tr class="b1">
+                            <th class="journal-padding-bootom">Product/Service/Project</th>
+                            <th class="journal-padding-bootom">Description</th>
+                            <th class="numeric journal-padding-bootom">Quantity</th>
+                            <th class="numeric journal-padding-bootom">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="editorRows">
+                        @*@foreach (EstimatesDetail estimateDetail in Model.EstimatesDetail)
+                            {
+                                Html.RenderPartial("Customer/estimateDetails", estimateDetail);
+                            } *@
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls no-left-margin">
+                                        @*@Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.BusinessItems, "--select--", new { @class = "m-wrap span12 border-form-radius" })*@
+                                        <select id="ddlBusinessItems"></select>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls no-left-margin">
+                                        @*@Html.TextBoxFor(model => model.Description, new { @class = "span12 m-wrap mabottom1" })*@
+                                        <input type="text" class="span12 m-wrap mabottom1" id="txtDesc" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="numeric">
+                                <div class="control-group">
+
+                                    <div class="controls">
+                                        <input type="text" class="span12 m-wrap mabottom1" id="txtQuantity" />
+                                        @*@Html.TextBoxFor(model => model.Quantity, new { @class = "span12 m-wrap mabottom1" })*@
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="numeric">
+                                <div class="control-group">
+
+                                    <div class="controls">
+                                        <input type="text" class="span12 m-wrap mabottom1" id="txtAmount" />
+                                        @*@Html.TextBoxFor(model => model.Amount, new { @class = "span12 m-wrap mabottom1" })*@
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <a class="details-color pull-right" id="addItem" onclick="AddNewRow();">Add More</a>
+                </div>
+                <div>
+                    <input type="button" value="Save" onclick="SaveEstimate();" /><input type="button" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(
+         function () {
+             $("#txtDate").datepicker();
+             
+             BindDropdown($('#ddlBusinessItems'));             
+         });
+
+    var childOptions='';
+    function BindDropdown(element)
+    {
+        var items = @Html.Raw(@ViewBag.BusinessItems);
+        $.each(items, function (i, item) {
+            childOptions+='<option value='+item.ItemId+'>'+item.Title+'</option>';
+            element.append($('<option>', {
+                value: item.ItemId,
+                text: item.Title
+            }));
+        });
+    }
+
+    function AddNewRow() {
+        var childNodes = document.getElementById("editorRows").innerHTML;
+        //var element = document.createElement("select");
+        //element.innerHTML = childOptions; 
+        
+        //code for adding through elements
+
+        //var tr = document.createElement("tr");
+        //var td1 = document.createElement("td");
+        //var div1 = document.createElement("div");
+        //div1.className ="control-group";
+        //var div2 = document.createElement("div");
+        //div2.className ="controls no-left-margin";
+        //div2.appendChild(element);
+        //div1.appendChild(div2);
+        //td1.appendChild(div1);
+        //tr.appendChild(td1);
+
+        //var td2 = document.createElement("td");
+        //var div3 = document.createElement("div");
+        //div3.className ="control-group";
+        //var div4 = document.createElement("div");
+        //div4.className ="controls no-left-margin";//<input type="text" class="span12 m-wrap mabottom1" id="txtDesc" />
+        //var desc = document.createElement("input");
+        //desc.type="text";
+        //desc.className="span12 m-wrap mabottom1";
+        //desc.id="txtDesc";
+        //div4.appendChild(desc);
+        //div3.appendChild(div4);
+        //td2.appendChild(div3);
+        //tr.appendChild(td2);
+
+        //var td3 = document.createElement("td");
+        //var div5 = document.createElement("div");
+        //div5.className ="control-group";
+        //var div6 = document.createElement("div");
+        //div6.className ="controls no-left-margin";
+        //var quant = document.createElement("input");//<input type="text" class="span12 m-wrap mabottom1" id="txtQuantity" />
+        //quant.type="text";
+        //quant.className="span12 m-wrap mabottom1";
+        //quant.id="txtQuantity";
+        //div6.appendChild(quant);
+        //div5.appendChild(div6);
+        //td3.appendChild(div5);        
+        //tr.appendChild(td3);
+
+        //var td4 = document.createElement("td");
+        //var div7 = document.createElement("div");
+        //div7.className ="control-group";
+        //var div8 = document.createElement("div");
+        //div8.className ="controls no-left-margin";
+        //var amnt = document.createElement("input");//<input type="text" class="span12 m-wrap mabottom1" id="txtAmount" />
+        //amnt.type="text";
+        //amnt.className="span12 m-wrap mabottom1";
+        //amnt.id="txtAmount";
+        //div8.appendChild(amnt);
+        //div7.appendChild(div8);
+        //td4.appendChild(div7);        
+        //tr.appendChild(td4);
+
+        //$("#editorRows").append(tr);
+
+        // end of code
+
+
+        //childNodes += '<tr><td><div class="control-group"><div class="controls no-left-margin">'+element.outerHTML+'</div></div></td><td><div class="control-group"><div class="controls no-left-margin"><input type="text" class="span12 m-wrap mabottom1" id="txtDesc" /></div></div></td><td class="numeric"><div class="control-group"><div class="controls"><input type="text" class="span12 m-wrap mabottom1" id="txtQuantity" /></div></div></td><td class="numeric"><div class="control-group"><div class="controls"><input type="text" class="span12 m-wrap mabottom1" id="txtAmount" /></div></div></td></tr>';
+        //document.getElementById("editorRows").innerHTML = childNodes;
+
+        var tbl = document.getElementById('tblEstimate');
+        var lastRow = tbl.rows.length;
+        // if there's no header row in the table, then iteration = lastRow + 1
+        var iteration = lastRow+1;
+        var row = tbl.insertRow(lastRow);
+  
+        // select cell
+        var cellRightSel = row.insertCell(0);
+        var sel = document.createElement('select');
+        sel.name = 'selRow' + iteration;
+        sel.innerHTML = childOptions; 
+        var div1 = document.createElement("div");
+        div1.className ="control-group";
+        var div2 = document.createElement("div");
+        div2.className ="controls no-left-margin";
+        div2.appendChild(sel);
+        div1.appendChild(div2);
+        cellRightSel.appendChild(div1);
+
+        // right cell
+        var cellRight = row.insertCell(1);
+        var el = document.createElement('input');
+        el.type = 'text';
+        el.name = 'txtRow' + iteration;
+        el.id = 'txtDesc';
+        el.className = "span12 m-wrap mabottom1";
+        var div1 = document.createElement("div");
+        div1.className ="control-group";
+        var div2 = document.createElement("div");
+        div2.className ="controls no-left-margin";
+        div2.appendChild(el);
+        div1.appendChild(div2);
+        cellRight.appendChild(div1);
+
+        var cellRight = row.insertCell(2);
+        var el = document.createElement('input');
+        el.type = 'text';
+        el.name = 'txtRow' + iteration;
+        el.id = 'txtQuantity';
+        el.className = "span12 m-wrap mabottom1";
+        var div1 = document.createElement("div");
+        div1.className ="control-group";
+        var div2 = document.createElement("div");
+        div2.className ="controls no-left-margin";
+        div2.appendChild(el);
+        div1.appendChild(div2);
+        cellRight.appendChild(div1);
+
+        var cellRight = row.insertCell(3);
+        var el = document.createElement('input');
+        el.type = 'text';
+        el.name = 'txtRow' + iteration;
+        el.id = 'txtAmount';
+        el.className = "span12 m-wrap mabottom1";
+        var div1 = document.createElement("div");
+        div1.className ="control-group";
+        var div2 = document.createElement("div");
+        div2.className ="controls no-left-margin";
+        div2.appendChild(el);
+        div1.appendChild(div2);
+        cellRight.appendChild(div1);
+    }
+
+    var estimDetails = new Array();
+    function SaveEstimate() {
+        var id = parseInt($("#txtEstimateId").val());
+        var custName = $("#txtCustName").val();
+        var date = $("#txtDate").val();
+        var length = $("#editorRows")[0].childElementCount;
+
+        var tds = $("#editorRows").find('td');
+        var j=0;
+        for(var i=0;i<tds.length;)
+        {
+            if(j<length && i<4)
+            {
+                estimDetails[j] = new Array(4);
+                estimDetails[j][0] = $("#editorRows").find('td')[i].childNodes['1'].childNodes['1'].childNodes['1'].value;
+                estimDetails[j][1] = $("#editorRows").find('td')[i+1].childNodes['1'].childNodes['1'].childNodes['1'].value;
+                estimDetails[j][2] = $("#editorRows").find('td')[i+2].childNodes['1'].childNodes['1'].childNodes['1'].value;
+                estimDetails[j][3] = $("#editorRows").find('td')[i+3].childNodes['1'].childNodes['1'].childNodes['1'].value;
+                j++;
+                i=i+4;
+            }
+            else if(j<length && i>3)
+            {
+                estimDetails[j] = new Array(4);
+                estimDetails[j][0] = $("#editorRows").find('td')[i].childNodes[0].childNodes['0'].childNodes['0'].value;
+                estimDetails[j][1] = $("#editorRows").find('td')[i+1].childNodes[0].childNodes['0'].childNodes['0'].value;
+                estimDetails[j][2] = $("#editorRows").find('td')[i+2].childNodes[0].childNodes['0'].childNodes['0'].value;
+                estimDetails[j][3] = $("#editorRows").find('td')[i+3].childNodes[0].childNodes['0'].childNodes['0'].value;
+                j++;
+                i=i+4;
+            }
+        }
+
+        debugger;
+        $.ajax({
+            url: '/Customer/SaveEstimate/',
+            contentType: "application/json",
+            data: JSON.stringify({ "estimateNum": id, "custName": custName, "expiryDate":date, "estimDetails":estimDetails }),
+            type: 'POST',
+            success: function (data) {
+                if(data)
+                    alert("Saved Successfully");
+
+            },
+            error:function(data)
+            {
+                alert(data);
+            }
+        });
+    }
+
+</script>

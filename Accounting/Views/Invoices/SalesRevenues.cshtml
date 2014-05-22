@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "SalesRevenues";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Styles.Render("~/bundle/Datepicker")
+
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="chart_of_accounts.html">Transactions</a></li>
+                    <li><a href="invoice.html"><i class="icon-angle-right"></i>Invoices</a></li>
+                    <li><a href="invoice_sales_receipts.html"><i class="icon-angle-right"></i>Sales Revenues</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body">
+                        <h3 class="page-title matop border-btoom">Sales Revenues&nbsp;<a href="invoice_sales_receipts_add.html"><i class="icon-plus-sign"></i></a></h3>
+                        <!-- BEGIN FORM-->
+                        <div class="row-fluid">
+                            <!--BEGIN TABS-->
+                            <div class="span12">
+                                <div class="btn-group margin-bottom-10">
+                                    <a href="invoice.html">
+                                        <button class="btn blue form-border">Invoices</button>
+                                    </a><a href="invoice_payments.html">
+                                        <button class="btn blue form-border">Payments</button>
+                                    </a><a href="invoice_sales_receipts.html">
+                                        <button class="btn blue form-border active">Sales Receipts</button>
+                                    </a>
+                                    <div class="invoice-clear-both1"></div>
+                                    <a href="invoice_credit_memo.html">
+                                        <button class="btn blue form-border">Credit Memo</button>
+                                    </a><a href="invoice_delayed_charge.html">
+                                        <button class="btn blue form-border">Delayed Charge</button>
+                                    </a>
+                                </div>
+                                <!--BEGIN TABS-->
+                                <div class="portlet-body payment-display-block">
+
+                                    <div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                        <div class="row-fluid">
+                                            <div class="span6">
+                                                <div id="sample_2_length" class="dataTables_length">
+                                                    <label>
+                                                        <div class="select2-container m-wrap small" id="s2id_autogen1"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1"><span class="select2-chosen">5</span><abbr class="select2-search-choice-close"></abbr>
+                                                            <span class="select2-arrow"><b></b></span></a>
+                                                            <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2"><div class="select2-drop select2-display-none select2-with-searchbox">
+                                                                <div class="select2-search">
+                                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
+                                                                </div>
+                                                                <ul class="select2-results"></ul>
+                                                            </div>
+                                                        </div>
+                                                        <select size="1" name="sample_2_length" aria-controls="sample_2" class="m-wrap small select2-offscreen" tabindex="-1">
+                                                            <option value="5">5</option>
+                                                            <option value="15">15</option>
+                                                            <option value="20">20</option>
+                                                            <option value="-1">All</option>
+                                                        </select>
+                                                        Records Per Page</label></div>
+                                            </div>
+                                            <div class="span6">
+                                                <div class="dataTables_filter" id="sample_2_filter">
+                                                    <label>Search:
+                                                        <input type="text" aria-controls="sample_2" class="m-wrap small"></label></div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
+                                            <thead>
+                                                <tr class="b1" role="row">
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="S.No: activate to sort column ascending" style="width: 61px;">S.No</th>
+                                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Recipt #: activate to sort column descending" style="width: 122px;">Recipt #</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending" style="width: 201px;">Payment Method</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 116px;">Date</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 118px;">Customer</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 99px;">Amount</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Description: activate to sort column ascending" style="width: 139px;">Description</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                <tr class="odd">
+                                                    <td class="hidden-480 ">1</td>
+                                                    <td class=" sorting_1"><a href="#" class="details-color">BKT001/501</a></td>
+                                                    <td class=" ">Check #</td>
+                                                    <td class=" ">12/24/2013</td>
+                                                    <td class=" ">BPS</td>
+                                                    <td class=" ">$2000</td>
+                                                    <td class=" ">Details </td>
+                                                </tr>
+                                                <tr class="even">
+                                                    <td class="hidden-480 ">2</td>
+                                                    <td class=" sorting_1"><a href="#" class="details-color">BKT001/501</a></td>
+                                                    <td class=" ">Check #</td>
+                                                    <td class=" ">12/24/2013</td>
+                                                    <td class=" ">BPS</td>
+                                                    <td class=" ">$2000</td>
+                                                    <td class=" ">Details
+                            <div class="btn-group pull-right">
+                                <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">View</a></li>
+                                    <li><a href="#">Edit</a></li>
+                                    <li><a href="#">Copy</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Mark as Paid</a></li>
+                                    <li><a href="#">Mark as Void</a></li>
+                                </ul>
+                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="odd">
+                                                    <td class="hidden-480 ">3</td>
+                                                    <td class=" sorting_1"><a href="#" class="details-color">BKT001/501</a></td>
+                                                    <td class=" ">Check #</td>
+                                                    <td class=" ">12/24/2013</td>
+                                                    <td class=" ">BPS</td>
+                                                    <td class=" ">$2000</td>
+                                                    <td class=" ">Details
+                            <div class="btn-group pull-right">
+                                <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">View</a></li>
+                                    <li><a href="#">Edit</a></li>
+                                    <li><a href="#">Copy</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Mark as Paid</a></li>
+                                    <li><a href="#">Mark as Void</a></li>
+                                </ul>
+                            </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row-fluid">
+                                            <div class="span6">
+                                                <div class="dataTables_info" id="sample_2_info">Showing 1 to 3 of 3 entries</div>
+                                            </div>
+                                            <div class="span6">
+                                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                                    <ul>
+                                                        <li class="prev disabled"><a href="#">← <span class="hidden-480">Previous</span></a></li>
+                                                        <li class="active"><a href="#">1</a></li>
+                                                        <li class="next disabled"><a href="#"><span class="hidden-480">Next</span> → </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="portlet-body flip-scroll payment-display">
+                                    <table class="table-bordered table-striped table-condensed cf margin-top-10">
+                                        <thead class="cf">
+                                            <tr class="b1">
+                                                <th class="journal-padding-bootom">Receipt #</th>
+                                                <th class="journal-padding-bootom">Payment Method</th>
+                                                <th class="numeric journal-padding-bootom">Date</th>
+                                                <th class="numeric journal-padding-bootom">Customer</th>
+                                                <th class="numeric journal-padding-bootom">Amount</th>
+                                                <th class="numeric journal-padding-bootom">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td class="journal-padding-bootom"><a href="#" class="details-color">BKT001/501</a></td>
+                                                <td class="journal-padding-bootom">Check</td>
+                                                <td class="numeric journal-padding-bootom">1/24/14</td>
+                                                <td class="numeric journal-padding-bootom">BPS</td>
+                                                <td class="numeric journal-padding-bootom">$12000</td>
+                                                <td class="numeric journal-padding-bootom">Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="journal-padding-bootom"><a href="#" class="details-color">BKT001/501</a></td>
+                                                <td class="journal-padding-bootom">Check</td>
+                                                <td class="numeric journal-padding-bootom">1/24/14</td>
+                                                <td class="numeric journal-padding-bootom">BPS</td>
+                                                <td class="numeric journal-padding-bootom">$12000</td>
+                                                <td class="numeric journal-padding-bootom">Details
+                                                    <div class="btn-group pull-right">
+                                                        <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">View</a></li>
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Copy</a></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                            <li><a href="#">Mark as Paid</a></li>
+                                                            <li><a href="#">Mark as Void</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="journal-padding-bootom"><a href="#" class="details-color">BKT001/501</a></td>
+                                                <td class="journal-padding-bootom">Check</td>
+                                                <td class="numeric journal-padding-bootom">1/24/14</td>
+                                                <td class="numeric journal-padding-bootom">BPS</td>
+                                                <td class="numeric journal-padding-bootom">$12000</td>
+                                                <td class="numeric journal-padding-bootom">Details
+                                                    <div class="btn-group pull-right">
+                                                        <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">View</a></li>
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Copy</a></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                            <li><a href="#">Mark as Paid</a></li>
+                                                            <li><a href="#">Mark as Void</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <!--END TABS-->
+                            </div>
+                            <!--END TABS-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>

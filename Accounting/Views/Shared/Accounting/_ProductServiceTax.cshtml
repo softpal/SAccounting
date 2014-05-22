@@ -1,0 +1,170 @@
+﻿<style type="text/css">
+    .products-container {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+
+        .products-container .products-table .products-header {
+            border-bottom: 1px solid #D4D4D4;
+        }
+
+
+        .products-container .products-table {
+            width: 100%;
+        }
+
+            .products-container .products-table .products-data td a {
+                text-decoration: none;
+                color: blue;
+            }
+
+            .products-container .products-table .products-data td input {
+                max-width: 150px;
+            }
+
+        .products-container .add-more {
+            width: 100%;
+            float: right;
+            margin-bottom: 30px;
+        }
+
+            .products-container .add-more a {
+                float: right;
+            }
+
+            .products-container .add-more a {
+                color: blue;
+            }
+
+        .products-container .tax-calc {
+            width: 100%;
+            display: inline-block;
+        }
+
+            .products-container .tax-calc .all-perticulars {
+                width: 400px;
+                float: right;
+            }
+
+                .products-container .tax-calc .all-perticulars .perticular {
+                    padding: 5px;
+                }
+
+                    .products-container .tax-calc .all-perticulars .perticular div {
+                        min-width: 190px;
+                        display: inline-block;
+                    }
+
+                    .products-container .tax-calc .all-perticulars .perticular .value {
+                        float: right;
+                        font-weight:bold;
+                    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".add-more a").click(function () {
+            $(".products-table").each(function () {
+                var tds = '<tr>';
+                jQuery.each($('tr:last td', this), function () {
+                    $("td").find("input").css("max-width", "150px");
+                    tds += '<td>' + $(this).html() + '</td>';
+                });
+                tds += '</tr>';
+                if ($('tbody', this).length > 0) {
+                    $('tbody', this).append(tds);
+                } else {
+                    $(this).append(tds);
+                }
+                var recordscount = $(".products-table").find("tr").length - 1;
+                if (recordscount > 4) {
+                    $(".add-more a").attr("disabled", "disable");
+                    $(".add-more a").css("color", "#777777");
+                    return;
+                }
+            });
+        });
+        var sum = 0;
+        $(".products-data").find("#txtAmount").blur(function () {
+            var elem = $(".amount");
+            CalculateTotal(elem);
+            $(".tax-calc").find(".sub-total-value").html(sum);
+            GetTotal();
+        });
+
+        $(".products-data").find("#txtTax").blur(function () {
+            var elem = $(".tax");
+            CalculateTotal(elem);
+            $(".tax-calc").find(".tax-value").html(sum);
+            GetTotal();
+        });
+
+        function CalculateTotal(elem) {
+            sum = 0;
+            $(elem).find("input").each(function () {
+                sum += Number($(this).val());
+            });
+        }
+
+        function GetTotal()
+        {
+            var subtotal=parseInt($(".tax-calc").find(".sub-total-value").html());
+            var taxtotal=parseInt($(".tax-calc").find(".tax-value").html());
+            var total=subtotal+taxtotal;
+            $(".tax-calc").find(".total-value").html(total);
+        }
+
+        $(".tax-calc").find(".tax-value").change(function () {
+            
+        });
+    });
+</script>
+
+<div class="products-container">
+    <table class="products-table">
+        <tr class="products-header">
+            @*loop this based on the number of fields getting from the model data*@
+            <th>Product/Service/Project</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Tax</th>
+        </tr>
+        <tr class="products-data">
+            <td>@Html.TextBox("ddlProducts")</td>
+            <td>@Html.TextBox("txtDescription")</td>
+            <td>@Html.TextBox("txtQuantity")</td>
+            <td class="amount">@Html.TextBox("txtAmount")</td>
+            <td class="tax">@Html.TextBox("txtTax")</td>
+        </tr>
+        <tr class="products-data">
+            <td>@Html.TextBox("ddlProducts")</td>
+            <td>@Html.TextBox("txtDescription")</td>
+            <td>@Html.TextBox("txtQuantity")</td>
+            <td class="amount">@Html.TextBox("txtAmount")</td>
+            <td class="tax">@Html.TextBox("txtTax")</td>
+        </tr>
+    </table>
+
+    <div class="add-more">
+        <a href="#">Add more</a>
+    </div>
+    <hr />
+    <div class="tax-calc">
+        <div class="all-perticulars">
+            <div class="perticular">
+                <div class="sub-total">Sub Total</div>
+                <div class="value sub-total-value"></div>
+            </div>
+            <div class="perticular">
+                <div class="tax">Tax</div>
+                <div class="value tax-value"></div>
+            </div>
+            <div class="perticular">
+                <div class="total">Total</div>
+                <div class="value total-value"></div>
+            </div>
+        </div>
+    </div>
+</div>
