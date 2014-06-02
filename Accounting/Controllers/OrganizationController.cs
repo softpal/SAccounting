@@ -786,9 +786,10 @@ namespace StratusAccounting.Controllers
             string FiscalYearFormat = Convert.ToString(HttpRuntime.Cache["FiscalYearFormat"]);
             string PrimaryCurrency = Convert.ToString(HttpRuntime.Cache["PrimaryCurrency"]);
             ViewBag.BusinessType = new SelectList(BAL.Preferences.GetBusinessTypes(), "BusinessTypeId", "BusinessType", "--select--");
-            ViewBag.Countrys = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "country", 0)); //new SelectList(BAL.Preferences.GetCountries().Where(item => item.IsActive.Equals(true)), "CountriesId", "Country", "--select--");
-            ViewBag.States = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "state", 0));
-            ViewBag.Cities = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "city", 0));
+            //ViewBag.Countrys = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "country", 0)); //new SelectList(BAL.Preferences.GetCountries().Where(item => item.IsActive.Equals(true)), "CountriesId", "Country", "--select--");
+            ViewBag.Countrys = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "country", 0), "CountryId", "CountryName", "--select--");
+            ViewBag.States = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "state", 1), "StateId", "StateName", "--select--");
+            ViewBag.Cities = new SelectList(CountryStateCity.GetCountryStateCity(string.Empty, "city", 1), "CityId", "CityName", "--select--");
             ViewBag.GreetingEmails = new SelectList(BAL.Preferences.GetGreetingsList(), "GreetingsListId", "GreetingName", "--select--");
             ViewBag.CustomersRename = new SelectList(BAL.Preferences.GetCustomersRename(), "CustomersRenameId", "CustomersRename", "--select--");
             //
@@ -805,10 +806,10 @@ namespace StratusAccounting.Controllers
             bpreference.FiscalYearFormat = BAL.Preferences.GetBusinessPreferences(this.BusinessId).FirstOrDefault(item => item.PreferenceFieldsId.Equals(3));
             bpreference.PrimaryCurrency = BAL.Preferences.GetBusinessPreferences(this.BusinessId).FirstOrDefault(item => item.PreferenceFieldsId.Equals(4));
             //
-            bpreference.BusiReg = BAL.Preferences.GetBusinessRegistration(this.BusinessId).FirstOrDefault();
-            bpreference.CustomFields = BAL.Preferences.GetCustomizeFields(this.BusinessId).FirstOrDefault();
+            //bpreference.BusiReg = BAL.Preferences.GetBusinessRegistration(this.BusinessId).FirstOrDefault();
+            //bpreference.CustomFields = BAL.Preferences.GetCustomizeFields(this.BusinessId).FirstOrDefault();
             bpreference.TaxDetails = BAL.Preferences.GetTaxDetails(this.BusinessId).ToList();
-            bpreference.UserCustFields = BAL.Preferences.GetCustomFields(this.BusinessId).FirstOrDefault();
+            //bpreference.UserCustFields = BAL.Preferences.GetCustomFields(this.BusinessId).FirstOrDefault();
 
             return View(bpreference);
         }

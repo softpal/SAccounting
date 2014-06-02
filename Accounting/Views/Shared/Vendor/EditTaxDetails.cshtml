@@ -1,0 +1,103 @@
+﻿@model StratusAccounting.Models.UserVendor
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3>Shipping Address</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="scroller" data-always-visible="1" data-rail-visible1="1">
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Federal Tax ID</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.FederalTaxNum)
+                            @Html.HiddenFor(model=> model.UserVendorId)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Federal Tax %</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.FederalTaxValue)                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">City Tax ID</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CityTaxNum)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">City Tax %</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CityTaxValue)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">State Tax ID</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.StateTaxNum)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">State Tax %</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.StateTaxValue)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">County Tax ID</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CountyTaxNum)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">County Tax %</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CountyTaxValue)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn blue" onclick="SaveTaxDetails();" value="Save" />
+        <a class="btn" onclick="CloseAddPopup();">Cancel</a>
+    </div>
+
+    <script>
+        function SaveTaxDetails() {
+            var strDetails = new Array();
+            strDetails.push($("#UserVendorId").val());            
+            strDetails.push($("#FederalTaxNum").val());
+            strDetails.push($("#FederalTaxValue").val());
+            strDetails.push($("#CityTaxNum").val());
+            strDetails.push($("#CityTaxValue").val());
+            strDetails.push($("#StateTaxNum").val());
+            strDetails.push($("#StateTaxValue").val());
+            strDetails.push($("#CountyTaxNum").val());
+            strDetails.push($("#CountyTaxValue").val());
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/Vendors/SaveTaxDetails",
+                data: JSON.stringify({ "taxDetails": strDetails }),
+                success: function (data) {
+                    if (data) {
+                        CloseAddPopup();
+                        var url = '@Url.Action("VendorDetails", "Vendors", new { id = "__id__" })';
+                        window.location.href = url.replace('__id__', strDetails[0]);
+                }
+            },
+            error: function (data) {
+                //debugger;
+            }
+        });
+    }
+
+    function CloseAddPopup() {
+        $(".close").click();
+    }
+    </script>

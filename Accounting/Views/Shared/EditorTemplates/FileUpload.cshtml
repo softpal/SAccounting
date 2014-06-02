@@ -10,24 +10,55 @@
                         <input type="file" class="default" id="upLoad">
                     </span>
                 </div>
+                <button class="btn blue" type="button" style="margin-top: -11px;" onclick="return AddFile();"><i class="icon-plus-sign"></i>Add</button>
+                @*&nbsp;<i class="icon-plus-sign" onclick="AddFile();" style="cursor: pointer">Add</i>*@
             </div>
-            <i class="icon-plus-sign" onclick="AddFile();" style="cursor:pointer"></i>Add
         </div>
-
     </div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tblFileName">
-        @*<tr>
-            <td width="85%" valign="middle"><a href="#">one.pdf</a></td>
-            <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
-        </tr>
-        <tr>
-            <td width="85%" valign="middle"><a href="#">excel.xls</a></td>
-            <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
-        </tr>*@
     </table>
 </div>
 
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+
 <script type="text/javascript">
-    
+    var aryFilePath = new Array();
+    function AddFile() {
+        var fullPath = document.getElementById('upLoad').value;
+        //debugger;
+        var filename;
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var children = document.getElementById("tblFileName").innerHTML;
+            children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);"></i></td></tr>';
+            document.getElementById("tblFileName").innerHTML = children;
+            //document.getElementById('upLoad').value = "";
+            $('.fileupload-preview').html("");
+            aryFilePath.push([fullPath]);
+            return false;
+        }
+    }
+
+    function Removefile(element) {
+        var fileName = element.parentNode.parentNode.parentNode.innerHTML.split('#\">')[1].split("</")[0];
+        aryFilePath.splice($.inArray(fileName, aryFilePath), 1);
+        document.getElementById("tblFileName").innerHTML = '';
+        var children = '';
+        for (var i = 0; i < aryFilePath.length; i++) {
+            var fullPath = aryFilePath[i].toString();
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);" style="cursor:pointer;"></i></td></tr>';
+        }
+        document.getElementById("tblFileName").innerHTML = children;
+    }
 
 </script>

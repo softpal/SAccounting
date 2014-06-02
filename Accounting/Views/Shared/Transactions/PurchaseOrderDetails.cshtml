@@ -3,10 +3,11 @@
 <tr>
     @using (Html.BeginCollectionItem("PurchaseOrderDetail"))
     {
+        @Html.HiddenFor(model => model.PODetailsId)
         <td>
             <div class="control-group">
                 <div class="controls no-left-margin">
-                    @Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.BusinessItems, "--Select--", new { @class = "m-wrap span12 border-form-radius" })
+                    @Html.DropDownListFor(model => model.ItemId, (SelectList)ViewBag.BusinessItems, "--Select--", new { @class = "m-wrap span12 border-form-radius" ,@onchange="javascript:return getItemDetails(this.id);"})
                 </div>
             </div>
         </td>

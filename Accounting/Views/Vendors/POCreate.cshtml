@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
 @Scripts.Render("~/bundle/Script/Dashboard")
 @using (Html.BeginForm("POCreate", "Vendors", FormMethod.Post, new { ReturnUrl = ViewBag.ReturnUrl }))
 {
@@ -77,15 +76,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="span4">
+                                @*<div class="span4">
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">Custom label from preferences</label>
                                             <input type="text" class="m-wrap span12 border-form-radius" id="txtCustomLabel">
                                         </div>
                                     </div>
+                                </div>*@
                                 </div>
-                            </div>
                             <div id="purchaseDetails">
                                 <table class="table-bordered table-striped table-condensed cf margin-top-10 margin-bottom-10">
                                     <thead class="cf">
@@ -110,7 +109,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a class="details-color pull-right" id="addItem">Add More</a>
+                            <a href="#" class="details-color pull-right" id="addItem">Add More</a>
                             @*@Html.ActionLink("Add More...", "BlankEditorRow", null, new { @class = "details-color pull-right", id = "addItem" })*@
                             <div class="clearfix">
                             </div>
@@ -135,8 +134,15 @@
                                     <div class="control-group">
                                         <label class="control-label">Tag to</label>
                                         <div class="controls">
-                                            <input id="tags_1" type="text" class="m-wra tags" value="Service, Project, Project1" />
+                                            @*<input id="tags_1" type="text" class="m-wra tags" value="Service, Project, Project1" />*@
+                                            <input id="tags_1" type="text" class="m-wra tags" value="Service, Project, Project1" style="display: none;">
+                                            <div id="tags_1_tagsinput" class="tagsinput" style="width: auto; height: 100px;">
+                                                <span class="tag"><span>Service&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>Project&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>Project1&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><div id="tags_1_addTag">
+                                                    <input id="tags_1_tag" value="" data-default="add a tag" style="color: rgb(102, 102, 102); width: 80px;">
                                         </div>
+                                                <div class="tags_clear"></div>
+                                    </div>
+                                </div>
                                     </div>
                                 </div>
 
@@ -146,7 +152,8 @@
                             <div class="clearfix"></div>
 
                             <div class="form-actions ">
-                                <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button>
+                                <a href="~/Vendors/PurchaseOrders">
+                                    <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button></a>
                                 <button class="btn blue" type="button"><i class="icon-print"></i>Print</button>
                                 <button class="btn red" type="submit" id="btnSubmit"><i class="icon-ok"></i>Save</button>
                                 @*<input class="btn red" type="button" onclick="SavePurchaseOrders();" value="Save" />*@
@@ -171,6 +178,11 @@
 <script src="~/Scripts/scripts/table-advanced.js"></script>
 
 <script src="~/Scripts/scripts/form-components.js"></script>
+<script src="~/Scripts/jquery-dateFormat.js"></script>
+
+<script src="~/Scripts/plugins/jquery-tags-input/jquery.tagsinput.js"></script>
+<link href="~/Scripts/plugins/jquery-tags-input/jquery.tagsinput.css" rel="stylesheet" />
+
 <script type="text/javascript">
 
     $(document).ready(
@@ -178,9 +190,8 @@
 
             $("#txtExpiry").datepicker();
 
-
             $("#addItem").click(function () {
-                //debugger;
+                debugger;
                 $.ajax({
                     url: "/Vendors/BlankEditorRow",
                     cache: false,
@@ -271,8 +282,23 @@
             });
 
         }
-        );
 
+        );
+    @*$(document).ready(
+        function(){
+        if(@ViewBag.Total !=null)
+            $('#txtTotal').html(@ViewBag.Total);
+        if(@ViewBag.SubTotal !=null)
+            $('#txtsubTotal').html(@ViewBag.SubTotal);
+        if(@ViewBag.Tax !=null)
+            $('#txttotalTax').html(@ViewBag.Tax);
+        if(@ViewBag.UserVendorID !=null)
+            $('#PurchaseOrder_UserVendorId').val(@ViewBag.UserVendorID);
+        if(@ViewBag.PONo !=null){
+            var pono=@ViewBag.PONo;
+            if(eval(pono)>0)
+                $('#txtPO').val(@ViewBag.PONo);
+    });*@
 
     var subtotal = 0;
     var totalTax = 0;
@@ -358,6 +384,37 @@
             children += '<tr><td width="85%" valign="middle"><a href="#">' + filename + '</a></td><td width="15%" align="center"><i class="icon-remove-circle f24" onclick="Removefile(this);" style="cursor:pointer;"></i></td></tr>';
         }
         document.getElementById("tblFileName").innerHTML = children;
+    }
+
+    function getItemDetails(obj)
+    {
+        var prefix=obj;
+        if (prefix.indexOf("ItemId") >= 0) {
+            prefix =prefix.split('__ItemId')[0].split('_')[1];
+        }
+        $.ajax({
+            url: '@Url.Action("GetBusinessItemDetails")',
+            dataType: "json",
+            contentType: 'application/json, charset=utf-8',
+            type:"Post",
+            data: {
+                itemid: $("#"+obj).val()
+            },
+            success: function (data) {
+                if(data!=null)
+                {
+                    var strs=data.split('___');
+                    if(strs!=null&&strs.length==3){
+                        $("#PurchaseOrderDetail_" + prefix + "__Amount").val(strs[0]);
+                        $("#PurchaseOrderDetail_" + prefix + "__Description").val(strs[1]);
+                    }
+                }
+            },
+            error: function (xhr, status, error) {
+                // alert(error);
+            }
+        });
+                
     }
 
 </script>

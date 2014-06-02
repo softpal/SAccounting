@@ -1,0 +1,260 @@
+﻿@model StratusAccounting.Models.PurchaseOrder_DTO
+@{
+    ViewBag.Title = "ViewPurchaseOrder";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+@Scripts.Render("~/bundle/Script/Dashboard")
+@using (Html.BeginForm("ViewPurchaseOrder", "Vendors", FormMethod.Post, new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.HiddenFor(model => model.PurchaseOrder.PurchaseOrderId)
+    <!-- <div class="page-container row-fluid">
+       BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="#">Customers</a></li>
+                        <li><i class="icon-angle-right"></i><a href="#">Purchase Order</a> </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body flip-scroll">
+                            <!-- BEGIN FORM-->
+                            <h3 class="form-section matop">View Purchase Order</h3>
+                            <div class="row-fluid">
+                                <div class="span8 ">
+                                    <div class="control-group">
+                                        <label for="firstName" class="control-label">PO Title</label>
+                                        <div class="controls">
+                                            @Html.DisplayFor(model => model.PurchaseOrder.POTitle)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4 ">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Vendor</label>
+                                            @Html.DisplayFor(model => model.PurchaseOrder.VendorName)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">PO #</label>
+                                            @Html.DisplayFor(model => model.PurchaseOrder.PurchaseOrderId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Expiry date</label>
+                                            @Html.DisplayFor(model => model.PurchaseOrder.ExpiryDate)
+                                            @*  @Html.DisplayFor(model => model.PurchaseOrder.ExpiryDtString)*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Custom label from preferences</label>
+                                            --
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="purchaseDetails">
+                                <table class="table-bordered table-striped table-condensed cf margin-top-10 margin-bottom-10">
+                                    <thead class="cf">
+                                        <tr class="b1">
+                                            <th class="journal-padding-bootom">Product/Service/Project</th>
+                                            <th class="journal-padding-bootom">Description</th>
+                                            <th class="numeric journal-padding-bootom">Quantity</th>
+                                            <th class="numeric journal-padding-bootom">Amount</th>
+                                            <th class="numeric journal-padding-bootom">Tax</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="editorRows">
+
+                                        @if (Model != null)
+                                        {
+                                            if (Model.PurchaseOrderDetail != null && Model.PurchaseOrderDetail.Count > 0)
+                                            {
+                                                foreach (StratusAccounting.Models.PurchaseOrderDetail purchaseOrderDetail in Model.PurchaseOrderDetail)
+                                                {
+                                                    
+                                            <tr>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            @purchaseOrderDetail.ItemName
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            @purchaseOrderDetail.Description
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            @purchaseOrderDetail.Quantity
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            @purchaseOrderDetail.Amount
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            @purchaseOrderDetail.Tax
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                            <tr>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            --
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            --
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            --
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            --
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-group">
+                                                        <div class="controls no-left-margin">
+                                                            --
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div class="span2 pull-right">
+                                <p>Sub total<span class="pull-right" id="txtsubTotal"></span></p>
+                                <p>Tax<span class="pull-right" id="txttotalTax"></span></p>
+                                <p>Total<span class="pull-right" id="txtTotal"></span></p>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Custom label from prefrences</label>
+                                            --
+                                            @* @Html.DisplayFor(model => model.PurchaseOrder.CustomLabelpreferences)*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label">Tag to</label>
+                                        <div class="controls">
+                                            -- @* @Html.DisplayFor(model => model.PurchaseOrder.Tages)*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @*  @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")*@
+                            <div class="clearfix"></div>
+
+                            <div class="form-actions ">
+                                <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button>
+                                <button class="btn blue" type="button"><i class="icon-print"></i>Print</button>
+                                <button class="btn red" type="submit" id="btnEdit"><i class="icon-ok"></i>Edit</button>
+                                <button class="btn green" type="button"><i class="icon-envelope"></i>Send Email</button>
+                            </div>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE 
+    </div>-->
+
+}
+<script src="~/Scripts/scripts/app.js"></script>
+<script src="~/Scripts/scripts/table-advanced.js"></script>
+
+<script src="~/Scripts/scripts/form-components.js"></script>
+<script>
+    $(document).ready(function () {
+
+        if(@ViewBag.Total !=null)
+            $('#txtTotal').html(@ViewBag.Total);
+        if(@ViewBag.SubTotal !=null)
+            $('#txtsubTotal').html(@ViewBag.SubTotal);
+        if(@ViewBag.Tax !=null)
+            $('#txttotalTax').html(@ViewBag.Tax);
+    });
+</script>

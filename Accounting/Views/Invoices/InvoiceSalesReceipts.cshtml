@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "InvoiceSalesReceipts";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>InvoiceSalesReceipts</h2>
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+@Scripts.Render("~/bundle/Script/Dashboard")
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="chart_of_accounts.html">Transactions</a></li>
+                        <li><a href="invoice.html"><i class="icon-angle-right"></i>Invoices</a></li>
+                        <li><a href="invoice_sales_receipts.html"><i class="icon-angle-right"></i>Sales Revenues</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body">
+                            <h3 class="page-title matop border-btoom">Sales Revenues&nbsp;<a href="~/Invoices/AddInvoiceSalesReceipts"><i class="icon-plus-sign"></i></a></h3>
+                            <!-- BEGIN FORM-->
+                            <div class="row-fluid">
+                                <!--BEGIN TABS-->
+                                <div class="span12">
+                                    <div class="btn-group margin-bottom-10">
+                                        <a href="~/Invoices/Index">
+                                            <button class="btn blue form-border">Invoices</button>
+                                        </a><a href="~/Invoices/GetPayments">
+                                            <button class="btn blue form-border">Payments</button>
+                                        </a><a href="#">
+                                            <button class="btn blue form-border active">Sales Receipts</button>
+                                        </a>
+                                        <div class="invoice-clear-both1"></div>
+                                        <a href="invoice_credit_memo.html">
+                                            <button class="btn blue form-border">Credit Memo</button>
+                                        </a><a href="invoice_delayed_charge.html">
+                                            <button class="btn blue form-border">Delayed Charge</button>
+                                        </a>
+                                    </div>
+                                    <!--BEGIN TABS-->
+                                    <div class="portlet-body payment-display-block">
+
+                                        <table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+                                            <thead>
+                                                <tr class="b1">
+                                                    <th class="hidden-480">S.No</th>
+                                                    <th class="journal-padding-bootom">Recipt #</th>
+                                                    <th class="journal-padding-bootom">Payment Method</th>
+                                                    <th class="journal-padding-bootom">Date</th>
+                                                    <th class="journal-padding-bootom">Customer</th>
+                                                    <th class="numeric journal-padding-bootom">Amount</th>
+                                                    <th class="journal-padding-bootom">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                               
+                                                    <tr>
+                                                        <td class="hidden-480">@item.SNo</td>
+                                                        <td class="journal-padding-bootom">@item.ReceiptNum</td>
+                                                        <td class="journal-padding-bootom">@item.PaymentMethod</td>
+                                                        <td class="numeric journal-padding-bootom">@item.Date</td>
+                                                        <td class="numeric journal-padding-bootom">@item.Customer</td>
+                                                        <td class="numeric journal-padding-bootom">@item.Amount</td>
+                                                        <td class="numeric journal-padding-bootom">@item.Description</td>
+
+                                                    </tr>
+                                                }
+
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+                                    <!--END TABS-->
+                                </div>
+                                <!--END TABS-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->   
+    
+}
+
+
+<script src="~/Scripts/scripts/app.js"></script>
+<script src="~/Scripts/scripts/table-advanced.js"></script>
+
+<script src="~/Scripts/scripts/form-components.js"></script>

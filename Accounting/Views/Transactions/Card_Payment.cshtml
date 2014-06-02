@@ -1,0 +1,170 @@
+﻿@model IEnumerable<StratusAccounting.Models.Transaction>
+
+@{
+    ViewBag.Title = "Card_Payment";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- BEGIN PAGE -->
+  <div class="page-content"><!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid"> 
+      <!-- BEGIN PAGE HEADER-->
+      <div class="row-fluid">
+        <div class="span12"> 
+          
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+          
+          <ul class="breadcrumb margin-top-20">
+              <li> <i class="icon-home"></i> <a href="http://stratusmock.softpal.com/index.html">Home</a> <i class="icon-angle-right"></i> </li>    <li><a href="http://stratusmock.softpal.com/chart_of_accounts.html">Transactions</a></li>
+            <li><a href="http://stratusmock.softpal.com/payments.html"><i class="icon-angle-right"></i>Payments</a></li>
+            <li><a href="./Stratus Accounting   Card Payments_files/Stratus Accounting   Card Payments.htm"><i class="icon-angle-right"></i>Card</a></li>
+          </ul>
+          <!-- END PAGE TITLE & BREADCRUMB--> 
+        </div>
+      </div>
+      <!-- END PAGE HEADER--> 
+      <!-- BEGIN PAGE CONTENT-->
+      <div class="row-fluid">
+        <div class="span12"> 
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box blue border-topf">
+            <div class="portlet-body">
+              <h3 class="page-title matop border-btoom">Card Payments</h3>
+              <!-- BEGIN FORM-->
+              <form action="http://stratusmock.softpal.com/card_payments.html#" class="form-horizontal mabottom1">
+                <div class="row-fluid">
+                  <div class="span4">
+                    <div class="control-group">
+                      <div class="controls no-left-margin">
+                        <div class="input-append date form_datetime">
+                          <input size="16" type="text"  id="txtFrom" class="m-wrap large" placeholder="From">
+                          <span class="add-on"><i class="icon-calendar"></i></span> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="span4">
+                    <div class="control-group">
+                      <div class="controls no-left-margin">
+                        <div class="input-append date form_datetime">
+                          <input size="16" type="text"  id="txtTo"  class="m-wrap large" placeholder="To">
+                          <span class="add-on"><i class="icon-calendar"></i></span> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="span1"> <a class="btn blue margin-bottom-10" href="#">View</a> </div>
+                  
+                  <!--<div class="input-append pull-right">
+									<input type="text" placeholder="Search" class="m-wrap input-large">
+									<button type="button" class="btn blue"><i class="icon-search"></i></button>
+							
+						                                  
+                                                                        </div>--> 
+                  
+                </div>
+              </form>
+              <div class="row-fluid"> 
+                <!--BEGIN TABS-->
+                <div class="span12"> 
+                  <!--BEGIN TABS-->
+                  <div class="portlet-body payment-display-block">
+                    <div class="btn-group margin-bottom-10">
+                         <a href="~/Transactions/Payment"><button class="btn blue  payment-padding">Cash</button> </a> 
+                        <a href="#"><button class="btn blue  payment-padding active">Card</button>
+                      </a> <a href="~/Transactions/Cheque_Payment">
+                      <button class="btn blue payment-padding">Cheque</button>
+                      </a> </div>
+                    <div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row-fluid"><div class="span6"><div id="sample_2_length" class="dataTables_length"><label><div class="select2-container m-wrap small" id="s2id_autogen1"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">5</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><select size="1" name="sample_2_length" aria-controls="sample_2" class="m-wrap small select2-offscreen" tabindex="-1"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select> Records Per Page</label></div></div><div class="span6"><div class="dataTables_filter" id="sample_2_filter"><label>Search: <input type="text" aria-controls="sample_2" class="m-wrap small"></label></div></div></div><table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
+                      <thead>
+                        <tr class="b1" role="row"><th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="S.No: activate to sort column ascending" style="width: 32px;">S.No</th><th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Voucher No: activate to sort column descending" style="width: 151px;">Voucher No</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 161px;">Date</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Account: activate to sort column ascending" style="width: 145px;">Account</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Paid by: activate to sort column ascending" style="width: 82px;">Paid by</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Card Title: activate to sort column ascending" style="width: 146px;">Card Title</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Paid for: activate to sort column ascending" style="width: 153px;">Paid for</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Options: activate to sort column ascending" style="width: 55px;">Options</th></tr>
+                      </thead>
+                      
+                    <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
+                          <td class="hidden-480 ">&nbsp;</td>
+                        <td class=" sorting_1"><div class="control-group">
+                              <div class="controls no-left-margin">
+                                <input type="text" class="span12 m-wrap mabottom1">
+                              </div>
+                            </div></td>
+                      
+                          <td class=" "><div class="control-group">
+                              <div class="controls no-left-margin">
+                                <div class="input-append date form_datetime mabottom1">
+                                  <input size="16" type="text" value="" class="m-wrap small" placeholder="To">
+                                  <span class="add-on"><i class="icon-calendar"></i></span> </div>
+                              </div>
+                            </div></td>
+                          <td class=" "><div class="control-group">
+                              <div class="controls no-left-margin">
+                                <input type="text" class="span12 m-wrap mabottom1">
+                              </div>
+                            </div></td>
+                          <td class=" "><div class="control-group">
+                              <div class="controls">
+                                <select class="span12 m-wrap mabottom1" data-placeholder="Choose a Category" tabindex="1">
+                                  <option value="">Select</option>
+                                  <option value="Category 1">Category 1</option>
+                                  <option value="Category 2">Category 2</option>
+                                  <option value="Category 3">Category 5</option>
+                                  <option value="Category 4">Category 4</option>
+                                </select>
+                              </div>
+                            </div></td>
+                          <td class=" "><div class="control-group">
+                              <div class="controls">
+                                <input type="text" class="span12 m-wrap mabottom1">
+                              </div>
+                            </div></td>
+                          <td class=" "><div class="control-group">
+                              <div class="controls">
+                                <input type="text" class="span12 m-wrap mabottom1">
+                              </div>
+                            </div></td>
+                          <td class=" "><i class="icon-plus-sign font-size20"></i></td>
+                        </tr>
+                       
+                         <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td class="hidden-480 ">@item.SNo</td>
+                                                        <td class="hidden-480 ">@item.VoucherNumber</td>
+                                                        <td class="hidden-480 ">@item.Date</td>
+                                                        <td class="hidden-480 ">@item.Amount</td>
+                                                        <td class="hidden-480 ">@item.PaidBy</td>
+                                                        <td class="hidden-480 ">@item.CardTitle</td>
+                                                        <td class="hidden-480 ">@item.PaidFor</td>
+
+                                                        </tr>
+                                                }
+                   
+                  </tbody>
+
+                    </tbody></table>
+                        
+                        <div class="row-fluid"><div class="span6"><div class="dataTables_info" id="sample_2_info">Showing 1 to 4 of 4 entries</div></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="http://stratusmock.softpal.com/card_payments.html#">← <span class="hidden-480">Previous</span></a></li><li class="active"><a href="http://stratusmock.softpal.com/card_payments.html#">1</a></li><li class="next disabled"><a href="http://stratusmock.softpal.com/card_payments.html#"><span class="hidden-480">Next</span> → </a></li></ul></div></div></div></div>
+               </div>
+                  <!--END TABS--> 
+                </div>
+                <!--END TABS--> 
+              </div>
+            </div>
+            
+          </div>
+          <!-- END EXAMPLE TABLE PORTLET--></div>
+      </div>
+      <!-- END PAGE CONTENT--> 
+    </div>
+    
+    <!-- END PAGE CONTAINER--> 
+  </div>
+  <!-- END PAGE --> 
+
+<script type="text/javascript">
+          $(document).ready(function () {
+
+              $("#txtFrom").datepicker();
+              $("#txtTo").datepicker();
+
+          });
+          </Script>

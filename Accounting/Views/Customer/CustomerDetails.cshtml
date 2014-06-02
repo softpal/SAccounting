@@ -1,0 +1,791 @@
+﻿@model StratusAccounting.Models.Customers_DTO
+@{
+    ViewBag.Title = "CustomerDetails";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>CustomerDetails</h2>
+
+@Styles.Render("~/bundle/Datepicker")
+ <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="/Home/Dashboard">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="/Customer/UserCustomers">Customers</a></li>
+                        <li><i class="icon-angle-right"></i><a href="/Customer/UserCustomers">Customers List</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body form">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <!-- BEGIN FORM-->
+                                    @*@{
+                                        StratusAccounting.Models.UserCustomer UserCustomer = new StratusAccounting.Models.UserCustomer();
+}*@
+                                   
+  
+                                        
+<div class="page-container row-fluid"> 
+  
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet-body form"> 
+              <!-- BEGIN FORM-->
+              <h3 class="page-title matop border-btoom">Customer Details&nbsp;<a href="add_new_customer.html"><i class="icon-plus-sign"></i> </a></h3>
+              <div class="form-horizontal form-view">
+                <div class="row-fluid">
+                  <div class="span12">
+                    <div class="span4 ">
+                      <div class="employee-details-img"> <img src="img/client-details.png" alt=""/> </div>
+                      <div class="control-group mabottom">
+                        
+                      </div>
+                      <div class="control-group mabottom">
+                        <label class="control-label details-text span12 mabottom" for="firstName">
+                            Company Name &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                         
+                          @Html.LabelFor(m => m.UserCustomerDetails[0].CompanyName,Model.UserCustomerDetails[0].CompanyName)
+                      </div>
+                      <div class="control-group mabottom">
+                        <label class="control-label details-text span12 mabottom" for="firstName">First & Last Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                           @Html.Label(Model.UserCustomerDetails[0].CustomerFirstName+" "+Model.UserCustomerDetails[0].CustomerLastName)
+                      </div>
+                      <div class="control-group mabottom">
+                        <label class="control-label details-text span12 mabottom" for="firstName">Title&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                              @Html.LabelFor(m => m.UserCustomerDetails[0].Title,Model.UserCustomerDetails[0].Title)
+                      
+                      </div>
+                      <div class="control-group mabottom">
+                        <label class="control-label details-text span12 mabottom" for="firstName">Profit/Non profit type&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          @Html.LabelFor(m => m.UserCustomerDetails[0].BusinessType,Model.UserCustomerDetails[0].BusinessType)
+                      </div>
+                      <div class="control-group mabottom"> 
+                          <a data-toggle="modal" href="#popup-1">
+                        <button type="submit" class="btn blue border-form-radius margin-top-10">
+                            <i class="icon-pencil"></i> Edit</button>
+                        </a>
+                           @using (Html.BeginForm("EditCustomerDetails", "Customer", FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm" }))
+                                    { 
+                        <div id="popup-1" class="modal hide fade" tabindex="-1" data-width="760">
+                            
+                         
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h3>Employee Details</h3>
+                            </div>
+                            <div class="modal-body">
+                              <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                                <div class="row-fluid">
+                                  <div class="span12">
+                                   
+                                    <div class="control-group">
+                                         
+                                      <label class="control-label">Company Name</label>
+                                      <div class="controls">
+                                        <div class="span12">
+                                            @Html.TextBoxFor(m => m.UserCustomerDetails[0].CompanyName,Model.UserCustomerDetails[0].CompanyName)
+                                          @Html.HiddenFor(m => m.UserCustomerDetails[0].UserCustomerId,Model.UserCustomerDetails[0].UserCustomerId)
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label">First Name</label>
+                                      <div class="controls">
+                                         @Html.TextBoxFor(m => m.UserCustomerDetails[0].CustomerFirstName,Model.UserCustomerDetails[0].CustomerFirstName)
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label">Last Name</label>
+                                      <div class="controls">
+                                        @Html.TextBoxFor(m => m.UserCustomerDetails[0].CustomerLastName,Model.UserCustomerDetails[0].CustomerLastName)
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label">Title</label>
+                                      <div class="controls">
+                                        @Html.TextBoxFor(m => m.UserCustomerDetails[0].Title,Model.UserCustomerDetails[0].Title)
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label">Company Type</label>
+                                      <div class="controls">
+                                        <div class="span12">
+                                          <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                            <option value="">Select type</option>
+                                            <option value="Category 1">Profit</option>
+                                            <option value="Category 2">Non-Profit</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          
+                          <div class="modal-footer">
+                            <button type="submit" id="btnsave" data-dismiss="modal" onclick="$('#submitForm').submit()" 
+                                name="Command" value="test1"  class="btn blue">
+                                <i class="icon-ok"></i>&nbsp;Save</button>
+                             
+
+                           <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                          </div>
+                        </div>
+                           }
+                        <div id="popup-2" class="modal hide fade" tabindex="-1" data-width="760">
+                          <form class="form-horizontal" action="#">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h3>Customer Invoice</h3>
+                            </div>
+                            <div class="modal-body">
+                              <div class="scroller" style="height:250px" data-always-visible="1" data-rail-visible1="1">
+                                <div class="row-fluid">
+                                  <div class="span12">
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Customer Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Invoice Title&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Vendor&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Product/Service/Project&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Description&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Quantity&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Amount&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Invoice #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">PO #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="control-group mabottom">
+                                      <label class="control-label details-text span12 mabottom" for="firstName">Due Date&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <span>Tags To</span>
+                                    <div class="clearfix"></div>
+                                    <div class="service1">Service1</div>
+                                    <div class="service1">Service2</div>
+                                    <div class="service1">Service3</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="modal-footer">
+                           <button class="btn blue" data-dismiss="modal" type="button">Close</button>
+                                             </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="span8"> 
+                      
+                      <!--/span-->
+                      
+                      <div class="span12 no-left-margin">
+                        <h3 class="form-section mabottom matop">Pending Invoice</h3>
+                        <table class="table table-striped">
+                          <tbody>
+                            <tr>
+                              <td><a data-toggle="modal" href="#popup-2">BKT001/501</a></td>
+                              <td>12/24/2013</td>
+                              <td>Sent</td>
+                              <td>$2000</td>
+                            </tr>
+                            <tr>
+                              <td><a data-toggle="modal" href="#popup-2">BKT001/501</a></td>
+                              <td>12/24/2013</td>
+                              <td>Sent</td>
+                              <td>$2000</td>
+                            </tr>
+                            <tr>
+                              <td><a data-toggle="modal" href="#popup-2">BKT001/501</a></td>
+                              <td>12/24/2013</td>
+                              <td>Sent</td>
+                              <td>$2000</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        
+                        <div class="span6 no-left-margin margin-top-10">
+                          <h3 class="form-section matop">Communication Details <a data-toggle="modal" href="#popup-4">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-4" class="modal hide fade" tabindex="-1" data-width="760">
+                            <form class="form-horizontal form-row-seperated" action="#">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Communication Details </h3>
+                              </div>
+                              <div class="modal-body">
+                                <div class="scroller" style="height:320px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Office Email</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Business Phone</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Business FAX</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Street</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Country</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">City</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">ZIP</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">State</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Website</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                           <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Official Email&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Business Phone&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Business FAX&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Street&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">County&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">City&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">ZIP&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">State&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Website&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                        </div>
+                        <div class="span6">
+                          <h3 class="form-section matop margin-top-10">Bank Details <a data-toggle="modal" href="#popup-5">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-5" class="modal hide fade" tabindex="-1" data-width="760">
+                            <form class="form-horizontal form-row-seperated" action="#">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Bank Details </h3>
+                              </div>
+                              <div class="modal-body">
+                                <div class="scroller" style="height:260px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Bank Name</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Account #</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Account Type</label>
+                                        <div class="controls">
+                                          <div class="span12">
+                                            <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                              <option value="">Select type</option>
+                                              <option value="Category 1">Savings</option>
+                                              <option value="Category 2">Checking</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Routing #</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Bank Address</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                           <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Bank Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Account #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Account type&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Routing #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                          </div>
+                          <div class="control-group mabottom">
+                            <label class="control-label details-text span12 mabottom" for="firstName">Bank address</label>
+                            <div class="controls"> </div>
+                          </div>
+                        </div>
+                        <div class="span12 no-left-margin">
+                          <h3 class="form-section matop">Payment Details<a data-toggle="modal" href="#popup-6">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-6" class="modal hide fade" tabindex="-1" data-width="760">
+                            
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Payment Details</h3>
+                              </div>
+                                 @using (Html.BeginForm("EditCustomerPaymentDetails", "Customer", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_paymentdetails" }))
+                                    { 
+                              <div class="modal-body">
+                                <div class="scroller" style="height:280px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Credit period</label>
+                                        <div class="controls">
+                                          <div class="span12">
+                                            <select class="span12 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                                              <option value="">Select type</option>
+                                              <option value="Category 1">15 Days</option>
+                                              <option value="Category 2">20 Days</option>
+                                              <option value="Category 2">25 Days</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Credit limit</label>
+                                        <div class="controls">
+                                          @Html.TextBoxFor(m=>m.UserCustomerDetails[0].CreditLimit,Model.UserCustomerDetails[0].CreditLimit.ToString())
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Preferred&nbsp; payment method</label>
+                                          
+                                        <div class="controls">
+                                          <div class="span12">
+                                               @Html.DropDownListFor(model => model.PaymentTypes, (SelectList)ViewBag.PaymentTypes, "Select PaymentType", new { @class = "m-wrap span12 border-form-radius", @id = "ddlpaymenttypes" })
+                                            
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">Credit Card Token ID</label>
+                                        <div class="controls">
+                                           @Html.TextBoxFor(m => m.UserCustomerDetails[0].CreditCardToken,Model.UserCustomerDetails[0].CreditCardToken)
+                                        </div>
+                                      </div>
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                                 }
+                            
+                            <div class="modal-footer">
+                              <button type="submit" onclick="$('#form_paymentdetails').submit()" 
+                                name="Command" value="test1" data-dismiss="modal" class="btn blue">
+                                  <i class="icon-ok"></i>&nbsp;Save</button>
+                        <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+
+                            </div>
+                          </div>
+
+                          <div class="span6 no-left-margin">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">
+                                  Credit period&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                @Html.LabelFor(m=>m.Mst_CreditPeriodTypes.Period,Model.Mst_CreditPeriodTypes.Period)
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">
+                                  Preferred payment method&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                                  </label>
+                                 @Html.LabelFor(m => m.Mst_PaymentTypes.PaymentDesc,Model.Mst_PaymentTypes.PaymentDesc)
+                            </div>
+                          </div>
+                          <div class="span6">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">Credit limit&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                 @Html.LabelFor(m=>m.UserCustomerDetails[0].CreditLimit,Model.UserCustomerDetails[0].CreditLimit.ToString())
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">Credit card token ID&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                 @Html.LabelFor(m => m.UserCustomerDetails[0].CreditCardToken,Model.UserCustomerDetails[0].CreditCardToken)
+                            </div>
+                          </div>
+                        </div>
+                        <div class="span12 no-left-margin">
+                          <h3 class="form-section matop">Billing Address<a data-toggle="modal" href="#popup-7">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-7" class="modal hide fade" tabindex="-1" data-width="760">
+                            <form class="form-horizontal form-row-seperated" action="#">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Billing Address</h3>
+                              </div>
+                              <div class="modal-body">
+                                <div class="scroller" style="height:250px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Street</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">City</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">ZIP</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">County</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">State</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                           <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="span6 no-left-margin">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">Street&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">City&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">ZIP&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">County&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">State&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                          </div>
+                          <div class="span6">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d243647.2517687158!2d78.38212164747699!3d17.450496957502324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1395048601965" height="150" frameborder="0" style="border:0; width:100%"></iframe>
+                          </div>
+                        </div>
+                        <div class="span12 no-left-margin">
+                          <h3 class="form-section matop">Shipping Address<a data-toggle="modal" href="#popup-8">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-8" class="modal hide fade" tabindex="-1" data-width="760">
+                            <form class="form-horizontal form-row-seperated" action="#">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Shipping Address</h3>
+                              </div>
+                              <div class="modal-body">
+                                <div class="scroller" style="height:250px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Street</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">City</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">ZIP</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">County</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">State</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                             <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="span6 no-left-margin">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">Street&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">City&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">ZIP&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">County&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">State&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                          </div>
+                          <div class="span6">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d243647.2517687158!2d78.38212164747699!3d17.450496957502324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1395048601965" height="150" frameborder="0" style="border:0; width:100%"></iframe>
+                          </div>
+                        </div>
+                        <div class="span12 no-left-margin">
+                          <h3 class="form-section matop">Tax Details<a data-toggle="modal" href="#popup-9">
+                            <button type="submit" class="btn blue pull-right border-form-radius"><i class="icon-pencil"></i> Edit</button>
+                            </a></h3>
+                          <div id="popup-9" class="modal hide fade" tabindex="-1" data-width="760">
+                            <form class="form-horizontal form-row-seperated" action="#">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Tax Details</h3>
+                              </div>
+                              <div class="modal-body">
+                                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                                  <div class="row-fluid">
+                                    <div class="span12">
+                                      <div class="control-group">
+                                        <label class="control-label">Federal Tax ID</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">City Tax ID</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">City Tax %</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">State Tax ID</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">State Tax %</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">County Tax ID</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                      <div class="control-group">
+                                        <label class="control-label">County Tax %</label>
+                                        <div class="controls">
+                                          <input type="text" class="span12 m-wrap" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn blue"><i class="icon-ok"></i>&nbsp;Save</button>
+                        <button class="btn" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="span6 no-left-margin">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">Federal Tax ID &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<span class="text">xxxxxxxxxxxxxxx</span></label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">City Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<span class="text">xxxxxxxxxxxxxxx</span></label>
+                            </div>
+                          </div>
+                          <div class="span6">
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">State Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<span class="text">xxxxxxxxxxxxxxx</span></label>
+                            </div>
+                            <div class="control-group mabottom">
+                              <label class="control-label details-text span12 mabottom" for="firstName">County Tax ID (tax percentage)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<span class="text">xxxxxxxxxxxxxxx</span></label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="span12 no-left-margin">
+                          <h3 class="form-section matop">Documents</h3>
+                         
+                                  <div class="control-group">
+                      <div class="controls no-left-margin">
+                        <div data-provides="fileupload" class="fileupload fileupload-new">
+                          <div class="input-append">
+                            <div class="uneditable-input"> <i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span> </div>
+                            <span class="btn btn-file"> <span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
+                            <input type="file" class="default">
+                            </span> </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                                 
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td width="85%" valign="middle"><a href="#">one.pdf</a></td>
+                              <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
+                            </tr>
+                            <tr>
+                              <td width="85%" valign="middle"><a href="#">excel.xls</a></td>
+                              <td width="15%" align="center"><i class="icon-remove-circle f24"></i></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span--> 
+                </div>
+              </div>
+              <!-- END FORM--> 
+            </div>
+          
+          <!-- END EXAMPLE TABLE PORTLET--></div>
+     
+<!-- END CONTAINER --> 
+                                    }            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </div>
+
+ @Scripts.Render("~/bundle/Script/Dashboard")

@@ -1,7 +1,14 @@
-﻿@{
+﻿
+@model IEnumerable<StratusAccounting.Models.PurchaseInvoice>
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
 }
+<link href="~/Scripts/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/plugins/data-tables/jquery.dataTables.min.js"></script>
+
 <div class="page-content">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -34,9 +41,9 @@
                                 <div class="btn-group margin-bottom-10">
                                     <a href="#">
                                         <button class="btn blue form-border active">Invoices</button>
-                                    </a><a href="#">
+                                    </a><a href="~/Invoices/GetPayments">
                                         <button class="btn blue form-border">Payments</button>
-                                    </a><a href="invoice_sales_receipts.html">
+                                    </a><a href="~/Invoices/InvoiceSalesReceipts">
                                         <button class="btn blue form-border">Sales Receipts</button>
                                     </a>
                                     <div class="invoice-clear-both1"></div>
@@ -51,33 +58,7 @@
                                 <div class="portlet-body payment-display-block">
 
                                     <div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                                        <div class="row-fluid">
-                                            <div class="span6">
-                                                <div id="sample_2_length" class="dataTables_length">
-                                                    <label>
-                                                        <div class="select2-container m-wrap small" id="s2id_autogen1"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1"><span class="select2-chosen">5</span><abbr class="select2-search-choice-close"></abbr>
-                                                            <span class="select2-arrow"><b></b></span></a>
-                                                            <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2"><div class="select2-drop select2-display-none select2-with-searchbox">
-                                                                <div class="select2-search">
-                                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
-                                                                </div>
-                                                                <ul class="select2-results"></ul>
-                                                            </div>
-                                                        </div>
-                                                        <select size="1" name="sample_2_length" aria-controls="sample_2" class="m-wrap small select2-offscreen" tabindex="-1">
-                                                            <option value="5">5</option>
-                                                            <option value="15">15</option>
-                                                            <option value="20">20</option>
-                                                            <option value="-1">All</option>
-                                                        </select>
-                                                        Records Per Page</label></div>
-                                            </div>
-                                            <div class="span6">
-                                                <div class="dataTables_filter" id="sample_2_filter">
-                                                    <label>Search:
-                                                        <input type="text" aria-controls="sample_2" class="m-wrap small"></label></div>
-                                            </div>
-                                        </div>
+                                        
                                         <table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
                                             <thead>
                                                 <tr class="b1" role="row">
@@ -87,6 +68,7 @@
                                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Due Date: activate to sort column ascending" style="width: 141px;">Due Date</th>
                                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 143px;">Customer</th>
                                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 120px;">Amount</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 120px;">Balance</th>
                                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 109px;">Status</th>
                                                 </tr>
                                             </thead>
@@ -99,52 +81,55 @@
 
 
                                                         <td class="hidden-480 ">@item.SNo</td>
-                                                        <td class=" sorting_1"><a href="#" class="details-color">@item.PurchaseInvoiceId</a></td>
+                                                        @*<td class=" sorting_1"><a href="#" class="details-color">@item.PurchaseInvoiceId</a></td>*@
+                                                        <td>@Html.ActionLink(item.InvoiceNumber, "ViewPurchaseInvoice", "Invoices", new { id = @item.PurchaseInvoiceId }, new { @id = "lnk" })</td>
                                                         <td class=" ">@item.InvoiceType</td>
-                                                        <td class=" ">@item.DueDate</td>
+                                                        <td class=" ">@item.DueDate.GetValueOrDefault().ToString("MM/dd/yyyy")</td>
                                                         <td class=" ">@item.Customer</td>
-                                                        <td class=" ">@item.Amount</td>
+                                                        <td class=" ">@string.Format("{0:C}", item.Amount)</td>
+                                                        <td class=" ">@string.Format("{0:C}", item.Balance)</td>
                                                         <td class=" ">@item.InvoiceStatus
                                                             <div class="btn-group pull-right">
                                                                 <button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a href="#">View</a></li>
+                                                                    @*  <li><a href="#">View</a></li>
                                                                     <li><a href="#">Edit</a></li>
                                                                     <li><a href="#">Copy</a></li>
                                                                     <li><a href="#">Delete</a></li>
                                                                     <li><a href="#">Mark as Draft</a></li>
                                                                     <li><a href="#">Mark as Sent</a></li>
                                                                     <li><a href="#">Mark as Paid</a></li>
-                                                                    <li><a href="#">Mark as Void</a></li>
+                                                                    <li><a href="#">Mark as Void</a></li>*@
+                                                                    @if (item.InvoiceStatusList != null && item.InvoiceStatusList.Count > 0)
+                                                                    {
+                                                                        for (int i = 0; i < item.InvoiceStatusList.Count; i++)
+                                                                        {
+                                                                        @*<li value="@item.InvoiceStatusList[i].InvoicestatusId" onclick="invoiceStatusChange(@item.PurchaseInvoiceId,@item.InvoiceStatusList[i].InvoicestatusId);">
+                                                                            <a href="#">@item.InvoiceStatusList[i].InvoicestatusDesc</a></li>*@
+                                                                        
+                                                                         <li value="@item.InvoiceStatusList[i].InvoicestatusId">
+                                                                             
+                                                                    <a href="~/Invoices/UpdateInvoiceStatus/@item.InvoiceStatusList[i].InvoicestatusId-@item.PurchaseInvoiceId">@item.InvoiceStatusList[i].InvoicestatusDesc</a></li>
+                                                                        }
+                                                                    }
                                                                 </ul>
+                                                                @* @Html.DropDownList("ddlStatus", (SelectList)ViewBag.InvoiceStatus, "--Select--", new { @id = "ddlStatus-" + @item.PurchaseInvoiceId, @class = "dropdown-menu", @onchange = "javascript:return invoiceStatusChange(this.id);" })*@
+
                                                             </div>
                                                         </td>
 
 
                                                     </tr>    
                                                 }
-                                                
+
                                             </tbody>
                                         </table>
-                                        <div class="row-fluid">
-                                            <div class="span6">
-                                                <div class="dataTables_info" id="sample_2_info">Showing 1 to 3 of 3 entries</div>
-                                            </div>
-                                            <div class="span6">
-                                                <div class="dataTables_paginate paging_bootstrap pagination">
-                                                    <ul>
-                                                        <li class="prev disabled"><a href="#">← <span class="hidden-480">Previous</span></a></li>
-                                                        <li class="active"><a href="#">1</a></li>
-                                                        <li class="next disabled"><a href="#"><span class="hidden-480">Next</span> → </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
 
-                              @*  <div class="portlet-body flip-scroll payment-display">
+                                @*  <div class="portlet-body flip-scroll payment-display">
                                     <table class="table-bordered table-striped table-condensed cf margin-top-10">
                                         <thead class="cf">
                                             <tr class="b1">
@@ -230,3 +215,7 @@
     <!-- END PAGE CONTAINER-->
 </div>
 @Scripts.Render("~/bundle/Script/Dashboard")
+<script>
+    function invoiceStatusChange(objId, objStatus) {
+    }
+</script>

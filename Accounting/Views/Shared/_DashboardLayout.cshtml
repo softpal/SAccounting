@@ -14,11 +14,28 @@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
     @Styles.Render("~/bundles/plugins")
-    @Styles.Render("~/bundle/Dashboard")
+    @Styles.Render("~/bundles/pagePlugins")
+    @*@Styles.Render("~/bundle/Dashboard")
     @Styles.Render("~/bundles/bootstrap")
+    @Styles.Render("~/bundle/Datepicker")*@
     @Styles.Render("~/bundle/Datepicker")
     @Scripts.Render("~/bundles/jquery")
 
+    <link href="~/Scripts/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="~/Content/css/themes/default.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style-stratus.css" rel="stylesheet" />
+
+    @*<link href="~/Scripts/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />*@
+    <script src="~/Scripts/plugins/data-tables/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/select2/select2_stratus.css" />
+    <link rel="stylesheet" href="~/Scripts/plugins/data-tables/DT_bootstrap.css" />
+
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" />*@
+    <link href="~/Scripts/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/uniform/css/uniform.default.css" rel="stylesheet" />
+    @*<link href="~/Content/css/style-stratus.css" rel="stylesheet" />*@
     <!-- END PAGE LEVEL STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -41,16 +58,30 @@
                 </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
-                <ul class="nav navbar-nav pull-left">
-                    <li><a href="Preferences">Preferences</a> </li>
-                    <li class="borderright"><a href="BankAccounts">Bank Accounts</a> </li>
-                    <li class="borderright"><a href="Services">Services</a> </li>
-                    <li class="borderright"><a href="Products">Products</a> </li>
-                    <li class="borderright"><a href="Projects">Projects</a> </li>
-                    <li class="borderright"><a href="Assets">Assets</a> </li>
-                    <li class="borderright"><a href="DisplayCustomers">Quick Customer</a> </li>
-                    <li class="borderright"><a href="DisplayVendors">Quick Vendors</a> </li>
-                </ul>
+                @if (Request.Url.ToString().Contains("Organization"))
+                {
+                    <ul class="nav navbar-nav pull-left">
+                        <li><a href="Preferences">Preferences</a> </li>
+                        <li class="borderright"><a href="BankAccounts">Bank Accounts</a> </li>
+                        <li class="borderright"><a href="Services">Services</a> </li>
+                        <li class="borderright"><a href="Products">Products</a> </li>
+                        <li class="borderright"><a href="Projects">Projects</a> </li>
+                        <li class="borderright"><a href="Assets">Assets</a> </li>
+                        @*<li class="borderright"><a href="DisplayCustomers">Quick Customer</a> </li>
+                        <li class="borderright"><a href="DisplayVendors">Quick Vendors</a> </li>*@
+                    </ul>
+                }
+
+@*@if (Request.Url.ToString().Contains("Transactions"))
+                { 
+                    <ul class="nav navbar-nav pull-left">
+                        <li><a href="chart_of_accounts.html">Chart of Accounts </a></li>
+                        <li class="borderright"><a href="journal.html">Journal </a></li>
+                        <li class="borderright"><a href="payments.html">Payments </a></li>
+                        <li class="borderright"><a href="recipts.html">Revenues </a></li>
+                        <li class="borderright"><a href="invoice.html">Invoices </a></li>
+                    </ul>
+                }*@
                 @Html.Partial("_LoginPartial")
                 <!-- END TOP NAVIGATION MENU -->
             </div>
@@ -88,21 +119,17 @@
                         <li><a href="~/Organization/Products">Products </a></li>
                         <li><a href="~/Organization/Projects">Projects </a></li>
                         <li><a href="~/Organization/AssetsList">Assets </a></li>
+                        <li><a href="#">Reconcile </a></li>
+                        <li><a href="#">Account Closing</a> </li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="icon-align-justify"></i><span class="title">SALES & TRANSACTION</span> <span class="arrow "></span></a>
+                <li><a href="#"><i class="icon-align-justify"></i><span class="title">TRANSACTIONS</span> <span class="arrow "></span></a>
                     <ul class="sub-menu">
                         <li><a href="~/Transactions/ChartAccounts">Chart of Accounts </a></li>
-                        @*<li><a href="~/ChartofAccount/ChartofAccounts">Chart of Accounts </a></li>*@
-                        <li><a href="#">Journal </a></li>
-                        <li><a href="#">Payments </a></li>
-                        <li><a href="#">Expenses </a></li>
-                        <li><a href="#">Recipts </a></li>
+                        <li><a href="~/Transactions/Journal">Journal </a></li>
+                        <li><a href="~/Transactions/Payment">Payments </a></li>
+                        <li><a href="#">Revenues </a></li>
                         <li><a href="~/Invoices/Index">Invoices </a></li>
-                        <li><a href="~/ChartofAccount/GetInvoices">Invoices List </a></li>
-                        <li><a href="#">Reconcile </a></li>
-                        <li><a href="#">Purchase Orders </a></li>
-                        <li><a href="#">Account Closing </a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="icon-group"></i><span class="title">EMPLOYEES </span><span class="arrow "></span></a>
@@ -117,8 +144,8 @@
                 <li><a href="#"><i class="icon-user"></i><span class="title">CUSTOMERS</span> <span class="arrow "></span></a>
                     <ul style="" class="sub-menu">
                         <li><a href="~/Customer/Index">List </a></li>
-                        @*<li><a href="~/Customer/UserCustomers">Listof customers </a></li>*@
                         <li><a href="~/Customer/NewCustomer">Add new </a></li>
+                        <li><a href="#">Estimate</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="icon-gift"></i><span class="title">VENDORS</span> <span class="arrow "></span></a>
@@ -130,11 +157,11 @@
                 </li>
                 <li><a class="active" href="#"><i class="icon-bar-chart"></i><span class="title">REPORTS</span> <span class="arrow "></span></a>
                     <ul style="" class="sub-menu">
-                        <li><a href="~/Reports/Ledger">Ledgers </a></li>
-                        <li><a href="~/Reports/DayWise">Day wise </a></li>
-                        <li><a href="~/Reports/MonthWise">Month wise </a></li>
-                        <li><a href="~/Reports/ScheduleWise">Schedule wise </a></li>
-                        <li><a href="~/Reports/TrailBalance">Trial Balance </a></li>
+                        <li><a href="~/StratusReports/Ledger">Ledgers </a></li>
+                        <li><a href="~/StratusReports/DayWise">Day wise </a></li>
+                        <li><a href="~/StratusReports/MonthWise">Month wise </a></li>
+                        <li><a href="~/StratusReports/ScheduleWise">Schedule wise </a></li>
+                        <li><a href="~/StratusReports/TrailBalance">Trial Balance </a></li>
                         <li><a href="#">Trading Account </a></li>
                         <li><a href="#">Profit Loss </a></li>
                         <li><a href="#">Balance Sheet </a></li>
@@ -164,6 +191,7 @@
         <div class="footer-tools"><span class="go-top"><i class="icon-angle-up"></i></span></div>
     </div>
 
+    <script src="~/Scripts/plugins/data-tables/DT_bootstrap.js"></script>
     <script>
         jQuery(document).ready(function () {
             App.init();
@@ -174,26 +202,3 @@
 <!-- END BODY -->
 </html>
 <!---->
-<!----- below script added by Bhaskar-------->
-@*<script type="text/javascript">
-    $(function () {
-        $("#PopupDialog").dialog({
-            autoOpen: false, width: 400, height: 500, modal: true,
-            buttons: {
-                "ServicesPopUp": function () {
-                    if ($("#PopUp").validate().form()) {
-                        $.post("/Organization/ServicesPopUp",
-    $("#PopUp").serialize(),
-    function (data) {
-        $("#PopupDialog").dialog("close");
-        $("#SeriveListBlock").html(data);
-    });
-                    }
-                },
-                Cancel: function () { $(this).dialog("close"); }
-            }
-        });
-       
-    });
-   
-</script>*@

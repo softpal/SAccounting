@@ -1,0 +1,19 @@
+﻿@model IEnumerable<StratusAccounting.Models.UserCustomer>
+
+@{
+    if (Model != null)
+    {
+        foreach (StratusAccounting.Models.UserCustomer item in Model)
+        {
+            <div class="clearfix"></div>
+            <div class="list-customer">
+                <div class="list-customer-content">
+                    <a href="customer_details.html">@Html.ActionLink(item.CompanyName.ToString(), "VendorDetails", new { id = item.UserCustomerId })</a>@*Company Name*@
+                    <p><a href="customer_details.html">@item.CustomerFirstName & @item.CustomerLastName</a></p>@*First & Last Name*@
+                    <p><a href="customer_details.html">@item.PhoneNo</a></p>@*Phone No*@
+                    <span><a href="customer_details.html">@item.Payable</a></span>@*Receivable: $5000*@
+                </div>
+            </div>
+        }
+    }
+}

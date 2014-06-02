@@ -1,0 +1,322 @@
+﻿@model StratusAccounting.Models.PurchaseInvoice
+
+@{
+    ViewBag.Title = "ViewPurchaseInvoice";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+@Scripts.Render("~/bundle/Script/Dashboard")
+@using (Html.BeginForm("ViewPurchaseInvoice", "Invoices", FormMethod.Post, new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.HiddenFor(model => model.PurchaseInvoiceId)
+
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <!--<h3 class="page-title">Preferences</h3>-->
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="chart_of_accounts.html">Transactions</a></li>
+                        <li><i class="icon-angle-right"></i><a href="invoice.html">Invoice</a> </li>
+                        <li><i class="icon-angle-right"></i><a href="new_invoice.html">New Invoice / Edit Invoice</a> </li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet box blue border-topf">
+                        <div class="portlet-body flip-scroll">
+                            <!-- BEGIN FORM-->
+                            <form class="horizontal-form" action="#">
+                                <h3 class="form-section matop">View Invoices</h3>
+                                <div class="row-fluid">
+                                    <div class="span9  account-right1">
+                                        <div class="row-fluid margin-bottom-20">
+                                            <div class="span8">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        @if (Model.POInvoicetype.ToString() == "Purchase")
+                                                        {
+                                                            <label class="radio">
+                                                                <div class="radio">
+                                                                    <span class="checked">
+                                                                        <input type="radio" name="optionsRadios11" value="option1" id="option11" checked="" disabled="disabled"></span>
+                                                                </div>
+                                                                Purchase Invoice
+                                                            </label>
+                                                            <label class="radio">
+                                                                <div class="radio">
+                                                                    <span class="">
+                                                                        <input type="radio" name="optionsRadios11" value="option2" id="option12" disabled="disabled"></span>
+                                                                </div>
+                                                                Sales Invoice
+                                                            </label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="radio">
+                                                                <div class="radio">
+                                                                    <span class="checked">
+                                                                        <input type="radio" name="optionsRadios1" value="option1" id="option1" disabled="disabled"></span>
+                                                                </div>
+                                                                Purchase Invoice
+                                                            </label>
+                                                            <label class="radio">
+                                                                <div class="radio">
+                                                                    <span class="">
+                                                                        <input type="radio" name="optionsRadios1" value="option2" id="option2" checked="" disabled="disabled"></span>
+                                                                </div>
+                                                                Sales Invoice
+                                                            </label>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span4 ">
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Invoice Title</label>
+                                                    <div class="controls">
+                                                        @Html.DisplayFor(model => model.InvoiceTitle)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4 ">
+                                                <div class="control-group">
+                                                    <label for="firstName" class="control-label">Customer</label>
+                                                    <div class="controls">
+                                                        @Html.DisplayFor(model => model.Customer)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Invoice #</label>
+                                                        @Html.DisplayFor(model => model.InvoiceNumber)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Purchase Order / Service order #</label>
+                                                        @Html.DisplayFor(model => model.PurchaseOrderName)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Term</label>
+                                                        @Html.DisplayFor(model => model.Term)
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span4">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Due Date</label>
+                                                        @Html.DisplayFor(model => model.DueDate)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <table id="purchaseInvoicetbl" class="table-bordered table-striped table-condensed cf margin-top-10 margin-bottom-10">
+                                            <thead>
+                                                <tr class="b1" role="row">
+                                                    <th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="S.No: activate to sort column ascending" style="width: 76px;">Product/Service/Project</th>
+                                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Invoice #: activate to sort column descending" style="width: 148px;">Description</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending" style="width: 119px;">Quantity</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Due Date: activate to sort column ascending" style="width: 141px;">Amount</th>
+                                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 143px;">Tax</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="editorRows">
+
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.PurchaseInvoiceDetails != null && Model.PurchaseInvoiceDetails.Count > 0)
+                                                    {
+                                                        foreach (StratusAccounting.Models.PurchaseInvoiceDetail PurchaseInvoiceDetails in Model.PurchaseInvoiceDetails)
+                                                        {
+                                                    
+                                                    <tr>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    @*   @PurchaseInvoiceDetails.InvoiceType*@
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    @* @PurchaseInvoiceDetails.Description*@
+
+                                                                </div>
+                                                            </div>
+                                                            vo
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    @*   @PurchaseInvoiceDetails.Quantity*@
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    @*                                                            @PurchaseInvoiceDetails.Amount*@
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    @*  @PurchaseInvoiceDetails.Tax*@
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                    <tr>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    --
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    --
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    --
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    --
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="control-group">
+                                                                <div class="controls no-left-margin">
+                                                                    --
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                        <div class="clearfix"></div>
+                                        <div class="span2 pull-right">
+                                            <p>Sub total<span class="pull-right" id="txtsubTotal">0</span></p>
+                                            <p>Tax1<span class="pull-right" id="txtTax1">0</span></p>
+                                            <p>Tax2<span class="pull-right" id="txtTax2">0</span></p>
+                                            <p>Tax3<span class="pull-right" id="txtTax3">0</span></p>
+                                            <p>Total<span class="pull-right" id="txtTotal">0</span></p>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Terms &amp; Conditions</label>
+                                                        --
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <div class="control-group">
+                                                    <label class="control-label">Tag to</label>
+                                                    <div class="controls">
+                                                        --
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+                                        <div class="form-actions ">
+                                            <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button>
+                                            <button class="btn blue" type="button"><i class="icon-print"></i>Print</button>
+                                            <button class="btn red" type="submit" id="btnEdit"><i class="icon-ok"></i>Edit</button>
+                                            <button class="btn green" type="button"><i class="icon-envelope"></i>Send Email</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- END FORM-->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+}
+
+<script src="~/Scripts/scripts/app.js"></script>
+<script src="~/Scripts/scripts/table-advanced.js"></script>
+
+<script src="~/Scripts/scripts/form-components.js"></script>
+<script>
+    $(document).ready(function () {
+
+        if(@ViewBag.Total !=null)
+            $('#txtTotal').html(@ViewBag.Total);
+        if(@ViewBag.SubTotal !=null)
+            $('#txtsubTotal').html(@ViewBag.SubTotal);
+        if(@ViewBag.Tax !=null)
+            $('#txttotalTax').html(@ViewBag.Tax);
+    });
+</script>

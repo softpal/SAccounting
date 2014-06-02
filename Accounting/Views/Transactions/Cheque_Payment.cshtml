@@ -1,0 +1,269 @@
+﻿@model IEnumerable<StratusAccounting.Models.Transaction>
+
+@{
+    ViewBag.Title = "Cheque_Payment";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="page-content"><!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid"> 
+      <!-- BEGIN PAGE HEADER-->
+      <div class="row-fluid">
+        <div class="span12"> 
+          
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+          
+          <ul class="breadcrumb margin-top-20">
+              <li> <i class="icon-home"></i> <a href="http://stratusmock.softpal.com/index.html">Home</a> <i class="icon-angle-right"></i> </li>    <li><a href="http://stratusmock.softpal.com/chart_of_accounts.html">Transactions</a></li>
+            <li><a href="http://stratusmock.softpal.com/payments.html"><i class="icon-angle-right"></i>Payments</a></li>
+            <li><a href="./Stratus Accounting   Checks_files/Stratus Accounting   Checks.htm"><i class="icon-angle-right"></i>Check</a></li>
+          </ul>
+          <!-- END PAGE TITLE & BREADCRUMB--> 
+        </div>
+      </div>
+      <!-- END PAGE HEADER--> 
+      <!-- BEGIN PAGE CONTENT-->
+      <div class="row-fluid">
+        <div class="span12"> 
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box blue border-topf">
+            <div class="portlet-body">
+              <h3 class="page-title matop border-btoom">Cheque</h3>
+              <!-- BEGIN FORM-->
+              <form action="http://stratusmock.softpal.com/checks.html#" class="form-horizontal mabottom1">
+                <div class="row-fluid">
+                  <div class="span4">
+                    <div class="control-group">
+                      <div class="controls no-left-margin">
+                        <div class="input-append date form_datetime">
+                          <input size="16" type="text"  id="txtFrom" class="m-wrap large" placeholder="From">
+                          <span class="add-on"><i class="icon-calendar"></i></span> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="span4">
+                    <div class="control-group">
+                      <div class="controls no-left-margin">
+                        <div class="input-append date form_datetime">
+                          <input size="16" type="text"  id="txtTo" class="m-wrap large" placeholder="To">
+                          <span class="add-on"><i class="icon-calendar"></i></span> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="span1"> <a class="btn blue margin-bottom-10" href="#">View</a> </div>
+                  
+                  <!--<div class="input-append pull-right">
+									<input type="text" placeholder="Search" class="m-wrap input-large">
+									<button type="button" class="btn blue"><i class="icon-search"></i></button>
+							
+						                                  
+                                                                        </div>--> 
+                  
+                </div>
+              </form>
+              <div class="row-fluid"> 
+                <!--BEGIN TABS-->
+                <div class="span12"> 
+                  <!--BEGIN TABS-->
+                  <div class="portlet-body">
+                     <div class="btn-group margin-bottom-10"> <a href="~/Transactions/Payment">
+                      <button class="btn blue  payment-padding active">Cash</button>
+                      </a> <a href="~/Transactions/Card_Payment">
+                      <button class="btn blue  payment-padding">Card</button>
+                      </a> <a href="#">
+                      <button class="btn blue payment-padding">Cheque</button>
+                      </a> </div>
+                    <div class="portlet-body flip-scroll">
+                      <div id="popup-2" class="modal hide fade" tabindex="-1" data-width="760">
+                              <form class="form-horizontal" action="http://stratusmock.softpal.com/checks.html#"></form>
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                  <h3>Check Preview</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scroller" style="height: 250px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                                    <div class="row-fluid">
+                                      <div class="span12">
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName"> Issued to:
+                                            &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Amount&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Date&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">From account&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Check #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">For&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Status&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <span>Tags To</span>
+                                        <div class="clearfix"></div>
+                                        <div class="service1">Service1</div>
+                                        <div class="service1">Service2</div>
+                                        <div class="service1">Service3</div>
+                                      </div>
+                                    </div>
+                                  </div><div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                </div>
+                              
+                              <div class="modal-footer">
+                                <button type="button" class="btn blue">Close</button>
+                              </div>
+                            </div><div id="popup-2" class="modal hide fade" tabindex="-1" data-width="760">
+                              <form class="form-horizontal" action="http://stratusmock.softpal.com/checks.html#"></form>
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                  <h3>Check Preview</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scroller" style="height: 250px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                                    <div class="row-fluid">
+                                      <div class="span12">
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName"> Issued to:
+                                            &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Amount&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Date&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">From account&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Check #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">For&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Status&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <span>Tags To</span>
+                                        <div class="clearfix"></div>
+                                        <div class="service1">Service1</div>
+                                        <div class="service1">Service2</div>
+                                        <div class="service1">Service3</div>
+                                      </div>
+                                    </div>
+                                  </div><div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                </div>
+                              
+                              <div class="modal-footer">
+                                <button type="button" class="btn blue">Close</button>
+                              </div>
+                            </div><div id="popup-2" class="modal hide fade" tabindex="-1" data-width="760">
+                              <form class="form-horizontal" action="http://stratusmock.softpal.com/checks.html#"></form>
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                  <h3>Check Preview</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scroller" style="height: 250px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                                    <div class="row-fluid">
+                                      <div class="span12">
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName"> Issued to:
+                                            &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Amount&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Date&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">From account&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Check #&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">For&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="control-group mabottom">
+                                          <label class="control-label details-text span12 mabottom" for="firstName">Status&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <span>Tags To</span>
+                                        <div class="clearfix"></div>
+                                        <div class="service1">Service1</div>
+                                        <div class="service1">Service2</div>
+                                        <div class="service1">Service3</div>
+                                      </div>
+                                    </div>
+                                  </div><div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background: rgb(161, 178, 189);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                </div>
+                              
+                              <div class="modal-footer">
+                                <button type="button" class="btn blue">Close</button>
+                              </div>
+                            </div><table class="table-bordered table-striped table-condensed cf margin-top-10">
+                        <thead class="cf">
+                          <tr class="b1">
+                            <th class="journal-padding-bootom">S.No</th>
+                           <th class="journal-padding-bootom">Voucher No</th>
+                            <th class="numeric journal-padding-bootom">Issued to</th>
+                            <th class="numeric journal-padding-bootom">Amount </th>
+                            <th class="numeric journal-padding-bootom">Check #</th>
+                            <th class="numeric journal-padding-bootom">For</th>
+                            <th class="numeric journal-padding-bootom">From Account</th>
+                            <th class="numeric journal-padding-bootom">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td class="hidden-480 ">@item.SNo</td>
+                                                        <td class="hidden-480 ">@item.VoucherNumber</td>
+                                                        <td class="hidden-480 ">@item.Date</td>
+                                                        <td class="hidden-480 ">@item.Amount</td>
+                                                        <td class="hidden-480 ">@item.CheckNum</td>
+                                                        <td class="hidden-480 ">@item.PaidFor</td>
+                                                        <td class="hidden-480 ">@item.FromBankAccount</td>
+
+                                                        </tr>
+                                                }
+                        </tbody>
+                      </table>
+                        <div class="row-fluid"><div class="span6"><div class="dataTables_info" id="sample_2_info">Showing 1 to 4 of 4 entries</div></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="http://stratusmock.softpal.com/card_payments.html#">← <span class="hidden-480">Previous</span></a></li><li class="active"><a href="http://stratusmock.softpal.com/card_payments.html#">1</a></li><li class="next disabled"><a href="http://stratusmock.softpal.com/card_payments.html#"><span class="hidden-480">Next</span> → </a></li></ul></div></div></div></div>
+                    </div>
+                      
+                  </div>
+                  <!--END TABS--> 
+                </div>
+                <!--END TABS--> 
+              </div>
+            </div>
+          </div>
+          <!-- END EXAMPLE TABLE PORTLET--></div>
+      </div>
+      <!-- END PAGE CONTENT--> 
+    </div>
+    
+    <!-- END PAGE CONTAINER--> 
+  </div>
+
+<script type="text/javascript">
+          $(document).ready(function () {
+
+              $("#txtFrom").datepicker();
+              $("#txtTo").datepicker();
+
+          });
+          </Script>

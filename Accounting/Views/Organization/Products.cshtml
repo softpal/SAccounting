@@ -6,7 +6,6 @@
     //var ImageFolder = ("~/Content/img/icon-close.png");
 }
 
-<h2>Products</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 {
     @Html.AntiForgeryToken()
@@ -96,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="span4">
-                                                        <label for="firstName" class="control-label">Discount Price</label>
+                                                        <label for="firstName" class="control-label">Discounted Price</label>
                                                         <div class="controls">
                                                             @Html.TextBoxFor(model => model.DiscountPrice, new { @class = "m-wrap span12 border-form-radius" })
                                                             @Html.ValidationMessageFor(model => model.DiscountPrice)

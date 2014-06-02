@@ -1,0 +1,44 @@
+﻿<table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
+    <thead>
+        <tr class="b1" role="row">
+            <th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="S.No: activate to sort column ascending" style="width: 76px;">S.No</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Company Name: activate to sort column descending" style="width: 333px;">Company Name</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="First &amp;amp; Last Name: activate to sort column ascending" style="width: 247px;">First &amp; Last Name</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Phone No: activate to sort column ascending" style="width: 201px;">Phone No</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_2" rowspan="1" colspan="1" aria-label="Payable: activate to sort column ascending" style="width: 119px;">Payable</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        @{
+            if (Model != null)
+            {
+                foreach (StratusAccounting.Models.UserCustomer item in Model)
+                {
+            <tr class="odd">
+                <td class="hidden-480 ">@Html.ActionLink(item.Sno.ToString(), "VendorDetails", new { id = item.UserCustomerId }) </td>
+                <td class=" sorting_1"><a href="#" class="acolor">@item.CompanyName</a></td>
+                <td class=" "><a href="#" class="acolor">@item.CustomerFirstName & @item.CustomerLastName</a></td>
+                <td class=" "><a href="#" class="acolor">@item.PhoneNo</a></td>
+                <td class=" "><a href="#" class="acolor">@item.Payable</a></td>
+            </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<div class="row-fluid">
+    <div class="span6">
+        <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
+    </div>
+    <div class="span6">
+        <div class="dataTables_paginate paging_bootstrap pagination">
+            <ul>
+                <li class="prev disabled"><a href="#">← <span class="hidden-480">Previous</span></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li class="next"><a href="#"><span class="hidden-480">Next</span> → </a></li>
+            </ul>
+        </div>
+    </div>
+</div>

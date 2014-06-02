@@ -1,0 +1,517 @@
+﻿@model StratusAccounting.Models.VendorDetails_DTO
+@{
+    ViewBag.Title = "VendorDetails";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2></h2>
+
+<div class="page-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <ul class="breadcrumb margin-top-20">
+                    <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                    <li><a href="">Vendor</a></li>
+                    <li><i class="icon-angle-right"></i><a href="">List</a></li>
+                    <li><i class="icon-angle-right"></i><a href="po.html">Details</a></li>
+                </ul>
+                <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box blue border-topf">
+                    <div class="portlet-body form">
+                        <h3 class="page-title matop border-btoom">VendorDetails <a href=""><i class="icon-plus-sign"></i></a>
+                        </h3>
+                        <div class="form-horizontal form-view">
+                            <div class="row-fluid">
+                                <div class="span6 no-left-margin">
+                                    <div class="row-fluid">
+                                        <div class="span6 ">
+                                            <img src="~/Content/img/avatar2.jpg" />
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Unique #</label>
+                                                        @*<div class="controls">*@
+                                                        @Html.DisplayFor(model => model.VendorDetails.UserVendorId, new { @class = "m-wrap span12 border-form-radius", @id = "VendorId" })
+                                                        @*</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        @*<div class="controls">*@
+                                                        <label class="control-label">Company Name</label>
+                                                        @Html.DisplayFor(model => model.VendorDetails.CompanyName, new { @class = "m-wrap span12 border-form-radius", @id = "companyName" })
+                                                        @*</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">First & Last Name</label>
+                                                        @* <div class="controls">*@
+                                                        @Html.DisplayFor(model => model.VendorDetails.VendorFirstName, new { @class = "m-wrap span12 border-form-radius", @id = "firstName" })
+                                                        @*</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        @*<div class="controls">*@
+                                                        <label class="control-label">Title</label>
+                                                        @Html.DisplayFor(model => model.VendorDetails.Title, new { @class = "m-wrap span12 border-form-radius", @id = "txtTitle" })
+                                                        @*</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <a data-toggle="modal" href="#responsive">
+                                                                <input type="button" value="Edit" /></a>
+                                                            <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+                                                                @Html.Partial("Vendor/EditVendorDetails", Model.VendorDetails)
+                                                            </div>
+                                                            @*<input type="button" value="Edit" onclick="ShowDetailsPopup();" />*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6 no-left-margin">
+                                    <div class="row-fluid">
+                                        <div>
+                                            <h3>Payables PO's</h3>
+                                            <div class="row-fluid">
+                                                <div class="span12 no-left-margin">
+                                                    <table class="table table-striped" id="sample_2">
+                                                        <tbody id="rowsBody">
+                                                            @foreach (var item in Model.PurchaseOrder)
+                                                            {
+                                                                <tr>
+
+                                                                    <td>@item.PONumber</td>
+                                                                    <td>@item.ExpiryDate</td>
+                                                                    <td>@item.Status</td>
+                                                                    <td>@item.Amount</td>
+                                                                </tr>    
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <h3>Communication Details
+                                                     <a data-toggle="modal" href="#responsiveComm">
+                                                         <input type="button" value="Edit" id="editComm" /></a>
+                                                    <div id="responsiveComm" class="modal hide fade" tabindex="-1" data-width="760">
+                                                        @Html.Partial("Vendor/EditCommunicationDetails", Model.Communications)
+                                                    </div>
+                                                </h3>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Office Email</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.Email, new { @class = "m-wrap span12 border-form-radius", @id = "txtEmail" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Business Phone</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.Phone, new { @class = "m-wrap span12 border-form-radius", @id = "txtPhone" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Business FAX</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.Fax, new { @class = "m-wrap span12 border-form-radius", @id = "txtFax" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Street</label>
+                                                            <div class="controls">
+                                                                @*@Html.DisplayFor(model => model.Communications.Street, new { @class = "m-wrap span12 border-form-radius", @id = "txtStreet" })*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">County</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.County, new { @class = "m-wrap span12 border-form-radius", @id = "txtCounty" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">City</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.City, new { @class = "m-wrap span12 border-form-radius", @id = "txtCity" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Zip</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.Zip, new { @class = "m-wrap span12 border-form-radius", @id = "txtZip" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">State</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.State, new { @class = "m-wrap span12 border-form-radius", @id = "txtState" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">WebSite</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.Communications.WebSite, new { @class = "m-wrap span12 border-form-radius", @id = "txtWebSite" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3>Bank Details<a data-toggle="modal" href="#responsiveBank"><input type="button" value="Edit" /></a>
+                                                    <div id="responsiveBank" class="modal hide fade" tabindex="-1" data-width="760">
+                                                        @Html.Partial("Vendor/EditBankDetails", Model.BankDetails)
+                                                    </div>
+                                                </h3>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">BankName</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.VendorDetails.BankName, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankName" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">MAccount #</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.VendorDetails.AccountNum, new { @class = "m-wrap span12 border-form-radius", @id = "txtAccount" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Account Type</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.VendorDetails.AccountTypeDesc, new { @class = "m-wrap span12 border-form-radius", @id = "txtAccounttype" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Routing #</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.VendorDetails.RountingNum, new { @class = "m-wrap span12 border-form-radius", @id = "txtRouting" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span6 ">
+                                                        <div class="control-group">
+                                                            <label for="firstName" class="control-label">Bank Address</label>
+                                                            <div class="controls">
+                                                                @Html.DisplayFor(model => model.VendorDetails.Address, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h3>Payment Details<a data-toggle="modal" href="#responsivePayment"><input type="button" value="Edit" /></a>
+                                                <div id="responsivePayment" class="modal hide fade" tabindex="-1" data-width="760">
+                                                    @Html.Partial("Vendor/EditPaymentDetails", Model.Payments)
+                                                </div>
+                                            </h3>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Preferred Payment Method :</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.VendorDetails.PreferredPaymentMethod, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Credit Card Token ID :</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.VendorDetails.CreditCardToken, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label for="firstName" class="control-label">Life Time Payment</label>
+                                                <div class="controls">
+                                                    @Html.DisplayFor(model => model.VendorDetails.LifeTimePayment, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label for="firstName" class="control-label">Year To Date Payments</label>
+                                                <div class="controls">
+                                                    @Html.DisplayFor(model => model.VendorDetails.YearToDatePayments, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label for="firstName" class="control-label">Last Year Payments</label>
+                                                <div class="controls">
+                                                    @Html.DisplayFor(model => model.VendorDetails.LastYearPayments, new { @class = "m-wrap span12 border-form-radius", @id = "txtBankAddress" })
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="checker">
+                                                    <span>
+                                                        <input type="checkbox" value="" class="checkbox" style="margin-bottom: 28px;">
+                                                    </span>
+                                                </div>
+                                                <span class="checkbox-font">Track Payment for 1099
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h3>Billing Address<a data-toggle="modal" href="#responsiveBilling"><input type="button" value="Edit" /></a>
+                                                <div id="responsiveBilling" class="modal hide fade" tabindex="-1" data-width="760">
+                                                    @Html.Partial("Vendor/EditBillingAddress", Model.BillingAddress)
+                                                </div>
+                                            </h3>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Street</label>
+                                                        <div class="controls">
+                                                            @*@Html.DisplayFor(model => model.BillingAddress.Street, new { @class = "m-wrap span12 border-form-radius", @id = "txtBillStreet" })*@
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">City</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.BillingAddress.City, new { @class = "m-wrap span12 border-form-radius", @id = "txtBillCity" })
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Zip</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.BillingAddress.Zip, new { @class = "m-wrap span12 border-form-radius", @id = "txtBillZip" })
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">State</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.BillingAddress.State, new { @class = "m-wrap span12 border-form-radius", @id = "txtBillState" })
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Country</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.BillingAddress.Country, new { @class = "m-wrap span12 border-form-radius", @id = "txtBillCountry" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <img src="~/Content/img/avatar2.jpg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h3>Shipping Address<a data-toggle="modal" href="#responsiveShipping"><input type="button" value="Edit" /></a>
+                                                <div id="responsiveShipping" class="modal hide fade" tabindex="-1" data-width="760">
+                                                    @Html.Partial("Vendor/EditShippingAddress", Model.ShippingAddress)
+                                                </div>
+                                                </</h3>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Street</label>
+                                                        <div class="controls">
+                                                            @*@Html.DisplayFor(model => model.ShippingAddress.Street, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipStreet" })*@
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">City</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.ShippingAddress.City, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipCity" })
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Zip</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.ShippingAddress.Zip, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipZip" })
+                                                        </div>
+                                                    </div>
+                                                    @* </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">State</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.ShippingAddress.State, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipState" })
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">*@
+                                                    <div class="control-group">
+                                                        <label for="firstName" class="control-label">Country</label>
+                                                        <div class="controls">
+                                                            @Html.DisplayFor(model => model.ShippingAddress.Country, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipCountry" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <img src="~/Content/img/avatar2.jpg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h3>Tax Details<a data-toggle="modal" href="#responsiveTax"><input type="button" value="Edit" /></a>
+                                                <div id="responsiveTax" class="modal hide fade" tabindex="-1" data-width="760">
+                                                    @Html.Partial("Vendor/EditTaxDetails", Model.TaxDetails)
+                                                </div>
+                                            </h3>
+                                            <div class="row-fluid">
+                                                <div class="span6 ">
+                                                    <div class="row-fluid">
+                                                        <div class="span6 ">
+                                                            <div class="control-group">
+                                                                <label for="firstName" class="control-label">Federal Tax ID</label>
+                                                                <div class="controls">
+                                                                    @Html.DisplayFor(model => model.TaxDetails.FederalTaxValue, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipState" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label for="firstName" class="control-label">State Tax ID (Tax Percentage) :</label>
+                                                                <div class="controls">
+                                                                    @Html.DisplayFor(model => model.TaxDetails.StateTaxValue, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipState" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-fluid">
+                                                        <div class="span6 ">
+                                                            <div class="control-group">
+                                                                <label for="firstName" class="control-label">City Tax ID (Tax Percentage) :</label>
+                                                                <div class="controls">
+                                                                    @Html.DisplayFor(model => model.TaxDetails.CityTaxValue, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipCountry" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label for="firstName" class="control-label">County Tax ID (Tax Percentage) :</label>
+                                                                <div class="controls">
+                                                                    @Html.DisplayFor(model => model.TaxDetails.CountyTaxValue, new { @class = "m-wrap span12 border-form-radius", @id = "txtShipState" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="row-fluid margin-bottom-10">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

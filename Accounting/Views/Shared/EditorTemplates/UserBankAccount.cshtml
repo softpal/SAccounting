@@ -6,8 +6,10 @@
                 <div class="control-group">
                     <div class="controls">
                         <label class="control-label">Bank name</label>
-                        @Html.TextBoxFor(model => model.BankName)
-                    @Html.ValidationMessageFor(model => model.BankName)
+                        @*@Html.TextBoxFor(model => model.BankName)
+                         @Html.ValidationMessageFor(model => model.BankName) *@
+                        @Html.HiddenFor(model => model.BankAccountId, new { @id = "hdnBankAccountId" })
+                        @Html.TextBoxFor(model => model.AccountName, new { @id = "txtBankAccounts", @class = "m-wrap span12 date-picker border-form-radius" })
                     </div>
                 </div>
             </div>
@@ -15,8 +17,8 @@
                 <div class="control-group">
                     <div class="controls">
                         <label class="control-label">Account #</label>
-                        @Html.TextBoxFor(model => model.AccountNum)
-                    @Html.ValidationMessageFor(model => model.AccountNum)
+                        @Html.TextBoxFor(model => model.AccountNum, new { @id="txtAccountNum" })
+                        @Html.ValidationMessageFor(model => model.AccountNum)
                     </div>
                 </div>
             </div>
@@ -54,3 +56,58 @@
         </div>
     </div>
 }
+
+<script type="text/javascript">
+    $(function () {
+        $('#txtBankAccounts').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetPaymentBankAccounts")',
+                    dataType: "json",
+                    contentType: 'application/json, charset=utf-8',
+                    data: {
+                        keyword: $("#txtBankAccounts").val()
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.BankName,
+                                value: item.BankAccountsId
+                            };
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $('#txtBankAccounts').val(ui.item.label);
+                $('#hdnBankAccountId').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+    });
+
+    //checking for duplicate accountNums
+    $('#txtAccountNum').blur(function () {
+        debugger;
+        $.ajax({
+            url: '/Customer/BankAccountNum',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { userName: $('#txtAccountNum').val() },
+            success: function (data) {
+                debugger;
+                // put result of action into element with class "result"
+                $('.result').html(data);
+            },
+            error: function () {
+                debugger;
+                alert('Error');
+            }
+        });
+    });
+</script>
+

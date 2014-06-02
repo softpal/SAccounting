@@ -7,6 +7,13 @@
 <h2>UserVendors</h2>
 
 @Styles.Render("~/bundle/Datepicker")
+@*<script src="~/Scripts/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="~/Scripts/plugins/data-tables/jquery.dataTables.min.js"></script>
+<link href="~/Scripts/plugins/select2/select2_stratus.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/jquery.blockui.min.js"></script>*@
+
 
 
 <div class="page-content">
@@ -30,46 +37,9 @@
             <div class="span12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box blue border-topf">
+
                     <div class="portlet-body">
-                        <h3 class="page-title matop border-btoom">Vendors&nbsp;<a href="/Vendors/NewVendor"><i class="icon-plus-sign"></i> </a>
-
-                            <span class="pull-right"><a class="btn  mini blue margin-bottom-20" href="list_vendors.html">Normal View</a><a class="btn  mini green margin-bottom-20" href="list_vendors_gridview.html">Grid View</a></span>
-                        </h3>
-
-                        <div class="clearfix"></div>
-
-                        <div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
                             <div class="row-fluid">
-                                <div class="span6">
-                                    <div id="sample_2_length" class="dataTables_length">
-                                        <label>
-                                            <div class="select2-container m-wrap small" id="s2id_autogen1">
-                                                <a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1"><span class="select2-chosen">5</span><abbr class="select2-search-choice-close"></abbr>
-                                                    <span class="select2-arrow"><b></b></span></a>
-                                                <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2"><div class="select2-drop select2-display-none select2-with-searchbox">
-                                                    <div class="select2-search">
-                                                        <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
-                                                    </div>
-                                                    <ul class="select2-results"></ul>
-                                                </div>
-                                            </div>
-                                            <select size="1" name="sample_2_length" aria-controls="sample_2" class="m-wrap small select2-offscreen" tabindex="-1">
-                                                <option value="5">5</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="-1">All</option>
-                                            </select>
-                                            Records Per Page</label>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="dataTables_filter" id="sample_2_filter">
-                                        <label>
-                                            Search:
-                                            <input type="text" aria-controls="sample_2" class="m-wrap small"></label>
-                                    </div>
-                                </div>
-                            </div>
                             <table class="table table-striped table-bordered table-hover table-full-width dataTable" id="sample_2" aria-describedby="sample_2_info">
                                 <thead>
                                     <tr class="b1" role="row">
@@ -89,114 +59,16 @@
                                         <tr class="odd">
                                             <td class="hidden-480 ">@item.Sno</td>
                                             <td class=" sorting_1"><a href="#" class="acolor">@item.CompanyName</a></td>
-                                            <td class=" "><a href="#" class="acolor">@item.VendorFirstName</a></td>
+                                            <td class=" "><a href="#" class="acolor">@item.VendorFirstName @item.VendorLastName</a></td>
                                             <td class=" "><a href="#" class="acolor">@item.PhoneNo</a></td>
                                             <td class=" "><a href="#" class="acolor">@item.Payable</a></td>
                                         </tr>
                                             }
                                         }
                                     }
-
-
-                                    @*   <tr class="odd">
-                                        <td class="hidden-480 ">1</td>
-
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="even">
-                                        <td class="hidden-480 ">2</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="hidden-480 ">3</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="even">
-                                        <td class="hidden-480 ">4</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="hidden-480 ">5</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="even">
-                                        <td class="hidden-480 ">6</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="hidden-480 ">7</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="even">
-                                        <td class="hidden-480 ">8</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="hidden-480 ">9</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>
-                                    <tr class="even">
-                                        <td class="hidden-480 ">10</td>
-                                        <td class=" sorting_1"><a href="vendor_details.html" class="acolor">Worked on JC dhiter report</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">aaa</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">+91 90000 12345</a></td>
-                                        <td class=" "><a href="vendor_details.html" class="acolor">$ 5000</a></td>
-
-                                    </tr>*@
+                            
                                 </tbody>
                             </table>
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
-                                </div>
-                                <div class="span6">
-                                    <div class="dataTables_paginate paging_bootstrap pagination">
-                                        <ul>
-                                            <li class="prev disabled"><a href="#">← <span class="hidden-480">Previous</span></a></li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li class="next"><a href="#"><span class="hidden-480">Next</span> → </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,8 +85,19 @@
     $(document).ready(
         function () {
             $("#txtPurchaseDt").datepicker();
+            NormalLoad();
         }
         );
+
+    function NormalLoad() {
+        $('#normalDiv').load("@Url.Action("List_Vendor","Vendors")");
+    }
+
+    function GridLoad() {
+        //debugger;
+        $('#normalDiv').load("@Url.Action("List_Vendor_Grid","Vendors")");
+    }
+
     function removeAssetType(assetTypeId) {
         $.ajax({
             url: '/Organization/DeleteAssetType/',

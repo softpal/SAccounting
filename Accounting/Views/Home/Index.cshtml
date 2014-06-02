@@ -4,9 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 @Styles.Render("~/bundle/login")
 
- 
+
+<link href="~/Content/css/style-stratus.css" rel="stylesheet" />
 @using (Html.BeginForm("UserVerification", "Home", FormMethod.Post, new { @class = "form-vertical login-form" }))
 {
     @Html.AntiForgeryToken()

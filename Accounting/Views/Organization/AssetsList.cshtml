@@ -4,9 +4,6 @@
     ViewBag.Title = "AssetsList";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
-<h2>AssetsList</h2>
-
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 {
     <div class="page-content">
@@ -69,34 +66,7 @@
                                 </tbody>
                                 @*<tfoot> <tr><td colspan="4"><a>1</a><a>2</a></td><td></td><td></td><td></td></tr></tfoot>*@
                             </table>
-                            <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="dataTables_info" id="sample_2_info">Showing 1 to 10 of 15 entries</div>
-                                    </div>
-                                    <div class="span6" id="pager">
-                                        <form>
-                                            <div class="dataTables_paginate paging_bootstrap pagination">
-                                                <ul>
-                                                    <li class="prev disabled">
-                                                        <a href="#">←<span class="hidden-480">Previous</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" onclick=""><label id="strtPage">1</label></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" onclick="NextPage();">
-                                                            <label id="endPage">2</label></a>
-                                                    </li>
-                                                    <li class="next disabled">
-                                                        <a href="#">
-                                                            <span class="hidden-480">Next</span>→
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE PORTLET-->
@@ -109,35 +79,3 @@
     
     @Scripts.Render("~/bundle/Script/Dashboard")
 }
-
-<script type="text/javascript">
-
-    function NextPage() {
-        debugger;
-        var pageNum = parseInt(document.getElementById("endPage").innerText);
-        $.ajax({
-            type: "POST",
-            url: "/Organization/GetAssets",
-            cache: false,
-            data: { pageNum: pageNum },
-            success: function (data) {
-                if (data.length > 0) {
-                    debugger;
-                    document.getElementById("rowsBody").innerHTML = '';
-                    var childRows = '';
-                    for (var i = 0; i < data.length; i++) {
-                        childRows += '<tr><td class="hidden-480">' + data[i].CreatedDate + '</td><td>' + data[i].AssetDescription + '</td><td>' + data[i].UserVendorId + '</td><td class="hidden-480">' + data[i].PurchasedDate + '</td><td class="hidden-480">' + data[i].InitialValue + '</td><td>' + data[i].CurrentValue + '&nbsp;&nbsp;&nbsp;<div class="btn-group float-right"><button data-toggle="dropdown" class="btn dropdown-toggle padding-booton"><span class="caret"></span></button></div></td></tr>';
-                    }
-                    document.getElementById("rowsBody").innerHTML = childRows;
-                    $("#strtPage").val(pageNum);
-                    $("#endPage").val(pageNum + 1);
-                }
-            },
-            error: function (data) {
-                debugger;
-                alert(data);
-            }
-        });
-    }
-
-</script>

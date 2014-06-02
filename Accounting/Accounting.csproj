@@ -192,6 +192,7 @@
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StratusController.cs" />
+    <Compile Include="Controllers\StratusReportsController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
@@ -10260,6 +10261,34 @@
     <Content Include="Views\Vendors\PurchaseOrders.cshtml" />
     <Content Include="Views\Vendors\UserVendors.cshtml" />
     <Content Include="Views\Vendors\Vendors.cshtml" />
+    <Content Include="Views\Customer\CustomerDetails.cshtml" />
+    <Content Include="Views\Customer\List_Customer.cshtml" />
+    <Content Include="Views\Customer\List_Customer_Grid.cshtml" />
+    <Content Include="Views\Invoices\AddInvoiceSalesReceipts.cshtml" />
+    <Content Include="Views\Invoices\GetPayments.cshtml" />
+    <Content Include="Views\Invoices\InvoiceSalesReceipts.cshtml" />
+    <Content Include="Views\Invoices\ViewPurchaseInvoice.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditBankDetails.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditBillingAddress.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditCommunicationDetails.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditPaymentDetails.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditShippingAddress.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditTaxDetails.cshtml" />
+    <Content Include="Views\Shared\Vendor\EditVendorDetails.cshtml" />
+    <Content Include="Views\StratusReports\DayWise.cshtml" />
+    <Content Include="Views\StratusReports\Ledger.cshtml" />
+    <Content Include="Views\StratusReports\MonthWise.cshtml" />
+    <Content Include="Views\StratusReports\ScheduleWise.cshtml" />
+    <Content Include="Views\StratusReports\TrailBalance.cshtml" />
+    <Content Include="Views\Transactions\Card_Payment.cshtml" />
+    <Content Include="Views\Transactions\Cheque_Payment.cshtml" />
+    <Content Include="Views\Transactions\Journal.cshtml" />
+    <Content Include="Views\Transactions\Payment.cshtml" />
+    <Content Include="Views\Transactions\Revenues.cshtml" />
+    <Content Include="Views\Vendors\List_Vendor.cshtml" />
+    <Content Include="Views\Vendors\List_Vendor_Grid.cshtml" />
+    <Content Include="Views\Vendors\VendorDetails.cshtml" />
+    <Content Include="Views\Vendors\ViewPurchaseOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\Package\" />

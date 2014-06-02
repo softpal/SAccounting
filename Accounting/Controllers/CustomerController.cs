@@ -17,8 +17,20 @@ namespace StratusAccounting.Controllers
 
         public ActionResult Index()
         {
-            var customers = Customers.GetCustomersList(this.BusinessId);
+            var customers = Customers.GetCustomersList(this.BusinessId, this.UserId);
             return View(customers);
+        }
+
+        public ActionResult List_Customer()
+        {
+            var customers = Customers.GetCustomersList(this.BusinessId, this.UserId);
+            return PartialView(customers);
+        }
+
+        public ActionResult List_Customer_Grid()
+        {
+            var customers = Customers.GetCustomersList(this.BusinessId, this.UserId);
+            return PartialView(customers);
         }
 
         //
@@ -39,48 +51,181 @@ namespace StratusAccounting.Controllers
             string DateFormat = Convert.ToString(HttpRuntime.Cache["DateFormat"]);
             int businessId = this.BusinessId;
 
-            Models.Customers_DTO customer = new Customers_DTO();
-            customer.CustomerCommunication = new CustomersAddress() { AddressType = "Communication Details", AddressTypeId = 1 };
-            //customer.UserBankAccount = BAL.Customers.GetBankAccountTypes().ToList();
-            ViewBag.BankAccounts = new SelectList(BAL.Customers.GetBankAccountTypes(), "BankAccountTypeId", "AccountTypeDesc", "--Select--");
-            ViewBag.PaymentMethods = new SelectList(BAL.Customers.GetPaymentMethodTypes(), "PaymentTypesId", "PaymentDesc", "--select--");
+
+            ViewBag.AccountType = new SelectList(BAL.BankAccounts.GetBankAccountTypes(), "BankAccountTypeId", "AccountTypeDesc", "--select--");
+            ViewBag.PaymentType = new SelectList(BAL.BankAccounts.GetPaymentTypes(), "PaymentTypesId", "PaymentDesc", "--select--");
             ViewBag.CreditPeriods = new SelectList(BAL.Customers.GetPaymentCreditTypes(), "CreditPeriodTypeId", "Period", "--select--");
-            customer.TaxDetails = BAL.Customers.GetTaxDetails(this.BusinessId).ToList();
-            return View(customer);
+            
+            return View();
         }
 
         [HttpPost]
-        public ActionResult NewCustomer(Customers_DTO cdto, FormCollection fc)
+        public ActionResult Add_Vendor(Add_Customer customer)
+        {
+            try
+            {
+                customer.UserId = UserId;
+                customer.BusinessID = BusinessId;
+
+                string path = BAL.ExtensionMethods.CreateGuidFolder();
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                    if (hpf.ContentLength == 0)
+                        continue;
+
+                    string savedFileName = string.Empty;
+
+                    BAL.ExtensionMethods.AddFiletoGuid(path, file);                   
+
+                }
+
+                var len = path.Split('\\').Length;
+
+                int screenID = 7;// screen id for add customer
+                BAL.ExtensionMethods.SaveDocumentPath(BusinessId, UserId, screenID, path.Split('\\')[len]);
+
+                BAL.Customers.InsertCustomers(customer);                
+            }
+
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+            //
+            ViewBag.BankAccounts = new SelectList(BAL.BankAccounts.GetBankAccountTypes(), "BankAccountTypeId", "AccountTypeDesc", "--Select--");
+            ViewBag.PaymentMethods = new SelectList(BAL.Customers.GetPaymentMethodTypes(), "PaymentTypesId", "PaymentDesc", "--select--");
+            ViewBag.CreditPeriods = new SelectList(BAL.Customers.GetPaymentCreditTypes(), "CreditPeriodTypeId", "Period", "--select--");
+            return View("NewCustomer");
+        }
+
+        [HttpPost]
+        public ActionResult NewCustomer(Customers_DTO cdto, FormCollection fc, HttpPostedFileBase file)
         {
             //Customers_DTO customer = new Customers_DTO();
             //customer.CustomerCommunication = new CustomersAddress() { AddressType = "Communication Details", AddressTypeId = 1 };
-            //var data = Customers.SaveCustomers(cdto, this.BusinessId, this.UserId);
+           //  var data = Customers.SaveCustomer(cdto);
             //customer = Customers.SaveCustomers(cdto, this.BusinessId, this.UserId);
             //customer.TaxDetailses = BAL.Preferences.SaveTaxInformation(cdto.TaxDetailses);
-            //return View("NewCustomer");
+             //
 
             try
             {
-                cdto.UserCustomer.ModifiedByUserId = this.UserId;
-                cdto.UserCustomer.BusinessID = this.BusinessId;
-                //cdto.UserCustomer.CreatedByUserId = this.UserId;
-                //cdto.UserCustomer.CreatedDate = DateTime.Now;
+                 int UserId = Convert.ToInt32(HttpRuntime.Cache["UserId"]);
+                 int BusinessId = Convert.ToInt32(HttpRuntime.Cache["BusinessId"]);
+                 string DateFormat = Convert.ToString(HttpRuntime.Cache["DateFormat"]);
+                 int businessId = this.BusinessId; 
+                 cdto.UserCustomer.UserAccountsId = this.UserId;
+
+                 cdto.UserCustomer.BusinessID =  this.BusinessId;
+                 cdto.UserCustomer.CreatedByUserId = this.UserId;
+                 cdto.UserCustomer.CreatedDate = DateTime.Now;
                 cdto.UserCustomer.ModifiedDate = DateTime.Now;
-                foreach (var taxDet in cdto.TaxDetails)
+                 foreach(var taxDet in cdto.TaxDetails)
                 {
+                     string tmp = taxDet.TaxTypesId.ToString();
+                    string tmp2 = taxDet.TaxName;
+                 }
+               /*  foreach (var taxDet in cdto.TaxDetails)
+                 {
                     taxDet.ModifiedByUserId = this.UserId;
                     taxDet.BusinessID = this.BusinessId;
                     taxDet.ModifiedDate = DateTime.Now;
-                    //db.Entry(taxDet).State = EntityState.Modified;
-                }
+                    // db.Entry(taxDet).State = EntityState.Modified;
+                 }*/
                 BAL.Customers.SaveCustomers(cdto);
+
+               
+
+                 Models.Customers_DTO customer = new Customers_DTO();
+                 customer.CustomerCommunication = new CustomersAddress() { AddressType = "Communication Address" };
+                 customer.BillingAddress = new CustomersAddress() { AddressType = "Billing Address" };
+                 customer.ShippingAddress = new CustomersAddress() { AddressType = "Shipping Address" };
+                 //AddressType = "Communication Details", AddressTypeId = 1  };
+                 // customer.user = new Payment() {  };
+                 customer.BankDetails = new UserBankAccount() { BankAccountTypeId = 1 };
+                 //customer.UserBankAccount = BAL.Customers.GetBankAccountTypes().ToList();
+                 ViewBag.BankAccounts = new SelectList(BAL.BankAccounts.GetBankAccountTypes(), "BankAccountTypeId", "AccountTypeDesc", "--Select--");
+                 ViewBag.PaymentMethods = new SelectList(BAL.Customers.GetPaymentMethodTypes(), "PaymentTypesId", "PaymentDesc", "--select--");
+                 ViewBag.CreditPeriods = new SelectList(BAL.Customers.GetPaymentCreditTypes(), "CreditPeriodTypeId", "Period", "--select--");
+                 customer.TaxDetails = BAL.Customers.GetTaxDetails(BusinessId).ToList();
+
+                 //if (file == null)
+                 //{
+                 //    ModelState.AddModelError("File", "Please Upload Your file");
+                 //}
+                 //else if (file.ContentLength > 0)
+                 //{
+                 //    int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                 //    string[] AllowedFileExtensions = new string[] { ".jpg", ".gif", ".png", ".pdf" };
+
+                 //    if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
+                 //    {
+                 //        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                 //    }
+
+                 //    else if (file.ContentLength > MaxContentLength)
+                 //    {
+                 //        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                 //    }
+                 //    else
+                 //    {
+                 //        //TO:DO
+                 //        var fileName = Path.GetFileName(file.FileName);
+                 //        var path = Path.Combine(Server.MapPath("~/Content/Uploaded"), fileName);
+                 //        file.SaveAs(path);
+                 //        ModelState.Clear();
+                 //        ViewBag.Message = "File uploaded successfully";
+                 //    }
+                 //}
+
                 return View(cdto);
             }
             catch
             {
                 throw;
             }
+            // return View("NewCustomer");
         }
+
+        [HttpPost]
+        public ActionResult FileUploading(HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file == null)
+                {
+                    ModelState.AddModelError("File", "Please Upload Your file");
+                }
+                else if (file.ContentLength > 0)
+                {
+                    int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                    string[] AllowedFileExtensions = new string[] { ".jpg", ".gif", ".png", ".pdf" };
+
+                    if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
+                    {
+                        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                    }
+
+                    else if (file.ContentLength > MaxContentLength)
+                    {
+                        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                    }
+                    else
+                    {
+                        //TO:DO
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Upload"), fileName);
+                        file.SaveAs(path);
+                        ModelState.Clear();
+                        ViewBag.Message = "File uploaded successfully";
+                    }
+                }
+            }
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult Customer(Customers_DTO cdto)
@@ -109,6 +254,43 @@ namespace StratusAccounting.Controllers
             //return RedirectToAction("NewCustomer");
         }
 
+
+        [HttpPost]
+        public ActionResult EditCustomerDetails(Customers_DTO cdto,string Command)
+        {
+            int pageNo = 1;// Convert.ToInt32(Session["pageNo"].ToString());
+            int pageSize = 10;// Convert.ToInt32(Session["pageSize"].ToString());
+            string sortColumn = "";// Session["sortColumn"].ToString();
+            string sortDirection = "Desc";
+
+            cdto.UserCustomerDetails[0].ModifiedByUserId = this.UserId;
+            cdto.UserCustomerDetails[0].BusinessID = this.BusinessId;
+            BAL.Customers.EditCustomer(cdto);
+           
+               Models.Customers_DTO customer = new Customers_DTO();
+               customer.UserCustomerDetails = BAL.Customers.GetCustomerDetails(cdto.UserCustomerDetails[0].UserCustomerId);
+
+               customer.Mst_PaymentTypes = BAL.Customers.GetCustomerPaymentMethodTypes(cdto.UserCustomerDetails[0].UserCustomerId)[0];
+               customer.PaymentTypes = BAL.Customers.GetPaymentMethodTypes();
+               customer.Mst_CreditPeriodTypes = BAL.Customers.GetCustomerPaymentCreditTypes(cdto.UserCustomerDetails[0].UserCustomerId)[0];
+                customer.CustomerCommunication = null;
+           //var customer = customers.FirstOrDefault(v => v.UserCustomerId == userCustomerId);
+                ViewBag.PaymentTypes = BAL.Customers.GetPaymentMethodTypes();
+            // ViewBag.Files = GetCustomersById(customer);
+            //return View(customers);
+            
+
+            //return View(customer);
+            return View("CustomerDetails",customer);
+        }
+       
+        [HttpPost]
+        public ActionResult EditCustomerPaymentDetails(Customers_DTO cdto, string Command)
+       {
+
+           return View("CustomerDetails");
+       }
+        
         [HttpPost]
         public ActionResult SaveTaxInformation(string[][] taxDetails)
         {
@@ -128,6 +310,24 @@ namespace StratusAccounting.Controllers
             return Json(result);
         }
 
+
+        [HttpGet]
+        public JsonResult BankAccountNum(string accountNum)
+        {
+            bool chkStatus = BAL.BankAccounts.IsExistedAccountNum(accountNum);
+            string result = chkStatus == true ? "sucess" : "failed";
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+    /*    [HttpPost]
+        public ActionResult NewCustomer(Customers_DTO cust)
+        {
+            Models.Customers_DTO customer = new Customers_DTO();
+            customer.CustomerCommunication = new CustomersAddress() { AddressType = "Communication Details", AddressTypeId = 1 };
+            //customer.TaxDetailses = BAL.Preferences.GetTaxDetails(this.BusinessId).ToList();
+            
+            return View("NewCustomer", customer);
+        }*/
         //
         // POST: /Customer/Create
 
@@ -200,18 +400,31 @@ namespace StratusAccounting.Controllers
 
         public ActionResult UserCustomers(int? userCustomerId)
         {
-            ViewBag.Customers = new SelectList(BAL.Customers.GetCustomersList(BusinessId), "UserCustomerId", "CustomerFirstName", "--select--");
-            int pageNo = Convert.ToInt32(Session["pageNo"].ToString());
-            int pageSize = Convert.ToInt32(Session["pageSize"].ToString());
-            string sortColumn = Session["sortColumn"].ToString();
-            string sortDirection = Session["sortDirection"].ToString();
+            //ViewBag.Customers = new SelectList(BAL.Customers.GetCustomersList(BusinessId), "UserCustomerId", "CustomerFirstName", "--select--");
+            int pageNo = 1;// Convert.ToInt32(Session["pageNo"].ToString());
+            int pageSize = 10;// Convert.ToInt32(Session["pageSize"].ToString());
+            string sortColumn = "";// Session["sortColumn"].ToString();
+            string sortDirection = "Desc";// Session["sortDirection"].ToString();
+            
             var customers = BAL.Customers.GetUserCustomers(BusinessId, UserId, pageNo, pageSize, sortDirection, sortColumn);
-            var customer = customers.FirstOrDefault(v => v.UserCustomerId == userCustomerId);
+            //var customer = customers.FirstOrDefault(v => v.UserCustomerId == userCustomerId);
 
-            ViewBag.Files = GetCustomersById(customer);
+           // ViewBag.Files = GetCustomersById(customer);
+            return View(customers);
+        }
+        public ActionResult CustomerDetails()
+        {
+            string start = Request.QueryString["par1"];
+            
+            Models.Customers_DTO customer = new Customers_DTO();
+            customer.UserCustomerDetails = BAL.Customers.GetCustomerDetails(long.Parse(start));
+            customer.UserCustomerDetails[0].UserCustomerId = long.Parse(start);
+                customer.Mst_PaymentTypes= BAL.Customers.GetCustomerPaymentMethodTypes(long.Parse(start))[0];
+                customer.Mst_CreditPeriodTypes = BAL.Customers.GetCustomerPaymentCreditTypes(long.Parse(start))[0];
+                customer.CustomerCommunication = null;
+                ViewBag.PaymentTypes = new SelectList(BAL.BankAccounts.GetPaymentTypes(), "PaymentTypesId", "PaymentDesc", "Select Type");
             return View(customer);
         }
-
         private static List<string> GetCustomersById(UserCustomer customer)
         {
             List<string> files = new List<string>();

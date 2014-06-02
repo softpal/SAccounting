@@ -1,0 +1,65 @@
+﻿@model  IList<StratusAccounting.Models.Ledger_DTO>
+
+@{
+    ViewBag.Title = "Ledger";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("FilterLedgers", "StratusReports", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "sample_2" }))
+{
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <ul class="breadcrumb margin-top-20">
+                        <li><i class="icon-home"></i><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                        <li><a href="Ledger.html">Reports</a></li>
+                        <li><a href="Ledger.html"><i class="icon-angle-right"></i>Ledger</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet box blue border-topf">
+
+                        <div class="portlet-body">
+                            <div class="row-fluid">
+
+                                @Html.Partial("~/Views/Shared/Reports/LedgerHeader.cshtml")
+
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    @Html.Partial("Reports/LedgerList", Model)
+                                }
+                                <div class="span12 no-left-margin margin-top-10">
+                                    <span class="font-size20">Download report in</span>
+                                    <span class="pull-right">
+                                        <a class="btn red" href="#">Excel</a>
+                                        <a class="btn blue" href="#">CSV</a>
+                                        <a class="btn green" href="#">PDF</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+
+    @Scripts.Render("~/bundle/Script/Dashboard")
+}

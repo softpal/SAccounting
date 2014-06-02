@@ -4,9 +4,11 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-@Scripts.Render("~/bundle/Script/Dashboard")
+@Styles.Render("~/bundle/Datepicker")
 
 <link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+<link href="~/Content/css/style-stratus.css" rel="stylesheet" />
+
 @Scripts.Render("~/bundle/Script/Dashboard")
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 {
@@ -49,14 +51,14 @@
                                                         <label class="radio">
                                                             <div class="radio">
                                                                 <span class="checked">
-                                                                    <input type="radio" name="optionsRadios1" value="option1"></span>
+                                                                    <input type="radio" name="optionsRadios1" value="option1" id="option1" class="customradio"></span>
                                                             </div>
                                                             Purchase Invoice
                                                         </label>
                                                         <label class="radio">
                                                             <div class="radio">
                                                                 <span class="">
-                                                                    <input type="radio" name="optionsRadios1" value="option2" checked=""></span>
+                                                                    <input type="radio" name="optionsRadios1" value="option2" id="option2" checked="" class="customradio"></span>
                                                             </div>
                                                             Sales Invoice
                                                         </label>
@@ -69,14 +71,14 @@
                                                 <div class="control-group">
                                                     <label for="firstName" class="control-label">Invoice Title</label>
                                                     <div class="controls">
-                                                        @Html.TextBoxFor(model => model.InvoiceTitle)
+                                                        @Html.TextBoxFor(model => model.InvoiceTitle, new { @class = "m-wrap span12 border-form-radius" })
                                                         @Html.ValidationMessageFor(model => model.InvoiceTitle)
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="span4 ">
                                                 <div class="control-group">
-                                                    <label for="firstName" class="control-label">Customer</label>
+                                                    <label for="firstName" class="control-label">Customer / Vendor</label>
                                                     <div class="controls">
                                                         @Html.HiddenFor(model => model.UserVendorId)
                                                         <input type="text" class="m-wrap span12 border-form-radius" id="txtVendor" name="txtVendor" autocomplete="off">
@@ -87,9 +89,8 @@
                                                 <div class="control-group">
                                                     <div class="controls">
                                                         <label class="control-label">Invoice #</label>
-                                                        @Html.TextBoxFor(model => model.InvoiceNumber, new { @readonly = "readonly" })
+                                                        @Html.TextBoxFor(model => model.InvoiceNumber, new { @class = "m-wrap span12 border-form-radius", @readonly = "readonly" })
                                                         @Html.ValidationMessageFor(model => model.InvoiceNumber)
-                                                        @*<input type="text" class="m-wrap span12 border-form-radius" readonly="" placeholder="Autopopulate Unquie#">*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,6 +100,7 @@
                                                 <div class="control-group">
                                                     <div class="controls">
                                                         <label class="control-label">Purchase Order / Service order #</label>
+                                                        @*@Html.HiddenFor(model => model.PurchaseOrderId)*@
                                                         @Html.DropDownListFor(model => model.PurchaseOrderId, (SelectList)ViewBag.POServiceNum, "--Select--", new { @id = "purchaseProduct", @class = "m-wrap span12 border-form-radius" })
                                                     </div>
                                                 </div>
@@ -148,7 +150,7 @@
                                         </table>
                                         <a href="#" class="details-color pull-right" id="addItem">Add More</a>
                                         <div class="clearfix"></div>
-                                        <div class="span2 pull-right">
+                                        <div class="span2 pull-right" style="display: none">
                                             <p>Sub total<span class="pull-right" id="txtsubTotal">0</span></p>
                                             <p>Tax1<span class="pull-right" id="txtTax1">0</span></p>
                                             <p>Tax2<span class="pull-right" id="txtTax2">0</span></p>
@@ -160,7 +162,8 @@
                                                 <div class="control-group">
                                                     <div class="controls">
                                                         <label class="control-label">Terms &amp; Conditions</label>
-                                                        <textarea rows="3" class="m-wrap span12 border-form-radius"></textarea>
+                                                        @*<textarea rows="3" class="m-wrap span12 border-form-radius"></textarea>*@
+                                                        @Html.TextAreaFor(model => model.Term, new { rows = "3", @class = "m-wrap span12 border-form-radius" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,13 +187,14 @@
 
                                         <div class="clearfix"></div>
                                         <div class="form-actions ">
-                                            <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button>
+                                            <a href="~/Invoices/Index">
+                                                <button class="btn black" type="submit"><i class="icon-remove"></i>Cancel</button></a>
                                             <button class="btn blue" type="button"><i class="icon-print"></i>Print</button>
                                             <button class="btn red" type="submit"><i class="icon-ok"></i>Save</button>
                                             <button class="btn green" type="button"><i class="icon-envelope"></i>Send Email</button>
                                         </div>
                                     </div>
-                                    <div class="span3">
+                                    @*<div class="span3">
                                         <h4 class="border-btoom">Add to Invoice&nbsp;</h4>
                                         <button class="btn blue border-form-radius" type="button">Add All</button>
                                         <div class="span10 margin-top-10 invoice-border border-form-radius no-left-margin">
@@ -224,7 +228,7 @@
                                             <a class="btn mini green border-form-radius" href="#" style="margin-right: 5px;">Add</a>
                                             <a class="btn mini black border-form-radius" href="#">Open</a>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <!-- END FORM-->
                             </form>
@@ -353,6 +357,10 @@
     var i = 0;
     $(document).ready(function () {
 
+        $("#btnSubmit").click(function(){
+            $("#hdnPurchaseOrderId").val($("#purchaseProduct").val());
+        });
+
         $("#DueDate").datepicker();
 
         $("#addItem").click(function () {
@@ -384,14 +392,22 @@
             var edittax2 = 0;
             var edittax3 = 0;
             var edittotal = 0;
+            if ($("#purchaseProduct").val().toString().trim() == "" || $("#purchaseProduct").val() == "0") {
 
+                $("#editorRows").empty();
+                $("#addItem").click();
+                return false;
+            }
+            else {
+            }
             $.ajax({
                 url: '@Url.Action("GetPurchaseOrderDetailsByPOID")',
                 dataType: "json",
                 contentType: 'application/json, charset=utf-8',
                 data: {
                     vendorId: $("#UserVendorId").val(),
-                    PoId: $("#purchaseProduct").val()
+                    PoId: $("#purchaseProduct").val(),
+                    type: "1"
                 },
                 success: function (data) {
                     $("#editorRows").empty();
@@ -445,7 +461,6 @@
         });
 
         $('.ddlItems').change(function () {
-            alert($(this).id);
         });
 
 
@@ -453,6 +468,19 @@
             $('#txtVendor').val("");
             $('#UserVendorId').val("0");
 
+            var chkedVal ="option1";
+            $("input:radio").each(function(){
+                if($(this).is(":checked")){
+                    var val = this.value;
+                    chkedVal=val;
+                } else {
+                    //not checked. do something else.
+            }
+            });
+
+
+            $("#purchaseProduct").empty();
+            $("#purchaseProduct").append($("<option></option>").val("").html("--Select--"));
 
             $('#txtVendor').autocomplete({
                 source: function (request, response) {
@@ -462,17 +490,31 @@
                         contentType: 'application/json, charset=utf-8',
                         data: {
                             keyword: $("#txtVendor").val(),
-                            val: $(":radio[name='optionsRadios1']").val()
+                            val: chkedVal
                         },
                         success: function (data) {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.VendorFirstName,
-                                    value: item.UserVendorId
-                                };
-                            }));
+                            $("#editorRows").empty();
+                            $("#addItem").click();
+                            if (chkedVal == "option1") {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.VendorFirstName,
+                                        value: item.UserVendorId
+                                    };
+                                }));
+                            }
+                            else {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.CompanyName,
+                                        value: item.UserCustomerId
+                                    };
+                                }));
+                            }
                         },
                         error: function (xhr, status, error) {
+                            $("#editorRows").empty();
+                            $("#addItem").click();
                             alert(error);
                         }
                     });
@@ -480,13 +522,14 @@
                 select: function (event, ui) {
                     $('#txtVendor').val(ui.item.label);
                     $('#UserVendorId').val(ui.item.value);
-
+                    $("#editorRows").empty();
+                    $("#addItem").click();
                     $.ajax({
                         contentType: "application/json; charset=utf-8",
                         url: '@Url.Action("GetPODetails")',
                         data: {
                             vendorId: $("#UserVendorId").val(),
-                            type: $(":radio[name='optionsRadios1']").val()
+                            type: chkedVal
                         },
                         dataType: "json",
                         success: function (data) {
@@ -494,11 +537,16 @@
                                 $("#purchaseProduct").empty();
                                 $("#purchaseProduct").append($("<option></option>").val("").html("--Select--"));
                                 if (data.length > 0 && data != "") {
-                                    //$.each(data.d, function (key, value) {
-                                    //    $("#purchaseProduct").append($("<option></option>").val(value.PONumber).html(value.POTitle));
-                                    //});
-                                    for (var i = 0; i < data.length; i++) {
-                                        $("#purchaseProduct").append($("<option></option>").val(data[i].PurchaseOrderId).html(data[i].POTitle));
+                                    if (chkedVal == "option1") {
+
+                                        for (var i = 0; i < data.length; i++) {
+                                            $("#purchaseProduct").append($("<option></option>").val(data[i].PurchaseOrderId).html(data[i].POTitle));
+                                        }
+                                    }
+                                    else {
+                                        for (var i = 0; i < data.length; i++) {
+                                            $("#purchaseProduct").append($("<option></option>").val(data[i].EstimatesId).html(data[i].EstimateNo));
+                                        }
                                     }
                                 }
                                 else {
@@ -509,6 +557,8 @@
                             }
                         },
                         error: function (result) {
+                            $("#editorRows").empty();
+                            $("#addItem").click();
                             alert("Error");
                         }
                     });
@@ -520,5 +570,157 @@
 
         });
 
+
+        if(@ViewBag.poId!=null)
+        {
+            var poid=@ViewBag.poId;
+            if(eval(poid)>0)
+            {
+                var chkedVal ="option1";
+                $("input:radio").each(function(){
+                    if($(this).is(":checked")){
+                        var val = this.value;
+                        chkedVal=val;
+                    } else {
+                        //not checked. do something else.
+                }
+                });
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("GetPODetails")',
+                    data: {
+                        vendorId: $("#UserVendorId").val(),
+                        type: "option1"
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null) {
+                                
+                            $("#purchaseProduct").empty();
+                            $("#purchaseProduct").append($("<option></option>").val("").html("--Select--"));
+                            if (data.length > 0 && data != "") {
+                                if (chkedVal == "option1") {
+
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#purchaseProduct").append($("<option></option>").val(data[i].PurchaseOrderId).html(data[i].POTitle));
+                                    }
+                                }
+                                else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#purchaseProduct").append($("<option></option>").val(data[i].EstimatesId).html(data[i].EstimateNo));
+                                    }
+                                }
+                            }
+                            else {
+
+                            }
+                            $("#purchaseProduct").val(poid);
+                        }
+                        else {
+                        }
+                    },
+                    error: function (result) {
+                        $("#editorRows").empty();
+                        $("#addItem").click();
+                        alert("Error");
+                    }
+                });
+            }
+        }
+
     });
 </script>
+<script>
+    $(function () {
+        var chkedVal ="option1";
+        $("input:radio").each(function(){
+            if($(this).is(":checked")){
+                var val = this.value;
+                chkedVal=val;
+            } else {
+                //not checked. do something else.
+        }
+        });
+
+        $('#txtVendor').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetVendorsList")',
+                    dataType: "json",
+                    contentType: 'application/json, charset=utf-8',
+                    data: {
+                        keyword: $("#txtVendor").val(),
+                        val: chkedVal
+                    },
+                    success: function (data) {
+                        if (chkedVal == "option1") {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.VendorFirstName,
+                                    value: item.UserVendorId
+                                };
+                            }));
+                        }
+                        else {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.CompanyName,
+                                    value: item.UserCustomerId
+                                };
+                            }));
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $('#txtVendor').val(ui.item.label);
+                $('#UserVendorId').val(ui.item.value);
+
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("GetPODetails")',
+                    data: {
+                        vendorId: $("#UserVendorId").val(),
+                        type: chkedVal
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null) {
+                            $("#purchaseProduct").empty();
+                            $("#purchaseProduct").append($("<option></option>").val("").html("--Select--"));
+                            if (data.length > 0 && data != "") {
+                                if (chkedVal == "option1") {
+
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#purchaseProduct").append($("<option></option>").val(data[i].PurchaseOrderId).html(data[i].POTitle));
+                                    }
+                                }
+                                else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#purchaseProduct").append($("<option></option>").val(data[i].EstimatesId).html(data[i].EstimateNo));
+                                    }
+                                }
+                            }
+                            else {
+
+                            }
+                        }
+                        else {
+                        }
+                    },
+                    error: function (result) {
+                        alert("Error");
+                    }
+                });
+
+                return false;
+            },
+            minLength: 1
+        });
+    });
+</script>
+
+@Scripts.Render("~/bundle/Script/Dashboard")

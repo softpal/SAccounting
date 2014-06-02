@@ -1,4 +1,4 @@
-﻿@model StratusAccounting.Models.Customers_DTO
+﻿@model StratusAccounting.Models.Add_Customer
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -34,7 +34,9 @@
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
                             <!-- <h3 class="page-title matop border-btoom">create Customer <a href="#"><i class="icon-plus-sign"></i></a></h3>-->
-                            <form class="horizontal-form" action="#">
+                            @*<form class="horizontal-form" action="#">*@
+                             @using (Html.BeginForm("Add_Customer", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                             {
                                 <h3 class="form-section matop">Customer Details</h3>
                                 <div class="row-fluid">
                                     <div class="span6 ">
@@ -42,8 +44,7 @@
                                             <label for="firstName" class="control-label">Unique #</label>
                                             <div class="controls">
                                                 @*<input type="text" class="m-wrap span12 border-form-radius" disabled="" placeholder="Auto Generated">*@
-                                                @Html.TextBoxFor(model => model.UserCustomer.UserCustomerId, new { @class = "m-wrap span12 border-form-radius", placeholder = "Auto Generated" })
-                                                @Html.ValidationMessageFor(model => model.UserCustomer.UserCustomerId)
+                                                @Html.TextBoxFor(model => model.UserCustomerId, new { @class = "m-wrap span12 border-form-radius", placeholder = "Auto Generated" })
                                             </div>
                                         </div>
                                     </div>
@@ -51,8 +52,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Company Name</label>
-                                                @Html.TextBoxFor(model => model.UserCustomer.CompanyName, new { @class = "m-wrap span12 border-form-radius" })
-                                                @Html.ValidationMessageFor(model => model.UserCustomer.CompanyName)
+                                                @Html.TextBoxFor(model => model.CompanyName, new { @class = "m-wrap span12 border-form-radius" })
                                             </div>
                                         </div>
                                     </div>
@@ -62,8 +62,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">First Name</label>
-                                                @Html.TextBoxFor(model => model.UserCustomer.CustomerFirstName, new { @class = "m-wrap span12 border-form-radius" })
-                                                @Html.ValidationMessageFor(model => model.UserCustomer.CustomerFirstName)
+                                                @Html.TextBoxFor(model => model.CustomerFirstName, new { @class = "m-wrap span12 border-form-radius" })
                                             </div>
                                         </div>
                                     </div>
@@ -71,8 +70,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Last Name</label>
-                                                @Html.TextBoxFor(model => model.UserCustomer.CustomerLastName, new { @class = "m-wrap span12 border-form-radius" })
-                                                @Html.ValidationMessageFor(model => model.UserCustomer.CustomerLastName)
+                                                @Html.TextBoxFor(model => model.CustomerLastName, new { @class = "m-wrap span12 border-form-radius" })
                                             </div>
                                         </div>
                                     </div>
@@ -82,8 +80,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Title</label>
-                                                @Html.TextBoxFor(model => model.UserCustomer.Title, new { @class = "m-wrap span12 border-form-radius" })
-                                                @Html.ValidationMessageFor(model => model.UserCustomer.Title)
+                                                @Html.TextBoxFor(model => model.Title, new { @class = "m-wrap span12 border-form-radius" })
                                             </div>
                                         </div>
                                     </div>
@@ -101,13 +98,15 @@
                                     </div>
                                 </div>
 
-                                @Html.EditorFor(model => model.CustomerCommunication, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
-                                @* <div class="row-fluid">
+                                <h3 class="form-section matop">Communication Details</h3>
+
+                            <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">Office Email</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.Email)
                                         </div>
                                     </div>
                                 </div>
@@ -115,35 +114,45 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">Business Phone</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.TextBoxFor(model => model.Phone, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.Phone)
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">Business FAX</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.TextBoxFor(model => model.Fax, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.Fax)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <label class="control-label">Street</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">Country</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @* @Html.HiddenFor(model => model.CommCountryId, new { @id = "hdnCommCountryId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="country" placeholder="Select Country" />*@
+                                            @Html.HiddenFor(model => model.CommCountryId, new { @id = "hdnCommCountryId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="country" placeholder="Select Country" required />
+                                            @Html.ValidationMessageFor(model => model.CommCountryId)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">State</label>
+                                            @Html.HiddenFor(model => model.CommStateId, new { @id = "hdnCommStateId" })
+                                            <input type="text" id="state" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" placeholder="Select State" required />
+                                            @Html.ValidationMessageFor(model => model.CommStateId)
                                         </div>
                                     </div>
                                 </div>
@@ -151,17 +160,160 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">City</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.HiddenFor(model => model.CommCityId, new { @id = "hdnCommCityId" })
+                                            <input type="text" id="city" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" placeholder="Select City" required />
+                                            @Html.ValidationMessageFor(model => model.CommCityId)
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <div class="controls">
+                                            <label class="control-label">Street</label>
+                                            @Html.TextBoxFor(model => model.CommStreet, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CommStreet)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
                                             <label class="control-label">ZIP</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.TextBoxFor(model => model.Zip, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.Zip)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Website</label>
+                                            @Html.TextBoxFor(model => model.Website, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.Website)
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h3 class="form-section matop">Bank Details</h3>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Bank name</label>
+                                            @Html.TextBoxFor(model => model.BankName, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.BankName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Account #</label>
+                                            @Html.TextBoxFor(model => model.AccountNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.AccountNum)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Account type</label>
+                                            @Html.DropDownListFor(model => model.BankAccountTypeId, (SelectList)ViewBag.AccountType, "--Select--", new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.BankAccountTypeId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Routing #</label>
+                                            @Html.TextBoxFor(model => model.RountingNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.RountingNum)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                   
+                            <div class="row-fluid">
+
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Bank Address</label>
+                                            @Html.TextBoxFor(model => model.BankAddress, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.BankAddress)
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h3 class="form-section matop">Payment Details</h3>
+                                 
+                                 <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Credit Period</label>
+                                            @Html.DropDownListFor(model => model.CreditPeriodTypeId, (SelectList)ViewBag.CreditPeriods, "--Select--", new { @class = "m-wrap span12 border-form-radius" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Credit Limit</label>
+                                            @Html.TextBoxFor(model => model.CreditLimit, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CreditLimit)
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Preferred Payment Method</label>
+                                            @Html.DropDownListFor(model => model.PaymentTypesId, (SelectList)ViewBag.PaymentType, "--Select--", new { @class = "m-wrap span12 border-form-radius" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Credit Card Token ID</label>
+                                            @Html.TextBoxFor(model => model.CreditCardToken, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CreditCardToken)
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h3 class="form-section matop">Billing Address</h3>   
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Country</label>
+                                            @Html.HiddenFor(model => model.BillingCountryId, new { @id = "hdnbillingCountryId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="billingcountry" placeholder="Select Country" />
+                                            @Html.ValidationMessageFor(model => model.BillingCountryId)
                                         </div>
                                     </div>
                                 </div>
@@ -169,260 +321,234 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <label class="control-label">State</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            @Html.HiddenFor(model => model.BillingStateId, new { @id = "hdnbillingStateId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="billingstate" placeholder="Select State" />
+                                            @Html.ValidationMessageFor(model => model.BillingStateId)
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
+
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <div class="controls">
-                                            <label class="control-label">Website</label>
-                                            <input type="text" class="m-wrap span12 border-form-radius">
+                                            <label class="control-label">City</label>
+                                            @Html.HiddenFor(model => model.BillingCityId, new { @id = "hdnbillingCityId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="billingcity" placeholder="Select State" />
+                                            @Html.ValidationMessageFor(model => model.BillingCityId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+
+                                            <label class="control-label">Street</label>
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" id="billingStreet" />
+                                            @*@Html.TextBoxFor(model => model.BillingStreet, new { @class = "m-wrap span12 border-form-radius" })*@
+                                            @Html.ValidationMessageFor(model => model.BillingStreet)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+
+                                            <label class="control-label">ZIP</label>
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" id="billingZip" />
+                                            @*@Html.TextBoxFor(model => model.Billingzip, new { @class = "m-wrap span12 border-form-radius" })*@
+                                            @Html.ValidationMessageFor(model => model.Billingzip)
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>*@
-                                <h3 class="form-section matop">Bank Details</h3>
-                                @Html.EditorFor(model => model.UserBankAccount, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
+                            </div>
 
-                                @*<div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Bank name</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Account #</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
+                            <h3 class="form-section matop">Shipping Address&nbsp;
+				
+                                <div class="checker">
+                                    <span>
+                                        <input type="checkbox" value="" class="checkbox" id="shippingCheck" style="margin-bottom: 28px;" onchange="FillShippingData();">
+                                    </span>
+                                </div>
+                                <span class="checkbox-font">Same as Billing Address
+                                </span>
+                            </h3> 
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+
+                                            <label class="control-label">Country</label>
+                                            @Html.HiddenFor(model => model.ShippingCountryId, new { @id = "hdnshippingCountryId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="shippingcountry" placeholder="Select Country" />
+                                            @Html.ValidationMessageFor(model => model.ShippingCountryId)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Account type</label>
-                                                <select class="m-wrap span12 border-form-radius">
-                                                    <option value="con">Select</option>
-                                                    <option value="Con 1">Saving</option>
-                                                    <option value="Con 2">Checking</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Routing #</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">State</label>
+                                            @Html.HiddenFor(model => model.ShippingStateId, new { @id = "hdnshippingStateId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="shippingstate" placeholder="Select State" />
+                                            @Html.ValidationMessageFor(model => model.ShippingStateId)
 
-                                </div>
-                                <div class="row-fluid">
-
-                                    <div class="span12">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Bank Address</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>*@
-                                <h3 class="form-section matop">Payment Details</h3>
-                                @Html.EditorFor(model => model.UserCustomer, "~/Views/Shared/EditorTemplates/UserCustomer.cshtml")
-
-                                @*<div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Credit Period</label>
-                                                <select class="m-wrap span12 border-form-radius">
-                                                    <option value="con">Select</option>
-                                                    <option value="con 1">15 Days</option>
-                                                    <option value="Con 2">30 Days</option>
-                                                    <option value="Con 3">45 Days	</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Credit Limit</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Preferred Payment Method</label>
-                                                <select class="m-wrap span12 border-form-radius">
-                                                    <option value="con">Select</option>
-                                                    <option value="con 1">Cash</option>
-                                                    <option value="Con 2">Check</option>
-                                                    <option value="Con 3">Credit Card</option>
-                                                    <option value="Con 3">Debit Card</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Credit Card Token ID</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
-                                @Html.EditorFor(model => model.CustomerCommunication, "~/Views/Shared/EditorTemplates/CustomersAddress.cshtml")
-                                @*<h3 class="form-section matop">Billing Address</h3>*@
-
-                                @*<div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Street</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">City</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">ZIP</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">County</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">State</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Country</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
-                                <h3 class="form-section matop">Shipping Address&nbsp;
-										
-                                    <label class="checkbox pull-right">
-                                        <input type="checkbox" value="" />
-                                        Same as Billing Address
-                                    </label>
+                            </div>  
 
-                                </h3>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Street</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">City</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">City</label>
+                                            @Html.HiddenFor(model => model.ShippingCityId, new { @id = "hdnshippingCityId" })
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" pattern="^[a-zA-Z''-'\s]{1,40}$" id="shippingcity" placeholder="Select State" />
+                                            @Html.ValidationMessageFor(model => model.ShippingCityId)
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">ZIP</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">County</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Street</label>
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" id="shippingStreet" />
+                                            @*@Html.TextBoxFor(model => model.ShippingStreet, new { @class = "m-wrap span12 border-form-radius" })*@
+                                            @Html.ValidationMessageFor(model => model.ShippingStreet)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">State</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Country</label>
-                                                <input type="text" class="m-wrap span12 border-form-radius">
-                                            </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">ZIP</label>
+                                            <input type="text" title="" class="m-wrap span12 border-form-radius" id="shippingZip" />
+                                            @*@Html.TextBoxFor(model => model.ShippingZip, new { @class = "m-wrap span12 border-form-radius" })*@
+                                            @Html.ValidationMessageFor(model => model.ShippingZip)
                                         </div>
                                     </div>
                                 </div>
 
-                                <h3 class="form-section matop">Tax Info</h3>
-                                @*@Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")*@
-                                <div id="taxParentDiv">
+                            </div>
+                                 
+                                <h3 class="form-section matop">Tax Details</h3>
+                                @*<div id="taxParentDiv">
                                     @Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")
+                                </div>*@
+                                <div class="row-fluid">
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Federal Tax ID</label>
+                                            @Html.TextBoxFor(model => model.FederalTaxNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.FederalTaxNum)
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveTaxInformation();" />
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Federal Tax %</label>
+                                            @Html.TextBoxFor(model => model.FederalTaxValue, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.FederalTaxValue)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">City Tax ID</label>
+                                            @Html.TextBoxFor(model => model.CityTaxNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CityTaxNum)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">City Tax %</label>
+                                            @Html.TextBoxFor(model => model.CityTaxValue, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CityTaxValue)
+                                        </div>
+                                    </div>
                                 </div>
 
-                                @*<h3 class="form-section matop">Tax Details</h3>
-                                <div class="row-fluid">
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">State Tax ID</label>
+                                            @Html.TextBoxFor(model => model.StateTaxNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.StateTaxNum)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">State Tax %</label>
+                                            @Html.TextBoxFor(model => model.StateTaxValue, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.StateTaxValue)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Country Tax ID</label>
+                                            @Html.TextBoxFor(model => model.CountyTaxNum, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CountyTaxNum)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Country Tax %</label>
+                                            @Html.TextBoxFor(model => model.CountyTaxValue, new { @class = "m-wrap span12 border-form-radius" })
+                                            @Html.ValidationMessageFor(model => model.CountyTaxValue)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span12 no-left-margin">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <span>
+                                                        <input type="radio" name="optionsRadios1" value="option1"></span>
+                                                </div>
+                                                Taxable 
+										
+                                            </label>
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <span class="checked">
+                                                        <input type="radio" name="optionsRadios1" value="option2" checked=""></span>
+                                                </div>
+                                                Non Taxable 
+										
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                                @*<div class="row-fluid">
                                     <div class="span3">
                                         <div class="control-group">
                                             <div class="controls">
@@ -489,37 +615,45 @@
                                                 <input type="text" class="m-wrap span12 border-form-radius">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="span12 no-left-margin">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="radio">
-                                                    <input type="radio" name="optionsRadios1" value="option1" />
-                                                    Taxable 
-                                                </label>
-                                                <label class="radio">
-                                                    <input type="radio" name="optionsRadios1" value="option2" checked />
-                                                    Non Taxable 
-                                                </label>
+                                    </div>*@
 
-                                            </div>
+                                @*@Html.RadioButtonFor(model => model.UserCustomer.IsTaxable, true, new { @class = "type-radio" }) <span>Taxable</span>
+                                @Html.RadioButtonFor(model => model.UserCustomer.IsTaxable, false, new { @class = "type-radio" })<span>Non Taxable</span>*@
+
+
+
+                                @*<h3 class="form-section matop">Documents</h3>*@
+                                <div class="row-fluid margin-bottom-10">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")
                                         </div>
                                     </div>
+                                    </div>
+                            </div>
 
-                                </div>*@
-                                <h3 class="form-section matop">Documents</h3>
-                                <div class="row-fluid">
+                                @*<div class="row-fluid">
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                    <div class="input-append">
-                                                        <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                                                    <div class="input-append">*@
+                                                        @*<div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
                                                         <span class="btn btn-file"><span class="fileupload-new">Upload</span> <span class="fileupload-exists">Change</span>
                                                             <input type="file" class="default">
-                                                        </span>
-                                                    </div>
+                                                        </span>*@
+                                                        @*<ol>
+                                                            <li class="lifile">
+                                                                <input type="file" id="fileToUpload" name="file" />
+                                                                <span class="field-validation-error" id="spanfile"></span>
+                                                            </li>
+                                                        </ol>*@
+                                                        @*<input type="submit" id="btnSubmit" value="Upload" />*@
+
+                                                   @* </div>
                                                 </div>
+                                                <div>@Html.ActionLink("Upload", "FileUploading", "Customer", new { FormMethod.Post, enctype = "multipart/form-data" }) </div>
                                             </div>
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tbody>
@@ -535,13 +669,14 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="form-actions ">
                                     <button class="btn blue" type="submit"><i class="icon-plus-sign"></i>Add</button>
                                     <button class="btn" type="button">Cancel</button>
                                 </div>
-                            </form>
+                            @*</form>*@
+                             }
                             <!-- END FORM-->
                         </div>
                     </div>
@@ -557,6 +692,9 @@
     @Scripts.Render("~/bundle/Script/Dashboard")
 }
 
+<script src="~/Scripts/scripts/app.js"></script>
+<script src="~/Scripts/scripts/table-advanced.js"></script>
+<script src="~/Scripts/scripts/form-components.js"></script>
 <script type="text/javascript">
     function SaveTaxInformation() {
         var countChild = $('#taxParentDiv').find('input').length / 3;//$("#taxParentDiv")[0].childNodes.length;
@@ -599,130 +737,144 @@
 </script>
 
 
-<script type="text/javascript">
-    var url = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    $('#country').autocomplete({
+var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi", action = "GetCountries" })';
+    $("#country").autocomplete({
         source: function (request, response) {
+            //debugger;
             $.ajax({
                 url: url,
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
                 success: function (data) {
+                    //debugger;
                     response($.map(data, function (item) {
                         return {
                             label: item.CountryName,
                             value: item.CountryId
                         };
                     }));
+                },
+                error: function (data) {
+                    // debugger;
                 }
             });
         },
         focus: function (event, ui) {
+            //debugger;
             this.value = ui.item.label;
             $(".ui-helper-hidden-accessible").css("display", "none");
             event.preventDefault(); // Prevent the default focus behavior.
         },
         select: function (event, ui) {
+            //debugger;
             $('#country').val(ui.item.label);
-            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+            $('#hdnCommCountryId').val(ui.item.value);
 
             return false;
         },
         minLength: 1,
         messages: {
             noResults: '',
-            results: function () { }
+            results: function (data) { //debugger; 
+            }
         }
     });
 
-
-
-    var url = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    $('#billingcountry').autocomplete({
+    $("#billingcountry").autocomplete({
         source: function (request, response) {
-
+            //debugger;
             $.ajax({
                 url: url,
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
                 success: function (data) {
+                    //debugger;
                     response($.map(data, function (item) {
                         return {
                             label: item.CountryName,
                             value: item.CountryId
                         };
                     }));
+                },
+                error: function (data) {
+                    // debugger;
                 }
             });
         },
         focus: function (event, ui) {
+            //debugger;
             this.value = ui.item.label;
             $(".ui-helper-hidden-accessible").css("display", "none");
             event.preventDefault(); // Prevent the default focus behavior.
         },
         select: function (event, ui) {
+            //debugger;
             $('#billingcountry').val(ui.item.label);
-            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+            $('#hdnbillingCountryId').val(ui.item.value);
 
             return false;
         },
         minLength: 1,
         messages: {
             noResults: '',
-            results: function () { }
+            results: function (data) { //debugger; 
+            }
         }
     });
 
-
-    var url = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    $('#shippingcountry').autocomplete({
+    $("#shippingcountry").autocomplete({
         source: function (request, response) {
+            //debugger;
             $.ajax({
                 url: url,
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
                 success: function (data) {
+                    //debugger;
                     response($.map(data, function (item) {
                         return {
                             label: item.CountryName,
                             value: item.CountryId
                         };
                     }));
+                },
+                error: function (data) {
+                    // debugger;
                 }
             });
         },
         focus: function (event, ui) {
+            //debugger;
             this.value = ui.item.label;
             $(".ui-helper-hidden-accessible").css("display", "none");
             event.preventDefault(); // Prevent the default focus behavior.
         },
         select: function (event, ui) {
+            //debugger;
             $('#shippingcountry').val(ui.item.label);
-            $('#BusinessRegInfo_CountryId').val(ui.item.value);
+            $('#hdnshippingCountryId').val(ui.item.value);
 
             return false;
         },
         minLength: 1,
         messages: {
             noResults: '',
-            results: function () { }
+            results: function (data) { //debugger; 
+            }
         }
     });
-
 
     var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-
+        new { httproute = "", controller = "CountriesApi", action = "GetStates" })';
+    //debugger;
     $('#state').autocomplete({
         source: function (request, response) {
             //debugger;
-            var countryId = $('#BusinessRegInfo_CountryId').val();
+            var countryId = $("#hdnCommCountryId").val();
             //debugger;
             if (countryId > 0) {
                 $.ajax({
@@ -748,7 +900,7 @@
         },
         select: function (event, ui) {
             $('#state').val(ui.item.label);
-            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            $('#hdnCommStateId').val(ui.item.value);
             return false;
         },
         minLength: 1,
@@ -758,13 +910,10 @@
         }
     });
 
-    var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    //debugger;
     $('#billingstate').autocomplete({
         source: function (request, response) {
-
-            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            var countryId = $("#hdnbillingCountryId").val();
             //debugger;
             if (countryId > 0) {
                 $.ajax({
@@ -790,7 +939,7 @@
         },
         select: function (event, ui) {
             $('#billingstate').val(ui.item.label);
-            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            $('#hdnbillingStateId').val(ui.item.value);
             return false;
         },
         minLength: 1,
@@ -800,13 +949,10 @@
         }
     });
 
-    var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    //debugger;
     $('#shippingstate').autocomplete({
         source: function (request, response) {
-
-            var countryId = $('#BusinessRegInfo_CountryId').val();
+            //debugger;
+            var countryId = $("#hdnshippingCountryId").val();
             //debugger;
             if (countryId > 0) {
                 $.ajax({
@@ -832,7 +978,7 @@
         },
         select: function (event, ui) {
             $('#shippingstate').val(ui.item.label);
-            $('#BusinessRegInfo_StateId').val(ui.item.value);
+            $('#hdnshippingStateId').val(ui.item.value);
             return false;
         },
         minLength: 1,
@@ -842,18 +988,18 @@
         }
     });
 
-    var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
+    var cityapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi", action = "GetCity" })';
     //debugger;
     $('#city').autocomplete({
         source: function (request, response) {
-
-            var stateId = $('#BusinessRegInfo_StateId').val();
             //debugger;
-            if (stateId > 0) {
+            var stateID = $("#hdnCommStateId").val();
+            //debugger;
+            if (stateID > 0) {
                 $.ajax({
-                    url: stateapi,
-                    data: { state: stateId, query: request.term },
+                    url: cityapi,
+                    data: { state: stateID, query: request.term },
                     dataType: 'json',
                     type: 'GET',
                     success: function (data) {
@@ -874,7 +1020,7 @@
         },
         select: function (event, ui) {
             $('#city').val(ui.item.label);
-            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            $('#hdnCommCityId').val(ui.item.value);
             return false;
         },
         minLength: 1,
@@ -884,18 +1030,15 @@
         }
     });
 
-    var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    //debugger;
     $('#billingcity').autocomplete({
         source: function (request, response) {
-
-            var stateId = $('#BusinessRegInfo_StateId').val();
             //debugger;
-            if (stateId > 0) {
+            var stateID = $("#hdnbillingStateId").val();
+            //debugger;
+            if (stateID > 0) {
                 $.ajax({
-                    url: stateapi,
-                    data: { state: stateId, query: request.term },
+                    url: cityapi,
+                    data: { state: stateID, query: request.term },
                     dataType: 'json',
                     type: 'GET',
                     success: function (data) {
@@ -916,7 +1059,7 @@
         },
         select: function (event, ui) {
             $('#billingcity').val(ui.item.label);
-            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            $('#hdnbillingCityId').val(ui.item.value);
             return false;
         },
         minLength: 1,
@@ -926,19 +1069,15 @@
         }
     });
 
-
-    var stateapi = '@Url.RouteUrl("DefaultApi",
-        new { httproute = "", controller = "CountriesApi" })';
-    //debugger;
     $('#shippingcity').autocomplete({
         source: function (request, response) {
-
-            var stateId = $('#BusinessRegInfo_StateId').val();
             //debugger;
-            if (stateId > 0) {
+            var stateID = $("#hdnshippingStateId").val();
+            //debugger;
+            if (stateID > 0) {
                 $.ajax({
-                    url: stateapi,
-                    data: { state: stateId, query: request.term },
+                    url: cityapi,
+                    data: { state: stateID, query: request.term },
                     dataType: 'json',
                     type: 'GET',
                     success: function (data) {
@@ -959,7 +1098,7 @@
         },
         select: function (event, ui) {
             $('#shippingcity').val(ui.item.label);
-            $('#BusinessRegInfo_CityId').val(ui.item.value);
+            $('#hdnshippingCityId').val(ui.item.value);
             return false;
         },
         minLength: 1,

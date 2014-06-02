@@ -1,0 +1,82 @@
+﻿@model StratusAccounting.Models.VendorsAddress
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3>Shipping Address</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="scroller" data-always-visible="1" data-rail-visible1="1">
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Street</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Street)
+                            @Html.HiddenFor(model=> model.UserVendorId)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Country</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Country)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">State</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.State)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">City</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.City)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Zip</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Zip)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn blue" onclick="SaveAddressDetails();" value="Save" />
+        <a class="btn" onclick="CloseAddPopup();">Cancel</a>
+    </div>
+
+    <script>
+        function SaveAddressDetails() {
+            var strDetails = new Array();
+            strDetails.push($("#UserVendorId").val());            
+            strDetails.push($("#Street").val());
+            strDetails.push($("#Country").val());
+            strDetails.push($("#State").val());
+            strDetails.push($("#City").val());
+            strDetails.push($("#Zip").val());
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/Vendors/SaveAddressDetails",
+                data: JSON.stringify({ "vendorAddress": strDetails, "addressType": 3 }),
+                success: function (data) {
+                    if (data) {
+                        CloseAddPopup();
+                        var url = '@Url.Action("VendorDetails", "Vendors", new { id = "__id__" })';
+                    window.location.href = url.replace('__id__', strDetails[0]);
+                }
+            },
+            error: function (data) {
+                //debugger;
+            }
+        });
+    }
+
+    function CloseAddPopup() {
+        $(".close").click();
+    }
+    </script>

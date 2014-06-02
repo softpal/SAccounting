@@ -14,35 +14,38 @@ namespace StratusAccounting.Controllers
 {
     public class SuperAdminController : BasicController
     {
-        private Models.AccountingEntities db = new Models.AccountingEntities();
+        ///private Models.AccountingEntities db = new Models.AccountingEntities();
+        ///
+
         [HttpPost]
         public ActionResult ChangePassword(string emailid, string existingpwd, string newpwd)
         {
-            using (var db = new Models.AccountingEntities())
-            {
-                try
-                {
-                    newpwd = newpwd.GetSHA1();
-                    existingpwd = existingpwd.GetSHA1();
+            //using (var db = new Models.AccountingEntities())
+            //{
+            //    try
+            //    {
+            //        newpwd = newpwd.GetSHA1();
+            //        existingpwd = existingpwd.GetSHA1();
 
-                    User user = db.Users.Where(item => (item.Email.Equals(emailid) && item.UserPassword.Equals(existingpwd))).FirstOrDefault();
-                    if (user != null)
-                    {
-                        user.UserPassword = newpwd;
-                        StratusAccounting.Models.BusinessRegistration reg = db.BusinessRegistrations.Where(item => item.BusinessID.Equals(this.BusinessId)).First();
-                        reg.Email = emailid;
-                        reg.ModifiedByUserId = user.UserId;
-                        reg.ModifiedDate = DateTime.Now;
-                        db.SaveChanges();
-                        return View();
-                    }
-                    ModelState.AddModelError("", "Existing password is not matching");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                }
-            }
+            //        //User user = null; //db.Users.Where(item => (item.Email.Equals(emailid) && item.UserPassword.Equals(existingpwd))).FirstOrDefault();
+            //        //if (user != null)
+            //        //{
+            //        //    //user.UserPassword = newpwd;
+            //        //    //StratusAccounting.Models.BusinessRegistration reg = db.BusinessRegistrations.Where(item => item.BusinessID.Equals(this.BusinessId)).First();
+            //        //    //reg.Email = emailid;
+            //        //    //reg.ModifiedByUserId = user.UserId;
+            //        //    //reg.ModifiedDate = DateTime.Now;
+            //        //    //db.SaveChanges();
+            //        //    return View();
+            //        //}
+            //        return View();
+            //        //ModelState.AddModelError("", "Existing password is not matching");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        ModelState.AddModelError("", ex.Message);
+            //    }
+            //}
             return View();
         }
 
@@ -60,9 +63,10 @@ namespace StratusAccounting.Controllers
             {
                 //var BUList = GetBU();
                 //AccountingEntities db = new Models.AccountingEntities();
-                var ulist = db.Users.ToList();
+                //var ulist = db.Users.ToList();
                 //var userlist = (from p in db.BusinessRegistrations select p).ToList();
-                return View(ulist);
+                var listUsers = StratusAccounting.BAL.UserClients.GetUserCliets();
+                return View("ClientsList", listUsers);
             }
             catch (Exception ex)
             {

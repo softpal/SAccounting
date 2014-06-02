@@ -1,0 +1,98 @@
+﻿@model StratusAccounting.Models.UserVendor
+
+@*<form action="#">*@
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3>VendorDetails</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="scroller" style="height: 200px" data-always-visible="1" data-rail-visible1="1">
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Unique #</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.UserVendorId, new { id = "txtVendorId" })
+                        </div>
+                    </div>
+               @* </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">*@
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Company Name</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.CompanyName, new { id = "txtCompnyName" })
+                        </div>
+                    </div>
+               @* </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">*@
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">First Name</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.VendorFirstName, new { id = "txtfirstName" })
+                        </div>
+                    </div>
+                @*</div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">*@
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Last Name</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.VendorLastName, new { id = "txtlastName" })
+                        </div>
+                    </div>
+               @* </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">*@
+                    <div class="control-group">
+                        <label for="firstName" class="control-label">Title</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Title, new { id = "txtTitle" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn blue" onclick="SaveVendorDetails();" value="Save" />
+        <a class="btn" onclick="CloseAddPopup();">Cancel</a>
+    </div>
+
+
+    <script>
+        function SaveVendorDetails() {
+            var strDetails = new Array();
+            strDetails[0] = $("#UserVendorId").val();
+            strDetails[1] = $("#CompanyName").val();
+            strDetails[2] = $("#VendorFirstName").val();
+            strDetails[3] = $("#VendorLastName").val();
+            strDetails[4] = $("#Title").val();
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/Vendors/SaveVendorDetails",
+                data: JSON.stringify({ "vendorDetails": strDetails }),
+                success: function (data) {
+                    if (data) {
+                        CloseAddPopup();
+                        var url = '@Url.Action("VendorDetails", "Vendors", new { id = "__id__" })';
+                        window.location.href = url.replace('__id__', strDetails[0]);
+                    }
+                },
+                error: function (data) {
+                    //debugger;
+                }
+            });
+        }
+
+        function CloseAddPopup() {
+            $(".close").click();
+        }
+    </script>

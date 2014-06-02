@@ -10,9 +10,9 @@
 <link href="~/Scripts/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
 
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+@*@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 {
-    <div class="page-content">
+    *@<div class="page-content">
         <!-- BEGIN PAGE CONTAINER-->
         <div class="container-fluid">
             <!-- BEGIN PAGE HEADER-->
@@ -46,7 +46,7 @@
                                 <div class="row-fluid">
                                     <div class="span6 ">
                                         <div class="control-group">
-                                            <label for="firstName" class="control-label">Comapny Name</label>
+                                            <label for="firstName" class="control-label">Company Name</label>
                                             <div class="controls">
                                                 @Html.TextBoxFor(model => model.BusiReg.BusinessName, new { @class = "m-wrap span12 border-form-radius", @id = "companyName" })
                                             </div>
@@ -55,7 +55,7 @@
                                     <div class="span6 ">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Business type</label>
+                                                <label class="control-label">Business Type</label>
                                                 @Html.DropDownListFor(model => model.BusiReg.BusinessTypeId, (SelectList)ViewBag.BusinessType, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "businessType" })
                                             </div>
                                         </div>
@@ -84,15 +84,15 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">User Licensees Required</label>
-                                                @Html.TextBoxFor(model => model.BusiReg.Licences, new { @class = "m-wrap span12 border-form-radius", @id = "txtLicense" })
+                                                @Html.TextBoxFor(model => model.BusiReg.Licences, new { @class = "m-wrap span12 border-form-radius", @id = "txtLicense", @readonly = "readonly" })
                                             </div>
                                         </div>
                                     </div>
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">City</label>
-                                                @Html.DropDownListFor(model => model.BusiReg.CityId, (SelectList)ViewBag.Cities, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCity" })
+                                                <label class="control-label">Country</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.CountryId, (SelectList)ViewBag.Countrys, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCountry", @onchange = "BindStates();" })
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">State</label>
-                                                @Html.DropDownListFor(model => model.BusiReg.StateId, (SelectList)ViewBag.States,"--select--",new { @class = "m-wrap span12 border-form-radius", @id = "ddlState" })
+                                                @Html.DropDownListFor(model => model.BusiReg.StateId, (SelectList)ViewBag.States, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlState", @onchange = "BindCity();" })
                                             </div>
                                         </div>
                                     </div>
@@ -146,8 +146,8 @@
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Country</label>
-                                                @Html.DropDownListFor(model => model.BusiReg.CountryId, (SelectList)ViewBag.Countrys, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCountry" })
+                                                <label class="control-label">City</label>
+                                                @Html.DropDownListFor(model => model.BusiReg.CityId, (SelectList)ViewBag.Cities, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlCity" })
                                             </div>
                                         </div>
                                     </div>
@@ -173,12 +173,12 @@
                                 <div>
                                     <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveBusinessInformation();" />
                                 </div>
-                                <h3 class="form-section matop">Prefrences</h3>
+                                <h3 class="form-section matop">Preferences</h3>
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Date format</label>
+                                                <label class="control-label">Date Format</label>
                                                 @Html.DropDownListFor(model => model.DateFormatPreference.PreferenceValuesId, (SelectList)ViewBag.DateFormatPreference, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlDate" })
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Number format</label>
+                                                <label class="control-label">Number Format</label>
                                                 @Html.DropDownListFor(model => model.NumberFormatPreference.PreferenceValuesId, (SelectList)ViewBag.NumberFormat, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlnumberFormat" })
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Primary currency</label>
+                                                <label class="control-label">Primary Currency</label>
                                                 @Html.DropDownListFor(model => model.PrimaryCurrency.PreferenceValuesId, (SelectList)ViewBag.Currency, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "txtCurrency" })
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                     <input type="button" class="btn blue" value="Save" style="float: right" onclick="SavePreferenceInformation();" />
                                 </div>
                                 <h3 class="form-section matop">Tax Info</h3>
-                                <div id="taxParentDiv">
+                                <div class="container-fluid" id="taxParentDiv">
                                     @Html.EditorFor(model => model.TaxDetails, "~/Views/Shared/EditorTemplates/UMst_TaxDetails.cshtml")
                                 </div>
                                 <div>
@@ -232,7 +232,7 @@
                                                         <div class="uneditable-input"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview" id="txtfileUpload"></span></div>
                                                         <span class="btn btn-file"><span class="fileupload-new">Upload</span>
                                                             <span class="fileupload-exists">Change</span>
-                                                            <input type="file" class="default">
+                                                            <input type="file" class="default" id="logoUpLoad">
                                                         </span>
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -243,7 +243,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div class="span9">
-                                                    <label class="control-label">Custom field label</label>
+                                                    <label class="control-label">Custom Field Label</label>
                                                     @Html.TextBoxFor(model => model.UserCustFields.CustomField1Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField1" })
                                                     @Html.TextBoxFor(model => model.UserCustFields.CustomField2Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField2" })
                                                     @Html.TextBoxFor(model => model.UserCustFields.CustomField3Label, new { @class = "m-wrap span12 border-form-radius", @id = "customField3" })
@@ -260,9 +260,8 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Greeting emails</label>
+                                                <label class="control-label">Greeting Emails</label>
                                                 @Html.DropDownListFor(model => model.UserGreetingEmails.GreetingsListId, (SelectList)ViewBag.GreetingEmails, "--select--", new { id = "ddlGreetingEmails", @class = "m-wrap span12 border-form-radius", onchange = "displayGreetingText();" })@*onchange = "addGreeting();"*@
-
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -274,14 +273,14 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Online Payment Sure gateway merchant ID</label>
+                                                <label class="control-label">Online Payment SureGate Merchant ID</label>
                                                 <input type="text" class="m-wrap span12 border-form-radius" id="txtMerchantID">
                                                 @*@Html.TextBoxFor(model => model.CustomFields, new { @class = "m-wrap span12 border-form-radius" })*@
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Online Payment Sure gateway Password</label>
+                                                <label class="control-label">Online Payment SureGate Password</label>
                                                 <input type="text" class="m-wrap span12 border-form-radius" id="txtgatewayPwd">
                                             </div>
                                         </div>
@@ -289,7 +288,7 @@
                                     <div class="span6">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Rename customers to</label>
+                                                <label class="control-label">Rename Customers To</label>
 
                                                 @Html.DropDownListFor(model => model.CustomFields.CustomersRenameId, (SelectList)ViewBag.CustomersRename, "--select--", new { @class = "m-wrap span12 border-form-radius", @id = "ddlRenameCustomer" })
 
@@ -297,19 +296,19 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">Invoice terms (can be changed individually)</label>
+                                                <label class="control-label">Invoice Terms (can be changed individually)</label>
                                                 @*  <textarea rows="3" class="m-wrap span12 height123"></textarea>*@
                                                 @Html.TextAreaFor(model => model.CustomFields.InvoiceTerms, new { @class = "m-wrap span12 height123", rows = 3, @id = "txtInvoiceTerms" })
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <label class="control-label">PO terms (can be changed individually)</label>
+                                                <label class="control-label">PO Terms (can be changed individually)</label>
                                                 @Html.TextAreaFor(model => model.CustomFields.POTerms, new { rows = 3, @class = "m-wrap span12 height123", @id = "txtPOTerms" })
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label">Upload company documents</label>
+                                            <label class="control-label">Upload Company Documents</label>
                                             @Html.Partial("~/Views/Shared/EditorTemplates/FileUpload.cshtml")
                                             @*<div class="controls">
                                                 <div data-provides="fileupload" class="fileupload fileupload-new">
@@ -328,7 +327,7 @@
                                 <div>
                                     <input type="button" class="btn blue" value="Save" style="float: right" onclick="SaveCustomize();" />
                                 </div>
-                                <h3 class="form-section matop">Import quick books data</h3>
+                                <h3 class="form-section matop">Import Quick Books Data</h3>
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="control-group">
@@ -346,7 +345,7 @@
                                                 <div class="controls">
                                                     <label class="checkbox line">
                                                         <input type="checkbox" value="">
-                                                        Ignore data not compatible with "accounting (our product name)" 
+                                                        Ignore data not compatible with "stratus accounting (our product name)"  
                                                     </label>
 
                                                 </div>
@@ -373,8 +372,72 @@
         </div>
         <!-- END PAGE CONTAINER-->
     </div>
-    
-    <script type="text/javascript">
+
+<script type="text/javascript">
+
+    var stateapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi", action = "GetStates" })';
+
+    function BindStates() {
+        //debugger;
+        var countryID = $("#ddlCountry").val();//$("#ddlCountry option:selected").text();
+        $.ajax({
+            url: stateapi,
+            data: { country: countryID },
+            dataType: 'json',
+            type: 'GET',
+            success: function (data) {
+                //debugger;
+                document.getElementById("ddlState").innerHTML = "";
+                $('#ddlState').append($('<option>', {
+                    value: 0,
+                    text: '--select--'
+                }));
+                $.each(data, function (i, item) {
+                    $('#ddlState').append($('<option>', {
+                        value: data[0].StateId,
+                        text: data[0].StateName
+                    }));
+                });
+            },
+            error: function (data) {
+                // debugger;
+            }
+        });
+    }
+
+
+    var cityapi = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CountriesApi", action = "GetCity" })';
+
+        function BindCity() {
+            //debugger;
+            var stateID = $("#ddlState").val();//$("#ddlCountry option:selected").text();
+            $.ajax({
+                url: cityapi,
+                data: { state: stateID },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    //debugger;
+                    document.getElementById("ddlCity").innerHTML = "";
+                    $('#ddlCity').append($('<option>', {
+                        value: 0,
+                        text: '--select--'
+                    }));
+                    $.each(data, function (i, item) {
+                        $('#ddlCity').append($('<option>', {
+                            value: data[0].CityId,
+                            text: data[0].CityName
+                        }));
+                    });
+                },
+                error: function (data) {
+                    // debugger;
+                }
+            });
+        }
+
         greetings = new Array();
 
         var greetingIdMsg = new Array();
@@ -469,7 +532,7 @@
                     alert(error);
                 }
             });
-        }        
+        }
 
         function addGreeting() {
             //debugger;
@@ -573,6 +636,18 @@
 
         function SaveCustomize() {
 
+            var logoPath = $("#logoUpLoad")[0].value;
+
+            var filename;
+            if (logoPath) {
+                var startIndex = (logoPath.indexOf('\\') >= 0 ? logoPath.lastIndexOf('\\') : logoPath.lastIndexOf('/'));
+                filename = logoPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                document.getElementById('logoUpLoad').value = "";
+            }
+
             SaveGreeting();
 
             var renameCustomer = $("#ddlRenameCustomer").val();
@@ -594,7 +669,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     "renameCustomer": renameCustomer, "txtInvoiceTerms": txtInvoiceTerms, "txtPOTerms": txtPOTerms, "customField1": customField1,
-                    "customField2": customField2, "customField3": customField3, "txtOrder1": txtOrder1, "txtOrder2": txtOrder2, "txtOrder3": txtOrder3, "logo": logo, "txtMerchantID": txtMerchantID, "txtgatewayPwd": txtgatewayPwd, "aryFilePath": aryFilePath
+                    "customField2": customField2, "customField3": customField3, "txtOrder1": txtOrder1, "txtOrder2": txtOrder2, "txtOrder3": txtOrder3, "logo": filename, "txtMerchantID": txtMerchantID, "txtgatewayPwd": txtgatewayPwd, "aryFilePath": aryFilePath
                 }),
                 success: function (data) {
                     //debugger;  //var result = msg.data;
@@ -654,7 +729,7 @@
             var fileName = element.parentNode.parentNode.parentNode.innerHTML.split('#\">')[1].split("</")[0];
             aryFilePath.splice($.inArray(fileName, aryFilePath), 1);
             document.getElementById("tblFileName").innerHTML = '';
-            var children='';
+            var children = '';
             for (var i = 0; i < aryFilePath.length; i++) {
                 var fullPath = aryFilePath[i].toString();
                 var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
@@ -667,6 +742,6 @@
             document.getElementById("tblFileName").innerHTML = children;
         }
 
-    </script>
-    @Scripts.Render("~/bundle/Script/Dashboard")
-}
+</script>
+@Scripts.Render("~/bundle/Script/Dashboard")
+@*}*@

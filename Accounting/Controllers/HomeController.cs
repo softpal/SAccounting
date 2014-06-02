@@ -44,6 +44,8 @@ namespace StratusAccounting.Controllers
                             ModelState.AddModelError("", StratusResources.LoginFailed);
                             return View("Index");
                         }
+                        //return Redirect("/SuperAdmin/ClientsList");
+
                         if (!loggedUser.IsActive)
                         {
                             ModelState.AddModelError("", StratusResources.AccountVerification);
@@ -85,8 +87,8 @@ namespace StratusAccounting.Controllers
                         {
                             string preferenceValue = objpreference.Mst_PreferenceValues.PreferenceValue;
                             HttpRuntime.Cache.Insert("PrimaryCurrency", preferenceValue, null, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.NotRemovable, null);
-                        }                       
-                        
+                        }
+
                         return RedirectToAction("Dashboard", "Home");
                     }
                     catch (MembershipCreateUserException e)

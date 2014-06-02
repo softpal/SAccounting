@@ -1,0 +1,16 @@
+﻿@model IEnumerable<StratusAccounting.Models.UserVendor>
+
+@{
+    if (Model != null)
+    {
+        foreach (StratusAccounting.Models.UserVendor item in Model)
+        {
+            <div style="border:1px solid #e5e5e5;">
+                <div style="color:blue;">@Html.ActionLink(item.CompanyName.ToString(),"VendorDetails", new { id = item.UserVendorId })</div>
+                <div style="color:blue;">@item.VendorFirstName</div>
+                <div style="color:blue;">@item.PhoneNo</div>
+                <div>@item.Payable</div>
+            </div>
+        }
+    }
+}

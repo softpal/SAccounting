@@ -10,7 +10,7 @@ namespace StratusAccounting.Controllers
     {
         //
         // GET: /Registration/
-        readonly AccountingEntities _db = new AccountingEntities();
+        //readonly AccountingEntities _db = new AccountingEntities();
 
         [HttpGet]
         public JsonResult CheckForEmail(string email)
@@ -22,7 +22,7 @@ namespace StratusAccounting.Controllers
 
         public ActionResult SignUp(int? licience)
         {
-            ViewBag.Countries = new SelectList(_db.Mst_Countries, "CountryId", "Country", "--select--");
+            //ViewBag.Countries = new SelectList(_db.Mst_Countries, "CountryId", "Country", "--select--");
             ViewBag.Liciences = licience;
             if (licience > 0)
             {
@@ -38,7 +38,7 @@ namespace StratusAccounting.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignUp(UsersRegistrations userReg)
         {
-            ViewBag.Countries = new SelectList(_db.Mst_Countries, "CountryId", "Country", "--select--");
+            //ViewBag.Countries = new SelectList(_db.Mst_Countries, "CountryId", "Country", "--select--");
             if (ModelState.IsValid)
             {
                 try
